@@ -1,0 +1,160 @@
+<div class="categories-page">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="back-page">
+					<a href="#"><i class="fa fa-angle-left" aria-hidden="true"></i>Sub Category Name</a>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+
+<div class="show-product-result">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="product-list-re">
+					<h3>Showing Results of 350 products</h3>
+				</div>
+
+				<div class="product-list-form">
+					<form>
+						<input type="text" name="search" placeholder="Search">
+					</form>
+				</div>
+			</div>
+
+			<div class="col-md-3 col-sm-3 col-xs-6">
+				<div class="recent-product-list">
+					<button type="button" class="btn btn-info btn-lg">
+						<div class="off-overlay"><small>20%</small>
+							<img [routerLink]="['/product-details']" src="../../assets/img/product-1.jpg">
+						</div>
+						<div class="product-title">
+							<h3><a>Product Title is short...</a></h3>
+							<div class="price-prod">
+								<ins>₹900</ins>
+								<del>₹1999</del>
+								<a class="cart-btn" *ngIf="!counter" (click)="open()"> + Add</a>
+								<div *ngIf="counter" id="add-remove-div" class="add-remove-div">
+									<button type="button" class="btn minus-btn"  (click)="decrementproduct()"><i class="fa fa-minus"></i></button><input type="text"  id="input_item" readonly="" class="quantity-input ng-pristine ng-valid ng-touched" [(ngModel)]="counter"><button type="button" class="btn plus-btn" (click)="incrementproduct()"><i class="fa fa-plus"></i></button>
+								</div>
+							</div>
+						</div>
+					</button>
+				</div>
+			</div>
+
+			<div class="col-md-3 col-sm-3 col-xs-6">
+				<div class="recent-product-list">
+					<button type="button" class="btn btn-info btn-lg">
+						<div class="off-overlay"><small>20%</small>
+							<img [routerLink]="['/product-details']" src="../../assets/img/product-1.jpg">
+						</div>
+						<div class="product-title">
+							<h3><a>Product Title is short...</a></h3>
+							<div class="price-prod">
+								<ins>₹900</ins>
+								<del>₹1999</del>
+								<a class="cart-btn" *ngIf="!counter" (click)="open()"> + Add</a>
+								<div *ngIf="counter" id="add-remove-div" class="add-remove-div">
+									<button type="button" class="btn minus-btn"  (click)="decrementproduct()"><i class="fa fa-minus"></i></button><input type="text"  id="input_item" readonly="" class="quantity-input ng-pristine ng-valid ng-touched" [(ngModel)]="counter"><button type="button" class="btn plus-btn" (click)="incrementproduct()"><i class="fa fa-plus"></i></button>
+								</div>
+							</div>
+						</div>
+					</button>
+				</div>
+			</div>
+			<div class="col-md-3 col-sm-3 col-xs-6">
+				<div class="recent-product-list">
+					<button type="button" class="btn btn-info btn-lg">
+						<div class="off-overlay"><small>20%</small>
+							<img [routerLink]="['/product-details']" src="../../assets/img/product-1.jpg">
+						</div>
+						<div class="product-title">
+							<h3><a>Product Title is short...</a></h3>
+							<div class="price-prod">
+								<ins>₹900</ins>
+								<del>₹1999</del>
+								<a class="cart-btn" *ngIf="!counter" (click)="open()"> + Add</a>
+								<div *ngIf="counter" id="add-remove-div" class="add-remove-div">
+									<button type="button" class="btn minus-btn"  (click)="decrementproduct()"><i class="fa fa-minus"></i></button><input type="text"  id="input_item" readonly="" class="quantity-input ng-pristine ng-valid ng-touched" [(ngModel)]="counter"><button type="button" class="btn plus-btn" (click)="incrementproduct()"><i class="fa fa-plus"></i></button>
+								</div>
+							</div>
+						</div>
+					</button>
+				</div>
+			</div>
+
+			<div class="col-md-3 col-sm-3 col-xs-6">
+				<div class="recent-product-list">
+					<button type="button" class="btn btn-info btn-lg">
+						<div class="off-overlay"><small>20%</small>
+							<img [routerLink]="['/product-details']" src="../../assets/img/product-1.jpg">
+						</div>
+						<div class="product-title">
+							<h3><a>Product Title is short...</a></h3>
+							<div class="price-prod">
+								<ins>₹900</ins>
+								<del>₹1999</del>
+								<a class="cart-btn" *ngIf="!counter" (click)="open()"> + Add</a>
+								<div *ngIf="counter" id="add-remove-div" class="add-remove-div">
+									<button type="button" class="btn minus-btn"  (click)="decrementproduct()"><i class="fa fa-minus"></i></button><input type="text"  id="input_item" readonly="" class="quantity-input ng-pristine ng-valid ng-touched" [(ngModel)]="counter"><button type="button" class="btn plus-btn" (click)="incrementproduct()"><i class="fa fa-plus"></i></button>
+								</div>
+							</div>
+						</div>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<!-- Custom -->
+<div class="modal modalcatadd" *ngIf="isModalShow">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-body">
+				<div class="size-select">
+					<h2>Small</h2>
+					<div class="exTab1">
+						<ul class="nav nav-pills" style="display:flex; list-style: none;">
+							<li clas="active"><a data-toggle="tab">small</a></li>
+							<li><a data-toggle="tab">small</a></li>
+							<li><a data-toggle="tab">small</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="size-select">
+					<h2>Small</h2>
+					<div class="exTab2">
+						<ul class="nav nav-pills" style="display:flex; list-style: none;">
+							<li clas="active"><a data-toggle="tab">small</a></li>
+							<li><a data-toggle="tab">small</a></li>
+							<li><a data-toggle="tab">small</a></li>
+						</ul>
+					</div>
+				</div>
+				<div id="add-remove-div" class="add-remove-div">
+					<h2>Qty.</h2>
+					<button type="button" class="btn minus-btn" (click)="decrement()"> <i
+							class="fa fa-minus"></i></button>
+					<input type="text" value="1" id="input_item" readonly="" class="quantity-input"
+						[(ngModel)]="counter">
+					<button type="button" class="btn plus-btn" (click)="increment()"> <i
+							class="fa fa-plus"></i></button>
+					<div class="bag-button">
+					<button class="add_product-modal-btn" (click)="incrementOne()" *ngIf="isBtn">ADD TO BAG</button>
+					<button class="add_product-modal-btn" (click)="addToCart()" *ngIf="!isBtn">ADD TO CART</button>
+					<button class="add_product-modal-btn">ADD PRODUCT</button>
+				</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="backdrop" *ngIf="isModalShow" (click)="backDrop()"></div>

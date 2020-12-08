@@ -1,0 +1,49 @@
+::ng-deep .owl-carousel .owl-prev.disabled,
+.owl-carousel .owl-next.disabled {
+  pointer-events: none;
+  opacity: 0.2;
+}
+
+::ng-deep .owl-carousel .prev-slide {
+  background: url(../../assets/img/arrow-left-round.png) no-repeat scroll 0 0;
+  left: -33px;
+}
+
+::ng-deep .owl-carousel .next-slide {
+  background: url(../../assets/img/arrow-right-round.png) no-repeat scroll 0px 0px;
+  right: -38px;
+}
+
+::ng-deep .owl-carousel .prev-slide:hover {
+  background-position: 0px -53px;
+}
+
+::ng-deep .owl-carousel .next-slide:hover {
+  background-position: -24px -53px;
+}
+::ng-deep .owl-carousel {
+    width: 50% !important;
+    margin: 0 auto;
+  }
+  
+  ::ng-deep .owl-carousel .owl-nav {
+    overflow: hidden;
+    height: 0px;
+  }
+  
+  ::ng-deep .owl-carousel .nav-btn {
+    height: 47px;
+    position: absolute;
+    width: 35px;
+    cursor: pointer;
+    top: 40% !important;
+  }
+  @media screen and (max-width:500px){
+    ::ng-deep .owl-carousel .nav-btn{
+    display: none;
+}
+::ng-deep .owl-carousel {
+    width: 100% !important;
+  }
+
+  }

@@ -1,0 +1,17 @@
+
+<div class="container">
+    <div id="wrapper">
+      <div id="dialog">
+        <h3>Verify OTP</h3>
+        <span>Enter 4 digit OTP</span>
+        <div class="otp">
+            <ng-otp-input  (onInputChange)="onOtpChange($event)" class="otp-input" [config]="config"></ng-otp-input>
+          <div class="edit-no text-center">
+            <p>+91 - 8080298760 <a href="#">(Edit?)</a></p>
+            <span class="time-counting">00:59</span>
+          </div>
+          <button class="btn btn-primary btn-update"><a href="order.html">Verify</a></button>
+        </div>
+      </div>
+    </div>
+    
