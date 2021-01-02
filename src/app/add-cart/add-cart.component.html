@@ -1,3 +1,11 @@
+<ngx-spinner
+bdColor="rgba(51,51,51,0.8)"
+size="medium"
+color="#fff"
+type="ball-scale-multiple"
+>
+<p style="font-size: 20px; color: white">Loading...</p>
+</ngx-spinner>
 <div class="my-cart-product">
 	<div class="container">
 		<div class="row">
@@ -8,67 +16,56 @@
 			</div>
 			
 			<div class="col-md-12">
+				<ng-container *ngFor="let cart of cartData;let i=index;">
 				<div class="full-seleve">
 					<div class="col-md-2 col-sm-2 col-xs-2">
 					
 						<div class="cart-img">
-							<img src="../../assets/img/product-1.jpg">
+							<img  [src]="cart.product_img_url">
 						</div>
 					</div>
 					
 					<div class="col-md-10 col-sm-10 col-xs-10">
 						<div class="cart-img-price">
-							<a class="del-icon" href="#"><img src="../../assets/img/del-icon.png"></a>
-							<h3>Full Sleeve Solid Men Jacket</h3>
+							<a class="del-icon" (click)="deleteCartData(cart.id)"><img src="../../assets/img/del-icon.png"></a>
+							<h3>{{cart.product_name}}</h3>
 							<div class="size-pro">
-								<small>Size: Small</small>
-								<small>Colour: Red</small>
+								<ng-container *ngFor="let variants of cart.variations;let j=index;">
+								<small>{{variants.variation_name}}: {{variants.variation_value}}</small>
+								</ng-container>
+								<ng-container *ngIf="cart.variations.length==0">
+									<small>Out of Stock</small>
+								</ng-container>
+								
 							</div>
 							<div class="price-prod">
-								<ins>₹900</ins>
-								<del>₹1999</del> 
-								<small>20% off</small>
-								<app-counter-input [counter]="textvalue"></app-counter-input>
+								<ins>₹{{cart.selling_price}}</ins>
+								<del>₹{{cart.mrp}}</del> 
+								<small>{{cart.discount}}% off</small>
+								<ng-container *ngIf="cart.variations.length>0">
+								<div id="add-remove-div" class="add-remove-div">
+									<button type="button" class="btn minus-btn" (click)="remove(cart.id)"> <i class="fa fa-minus"></i></button>
+									<input type="text" [value]="cart.qty"  class="quantity-input inputitem">
+									<button type="button" class="btn plus-btn" (click)="add(cart.id)"> <i class="fa fa-plus"></i></button> 
+								</div>
+							</ng-container>
 							</div>
 						</div>
 					</div>					
 				</div>
+			</ng-container>
 				<!------------full-seleve----------------->
 				
-				<div class="full-seleve">
-					<div class="col-md-2 col-sm-2 col-xs-2">
-					
-						<div class="cart-img">
-							<img src="../../assets/img/product-1.jpg">
-						</div>
-					</div>
-					
-					<div class="col-md-10 col-sm-10 col-xs-10">
-						<div class="cart-img-price">
-							<a class="del-icon" href="#"><img src="../../assets/img/del-icon.png"></a>
-							<h3>Full Sleeve Solid Men Jacket</h3>
-							<div class="size-pro">
-								<small>Size: Small</small>
-								<small>Colour: Red</small>
-							</div>
-							<div class="price-prod">
-								<ins>₹900</ins>
-								<del>₹1999</del> 
-								<small>20% off</small>
-								<app-counter-input [counter]="textvalue1"></app-counter-input>
-							</div>
-						</div>
-					</div>					
-				</div><!------------full-seleve----------------->				
+			
 				
 				<form>
 					<h2>Add Notes</h2>
-					<textarea class="message"></textarea>
+					<textarea class="message" name="orderNotes" [(ngModel)]="orderNotes"></textarea>
 				</form>
 				<form>
 					<h2>Add Coupon</h2>
 					<div class="apply-input">
-					<input class="apply" type="text"><span><button class="btn-apply">Apply Coupon <i class="fa fa-arrow-right"></i></button></span>
+					<input class="apply" type="text" name="couponCode" [(ngModel)]="couponCode"><span><button class="btn-apply" (click)="loadCouponDetails()">Apply Coupon <i class="fa fa-arrow-right"></i></button></span>
 				</div>
 				</form>
 				
@@ -78,24 +75,32 @@
 					  <tbody>
 						<tr>
 						  <td>Item Total</td>
-						  <td class="text-right">5000</td>
+						  <td class="text-right">{{totalPrice}}</td>
 						</tr>
 						<tr>
 						  <td>Delivery Charges</td>
-						 <td class="text-right">50</td>
+						 <td class="text-right">{{delieveryCharges}}</td>
 						</tr>
+						<tr>
+							<td>Coupon Discount</td>
+						   <td class="text-right">{{couponDiscount}}</td>
+						  </tr>
 					  </tbody>
 					  <tfoot>
-						<tr>
+						<tr *ngIf=!couponApplied>
 						  <td>To Pay</td>
-						  <td class="text-right">5050</td>
+						  <td class="text-right">{{totalPaymentb4Discount}}</td>
+						</tr>
+						<tr *ngIf=couponApplied>
+							<td>To Pay</td>
+							<td colspan="" class="text-right">{{TpaymentRefvalue}}</td>
 						</tr>
 					  </tfoot>
 					</table>
 				</div>
 				
 				<div class="text-center">
-					<button class="btn btn-proceed">PROCEED</button>
+					<button class="btn btn-proceed" (click)="proceesRequest()">PROCEED</button>
 				</div>
 				
 			</div>
@@ -104,3 +109,4 @@
 </div>	
 
 <div class="margin-top"></div>	
+<app-footer></app-footer>

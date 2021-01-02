@@ -3,7 +3,9 @@ import {Router} from '@angular/router';
 import { NgbModal, NgbModalConfig, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import * as $ from 'jquery';
 import { AppComponent } from 'src/app/app.component';
-
+import {CategoryService} from './../../_api/category.service'
+import { ToastrService } from 'ngx-toastr'
+import { NgxSpinnerService } from "ngx-spinner";
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -15,6 +17,7 @@ export class HomeComponent implements OnInit {
 
   @ViewChild('myModal') myModal;
   private modalRef;
+  categorydata:any=[]
   counter : any = 0;
   isBtn = true;
   isModalShow = false;
@@ -54,13 +57,13 @@ export class HomeComponent implements OnInit {
 
 
 
-  constructor(private router: Router,private modalService: NgbModal, config: NgbModalConfig,private comp: AppComponent) {
+  constructor(private router: Router,private modalService: NgbModal, config: NgbModalConfig,private comp: AppComponent,private categoryservice:CategoryService,private toastr: ToastrService,private spinner: NgxSpinnerService) {
    
     
     
   }
   ngOnInit() {
-
+    this.loadCategories()
   }
   open() {
     //this.modalService.open(CustomModalComponent);
@@ -117,5 +120,33 @@ incrementOne() {
 addToCart() {
   this.isModalShow = false;
   this.comp.checkCart();
+}
+
+private loadCategories(){
+  this.spinner.show()
+  this.categoryservice.getcategories().then(resp=>{
+    if(resp['status']==200 && resp['message']=='Category list!'){
+      this.spinner.hide()
+      this.categorydata=resp['data']
+    }else{
+      this.spinner.hide()
+      this.toastr.error('Something went wrong!','Error',{
+        timeOut:3000,
+        positionClass:'toast-top-center'
+        })
+    }
+  
+  },error=>{
+    this.spinner.hide()
+    console.log(error)
+    this.toastr.error('Failed to load!','Error',{
+      timeOut:3000,
+      positionClass:'toast-top-center'
+      })
+  })
+}
+
+gotoSubcategory(catid){
+  this.router.navigate(['/category-page'],{queryParams:{id:catid}});
 }
 }

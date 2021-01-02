@@ -3,7 +3,7 @@
 		<div class="row">
 			<div class="col-md-12">
 				<div class="back-page">
-					<a [routerLink]="['/sub-categories']"><i class="fa fa-angle-left" aria-hidden="true"></i>Product Details Page</a>
+					<a [routerLink]="['/sub-categories']" [queryParams]="{id:productData.sub_category_id}"><i class="fa fa-angle-left" aria-hidden="true"></i>Product Details Page</a>
 				</div>	
 			</div>	
 		</div>		
@@ -42,29 +42,29 @@
 		</a>
 	  </div> -->
 	  <owl-carousel-o [options]="customOptions">
-		<ng-template carouselSlide>
+		<ng-template carouselSlide *ngIf="productData.product_img_url!=null">
 			<div class="slide text-center">
-				<img src="../../assets/img/product-1.jpg">
+				<img [src]="productData.product_img_url">
 			</div>
 		</ng-template>
-		<ng-template carouselSlide>
+		<ng-template carouselSlide *ngIf="productData.product_img_url_2!=null">
 			<div class="slide">
-				<img src="../../assets/img/product-1.jpg">
+				<img [src]="productData.product_img_url_2">
 			</div>
 		</ng-template>
-		<ng-template carouselSlide>
+		<ng-template carouselSlide *ngIf="productData.product_img_url_3!=null">
 			<div class="slide">
-				<img src="../../assets/img/product-1.jpg">
+				<img [src]="productData.product_img_url_3">
 			</div>
 		</ng-template>
-		<ng-template carouselSlide>
+		<ng-template carouselSlide *ngIf="productData.product_img_url_4!=null">
 			<div class="slide">
-				<img src="../../assets/img/product-1.jpg">
+				<img [src]="productData.product_img_url_4">
 			</div>
 		</ng-template>
-		<ng-template carouselSlide>
+		<ng-template carouselSlide *ngIf="productData.product_img_url_5!=null">
 			<div class="slide">
-				<img src="../../assets/img/product-1.jpg">
+				<img [src]="productData.product_img_url_5">
 			</div>
 		</ng-template>
 	</owl-carousel-o>
@@ -76,29 +76,38 @@
 		<div class="row">	
 			<div class="col-md-12">	
 				<div class="cloth-product">
-					<h3>Red Velvet Jackt for Men</h3>
-					<p>This is short description. This is short description. This
-					is short description. This is short description. This is short
-					description. This is short description.</p>
+					<h3>{{productData.product_name}}</h3>
+					<p>{{productData.product_description}}</p>
 					<div class="price-prod">
-							<ins>₹5000</ins>
-							<del>₹5000</del>
-							<small>20%</small>
+							<ins>₹{{productData.selling_price}}</ins>
+							<del>₹{{productData.mrp}}</del>
+							<small>{{productData.discount}}%</small>
 					</div>
+					<ng-container *ngFor="let varia of variationKeys">
 					<div class="size-select">
-						<h2>Small</h2>
+						<h2>{{varia}}</h2>
 						<div class="exTab1">
 							<ul class="nav nav-pills" style="display:flex; list-style: none;">
-							<li clas="active"><a href="#" data-toggle="tab">small</a></li>
-							<li><a href="#" data-toggle="tab">small</a></li>
-							<li><a href="#" data-toggle="tab">small</a></li>
+								<ng-container *ngFor="let vd of productData.variations">
+									<li *ngIf="vd.variation_name==varia"><a (click)="selectvariation(vd.id,vd.variation_name)" data-toggle="tab">{{vd.variation_value}}</a></li>
+								</ng-container>
+								
 							</ul>
 							</div>
 					</div>
-					
+					</ng-container>
+					<div id="add-remove-div" class="add-remove-div">
+						<h2>Qty.</h2>
+						<button type="button" class="btn minus-btn" (click)="decrement()"> <i
+								class="fa fa-minus"></i></button>
+						<input type="text" value="1" id="input_item" readonly="" class="quantity-input"
+							[(ngModel)]="counter">
+						<button type="button" class="btn plus-btn" (click)="increment()"> <i
+								class="fa fa-plus"></i></button>
+							</div>
 					<div class="add_cart_product">
-						<button class="buy-now-product" [routerLink]="['/enter-no']"><a href="#">Buy Now</a></button>
-						<button class="add-to-product" [routerLink]="['/add-cart']"><a href="#">Add To Cart</a></button>
+						<button class="buy-now-product" (click)="addproducttoCart()"><a href="javascript:void(0)">Buy Now</a></button>
+						<button class="add-to-product" (click)="addproducttoCart()"><a href="javascript:void(0)">Add To Cart</a></button>
 					</div>
 					
 				</div>	
@@ -106,3 +115,4 @@
 		</div>	
 	</div>	
 </div>
+<app-footer></app-footer>

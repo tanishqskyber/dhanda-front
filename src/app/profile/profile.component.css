@@ -1,0 +1,14 @@
+input[type="text"]:read-only {
+    background: transparent;
+  }
+  input[type="tel"]:read-only {
+    background: transparent;
+  }
+
+  input[type="email"]:read-only {
+    background: transparent;
+  }
+
+  select:disabled{
+    background: transparent;
+  }

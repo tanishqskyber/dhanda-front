@@ -1,3 +1,11 @@
+<ngx-spinner
+bdColor="rgba(51,51,51,0.8)"
+size="medium"
+color="#fff"
+type="ball-scale-multiple"
+>
+<p style="font-size: 20px; color: white">Loading...</p>
+</ngx-spinner>
 	<div class="container customer-details">
 		<div class="row">
 			<div class="col-md-12">
@@ -141,36 +149,14 @@
 							  </div> -->
 							  
 							  <owl-carousel-o [options]="customOptions">
+								<ng-container *ngFor="let cat of categorydata;let i=index;">
 								<ng-template carouselSlide>
 									<div class="slide">
-										<img [routerLink]="['/category-page']" src="../../assets/img/product-1.jpg">
-										<h4 [routerLink]="['/category-page']" class="text-center">Clothing</h4>
+										<img (click)="gotoSubcategory(cat.id)" [src]="cat.category_img_url">
+										<h4 (click)="gotoSubcategory(cat.id)" class="text-center">{{cat.category_name}}</h4>
 									</div>
 								</ng-template>
-								<ng-template carouselSlide>
-									<div class="slide">
-										<img [routerLink]="['/category-page']" src="../../assets/img/product-1.jpg">
-										<h4 [routerLink]="['/category-page']" class="text-center">Clothing</h4>
-									</div>
-								</ng-template>
-								<ng-template carouselSlide>
-									<div class="slide">
-										<img [routerLink]="['/category-page']" src="../../assets/img/product-1.jpg">
-										<h4 [routerLink]="['/category-page']" class="text-center">Clothing</h4>
-									</div>
-								</ng-template>
-								<ng-template carouselSlide>
-									<div class="slide">
-										<img [routerLink]="['/category-page']" src="../../assets/img/product-1.jpg">
-										<h4 [routerLink]="['/category-page']" class="text-center">Clothing</h4>
-									</div>
-								</ng-template>
-								<ng-template carouselSlide>
-									<div class="slide">
-										<img [routerLink]="['/category-page']" src="../../assets/img/product-1.jpg">
-										<h4 [routerLink]="['/category-page']" class="text-center">Clothing</h4>
-									</div>
-								</ng-template>
+							</ng-container>
 							</owl-carousel-o>
 						
 
@@ -284,3 +270,4 @@
 	</div>
 </div>
 <div class="backdrop" *ngIf="isModalShow" (click)="backDrop()"></div>
+<app-footer></app-footer>

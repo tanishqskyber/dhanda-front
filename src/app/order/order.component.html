@@ -1,3 +1,11 @@
+<ngx-spinner
+bdColor="rgba(51,51,51,0.8)"
+size="medium"
+color="#fff"
+type="ball-scale-multiple"
+>
+<p style="font-size: 20px; color: white">Loading...</p>
+</ngx-spinner>
 <div class="order-new">
   <div class="container">
     <div class="row">
@@ -9,82 +17,59 @@
 
         <div class="product-list-form">
           <form>
-            <input type="text" name="search" placeholder="Search">
+            <input type="text" name="search" placeholder="Search" [(ngModel)]="search">
           </form>
         </div>
+        <ng-container *ngFor="let order of orderData |filter:search;let i=index;">
         <div class="order-new-1">
             <div class="d-flex">
                 <div class="col-md-2 col-sm-2 col-xs-2">
-                    <div class="order-img">
+                    <!-- <div class="order-img">
                       <img src="../../assets/img/product-1.jpg">
-                    </div>
+                    </div> -->
                 </div>
                 <div class="col-md-10 col-sm-10 col-xs-10">
                     <div class="order-img-price">
-                      <a class="order-icon" href="#">5000</a>
-                      <h3>Store Name</h3>
-                      <h3>Order ID: #123-245678</h3>
+                      <a class="order-icon" href="#">{{order.final_amount}}</a>
+                      <h3>{{order.store_name}}</h3>
+                      <h3>Order ID: #{{order.order_id}}</h3>
                       <div class="order-size-pro">
-                        <span class="many-item">5 ITEM</span>
-                        <span class="item-date">20/10/2020</span>
+                        <span class="many-item">{{order.total_qty}} ITEM</span>
+                        <span class="item-date">{{order.order_date}}</span>
                       </div>
                     </div>
                 </div>
             </div>
             <div class="active-waiting">
-                <p class="text-success"><i class="fa fa-circle" aria-hidden="true"></i> Waiting </p>
-                <a [routerLink]="['/order-details']">View Details</a>
-              </div>
-        </div>
-        <div class="order-new-1">
-            <div class="d-flex">
-                <div class="col-md-2 col-sm-2 col-xs-2">
-                    <div class="order-img">
-                      <img src="../../assets/img/product-1.jpg">
-                    </div>
-                </div>
-                <div class="col-md-10 col-sm-10 col-xs-10">
-                    <div class="order-img-price">
-                      <a class="order-icon" href="#">5000</a>
-                      <h3>Store Name</h3>
-                      <h3>Order ID: #123-245678</h3>
-                      <div class="order-size-pro">
-                        <span class="many-item">5 ITEM</span>
-                        <span class="item-date">20/10/2020</span>
-                      </div>
-                    </div>
-                </div>
+              <ng-container *ngIf="order.order_status=='Pending'">
+                <p class="text-warning">
+                  <i class="fa fa-circle" aria-hidden="true"></i> 
+                  {{order.order_status}} 
+                </p>
+              </ng-container>
+              <ng-container *ngIf="order.order_status=='Rejected'">
+                <p class="text-danger">
+                  <i class="fa fa-circle" aria-hidden="true"></i> 
+                  {{order.order_status}} 
+                </p>
+              </ng-container>
+              <ng-container *ngIf="order.order_status=='Accepted' || order.order_status=='Delivered'">
+                <p class="text-success">
+                  <i class="fa fa-circle" aria-hidden="true"></i> 
+                  {{order.order_status}} 
+                </p>
+              </ng-container>
+              <!-- <p class="text-waiting">
+                <i class="fa fa-circle" aria-hidden="true"></i> 
+                {{order.order_status}} 
+              </p> -->
+              <a (click)="gotoDetails(order.id)">View Details</a>
             </div>
-            <div class="active-waiting">
-                <p class="text-danger"><i class="fa fa-circle" aria-hidden="true"></i> Rejected </p>
-                <a [routerLink]="['/order-details']">View Details</a>
-              </div>
         </div>
-        <div class="order-new-1">
-            <div class="d-flex">
-                <div class="col-md-2 col-sm-2 col-xs-2">
-                    <div class="order-img">
-                      <img src="../../assets/img/product-1.jpg">
-                    </div>
-                </div>
-                <div class="col-md-10 col-sm-10 col-xs-10">
-                    <div class="order-img-price">
-                      <a class="order-icon" href="#">5000</a>
-                      <h3>Store Name</h3>
-                      <h3>Order ID: #123-245678</h3>
-                      <div class="order-size-pro">
-                        <span class="many-item">5 ITEM</span>
-                        <span class="item-date">20/10/2020</span>
-                      </div>
-                    </div>
-                </div>
-            </div>
-            <div class="active-waiting">
-                <p class="text-warning"><i class="fa fa-circle" aria-hidden="true"></i> Waiting </p>
-                <a [routerLink]="['/order-details']">View Details</a>
-              </div>
-        </div>
+      </ng-container>
       </div>
     </div>
   </div>
 </div>
+
+<app-footer></app-footer>

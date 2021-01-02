@@ -10,10 +10,11 @@
             <img class="empty-img" src="../../assets/img/empty.png">
             </div>
             <div class="col-md-12 buttons text-center">
-                <button class="track"><a href="order-details.html">Track your order</a></button>
-                <button class="proceed-empty"><a href="categories.html">Back to Shopping</a></button>
+                <button class="track"><a [routerLink]="['/order']">Track your order</a></button>
+                <button class="proceed-empty"><a [routerLink]="['/home']">Back to Shopping</a></button>
             </div>
 			
 		</div>
 	</div>	
 </div>	
+<app-footer></app-footer>

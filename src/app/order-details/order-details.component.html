@@ -1,3 +1,11 @@
+<ngx-spinner
+bdColor="rgba(51,51,51,0.8)"
+size="medium"
+color="#fff"
+type="ball-scale-multiple"
+>
+<p style="font-size: 20px; color: white">Loading...</p>
+</ngx-spinner>
 <div class="ordee_details">
 	<div class="container">
 		<div class="row">
@@ -10,14 +18,14 @@
 			<div class="col-md-12">
 				<div class="order-id-no">
 					<div class="Order-ID-no1">
-						<p>Order ID: #123-45678</p>
+						<p>Order ID: #{{orderInfo.order_id}}</p>
 						<div class="order-date">
-						<strong>15/10/2020</strong>
+						<strong>{{orderInfo.order_date}}</strong>
 					</div>
 					</div>
 					<div class="customer_id-name">
-						<p>Shreyas Shah</p>
-						<span>+91 - 8080298760</span>
+						<p>{{orderInfo.customer_name}}</p>
+						<span>+91 - {{orderInfo.customer_contact_no}}</span>
 					</div>
 					
 					<div class="order-status">
@@ -114,43 +122,45 @@
 					<h4>ITEMS</h4>
 					</div>
 					</div>
+					<ng-container *ngFor="let order of orderItems;let i=index;">
 					<div class="full-seleve1" style="padding:5px;">
 						<div class="col-md-2 col-sm-2 col-xs-2">
 							<div class="product-img">
-								<img  src="../../assets/img/product-1.jpg">
+								<img  [src]="order.product_img_url">
 							</div>
 						</div>
 						<div class="col-md-10 col-sm-10 col-xs-10">
 							<div class="cart-img-pricing">
-								<h3>Full Sleeve Solid Men Jacket</h3>
+								<h3>{{order.product_name}}</h3>
 								<div class="size-pro">
 									<small>Size: Small</small>
 									<small>Colour: Red</small>
 								</div>
 								<div class="price-product">
-								<strong class="quantity">Quantity: 2</strong>
+								<strong class="quantity">Quantity: {{order.qty}}</strong>
 									<small class="prod-amount">500</small>
 								</div>
 							</div>
 						</div>	
 					</div>
-					
+				</ng-container>
+				
 					<div class="delivery-mode">
-						<h2>Delivery Mode : Collect From Store</h2>
-						<p>Date: 15/10/2020  &nbsp; &nbsp; &nbsp; Time: 05:00 PM</p>
+						<h2>Delivery Mode : {{orderInfo.delivery_mode}}</h2>
+						<p *ngIf="orderInfo.delivery_mode=='Pickup'">Date: {{orderInfo.collecting_date}}  &nbsp; &nbsp; &nbsp; Time: {{orderInfo.collecting_time}}</p>
+						<p *ngIf="orderInfo.delivery_mode=='Delivery'">{{orderInfo.delivery_address}}</p>
 					</div>
 
 
-					<div class="delivery-mode">
+					<!-- <div class="delivery-mode">
 						<h2>Delivery Mode : Delivery</h2>
-						<p>A-505, Rajiv Bhavan,</p>
-						<p>MG road, Kandivali West,</p>
-						<p>Mumbai 400067.</p>
+						
 					</div>
-					
+					 -->
 				</div>
 			</div>			
 			
 		</div>
 	</div>
 </div>
+<app-footer></app-footer>

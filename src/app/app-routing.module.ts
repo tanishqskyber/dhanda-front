@@ -14,24 +14,24 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
 import { ProfileComponent } from './profile/profile.component';
 import { HomeComponent } from './rountingcomponent/home/home.component';
 import { SubCategoriesPopupComponent } from './sub-categories-popup/sub-categories-popup.component';
+import { AuthGuard } from './_gaurd/auth.gaurd';
 
 
-
-const routes: Routes = [{ path:'',component:HomeComponent},
-{path:'add-cart',component:AddCartComponent},
-{path:'categories',component:CategoriesComponent},
-{path:'category-page',component:CategoryPageComponent},
-{path:'enter-no',component:EnterNoComponent},
-{path:'checkout',component:CheckoutComponent},
+const routes: Routes = [{ path:'',component:EnterNoComponent},
+{path:'add-cart',component:AddCartComponent,canActivate: [AuthGuard]},
+{path:'categories',component:CategoriesComponent,canActivate: [AuthGuard]},
+{path:'category-page',component:CategoryPageComponent,canActivate: [AuthGuard]},
+{path:'home',component:HomeComponent,canActivate: [AuthGuard]},
+{path:'checkout',component:CheckoutComponent,canActivate: [AuthGuard]},
 {path:'empty-cart',component:EmptyCartComponent},
-{path:'order-details',component:OrderDetailsComponent},
-{path:'order-placed',component:OrderPlacedComponent},
-{path:'order',component:OrderComponent},
-{path:'product-details',component:ProductDetailsComponent},
-{path:'profile',component:ProfileComponent},
-{path:'sub-categories',component:SubCategoriesPopupComponent},
+{path:'order-details',component:OrderDetailsComponent,canActivate: [AuthGuard]},
+{path:'order-placed',component:OrderPlacedComponent,canActivate: [AuthGuard]},
+{path:'order',component:OrderComponent,canActivate: [AuthGuard]},
+{path:'product-details',component:ProductDetailsComponent,canActivate: [AuthGuard]},
+{path:'profile',component:ProfileComponent,canActivate: [AuthGuard]},
+{path:'sub-categories',component:SubCategoriesPopupComponent,canActivate: [AuthGuard]},
 {path:'otp',component:OtpComponent},
-{ path:'**',redirectTo:''}
+{ path:'**',redirectTo:'',pathMatch: 'full'}
 ]
 
 

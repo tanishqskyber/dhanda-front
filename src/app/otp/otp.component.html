@@ -1,4 +1,11 @@
-
+<ngx-spinner
+bdColor="rgba(51,51,51,0.8)"
+size="medium"
+color="#fff"
+type="ball-scale-multiple"
+>
+<p style="font-size: 20px; color: white">Loading...</p>
+</ngx-spinner>
 <div class="container">
     <div id="wrapper">
       <div id="dialog">
@@ -7,10 +14,10 @@
         <div class="otp">
             <ng-otp-input  (onInputChange)="onOtpChange($event)" class="otp-input" [config]="config"></ng-otp-input>
           <div class="edit-no text-center">
-            <p>+91 - 8080298760 <a href="#">(Edit?)</a></p>
+            <p>+91 - {{mobilenumber}} <a href="#">(Edit?)</a></p>
             <span class="time-counting">00:59</span>
           </div>
-          <button class="btn btn-primary btn-update"><a href="order.html">Verify</a></button>
+          <button class="btn btn-primary btn-update" (click)="postOtp()">Verify</button>
         </div>
       </div>
     </div>

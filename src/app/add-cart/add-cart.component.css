@@ -1,0 +1,10 @@
+.inputitem{
+    background: #dcdcdc;
+    border: transparent;
+    padding: 5px;
+    font-size: 16px;
+    width:35px;
+    position: relative;
+    top: 2px;
+    text-align: center;
+}

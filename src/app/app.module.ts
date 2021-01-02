@@ -25,7 +25,13 @@ import { FormsModule } from '@angular/forms';
 import { CounterInputComponent } from './counter-input/counter-input.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CustomModalComponent } from './custom-modal/custom-modal.component';
-
+import { ToastrModule } from 'ngx-toastr';
+import { NgxSpinnerModule } from "ngx-spinner";
+import { AuthService } from './_api/auth.service'
+import { AuthInterceptorService } from './_api/authinterceptor.service';
+import { FooterComponent } from './supportingcomponents/footer/footer.component'
+import {CategoryService} from './_api/category.service'
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,6 +51,7 @@ import { CustomModalComponent } from './custom-modal/custom-modal.component';
     OtpComponent,
     CounterInputComponent,
     CustomModalComponent,
+    FooterComponent,
 
   ],
   imports: [
@@ -56,11 +63,19 @@ import { CustomModalComponent } from './custom-modal/custom-modal.component';
     BrowserAnimationsModule,
     CarouselModule,
     NgbModule,
+    HttpClientModule,
+    ToastrModule.forRoot(), // ToastrModule added
+    NgxSpinnerModule,
+    Ng2SearchPipeModule,
 
     
   ],
   entryComponents:[CustomModalComponent],
-  providers: [],
+  providers: [AuthService,CategoryService,{
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptorService,
+    multi: true,
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
