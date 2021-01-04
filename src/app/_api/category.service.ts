@@ -406,4 +406,48 @@ const path = new Config().getBaseURL();
       
         return promise;
       }
+
+      searchProduct(search_text:any): Promise<any> { 
+        var params={
+            "search_text":search_text
+        }
+      let promise = new Promise((resolve, reject) => {
+          this.http.post(`${path}sub-category/category_search`,params)
+              .subscribe(
+                  res => {
+                      
+                      resolve(res);
+                  },
+                  err => {
+                      console.log("Error occured : " + err);
+                      reject(err);
+                  }
+              );
+    
+      });
+    
+      return promise;
+    }
+
+    recentProducts(): Promise<any> { 
+        var params={
+           
+        }
+      let promise = new Promise((resolve, reject) => {
+          this.http.post(`${path}product/recent_products`,params)
+              .subscribe(
+                  res => {
+                      
+                      resolve(res);
+                  },
+                  err => {
+                      console.log("Error occured : " + err);
+                      reject(err);
+                  }
+              );
+    
+      });
+    
+      return promise;
+    }
   }

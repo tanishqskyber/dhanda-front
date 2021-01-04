@@ -14,6 +14,7 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
 import { ProfileComponent } from './profile/profile.component';
 import { HomeComponent } from './rountingcomponent/home/home.component';
 import { SubCategoriesPopupComponent } from './sub-categories-popup/sub-categories-popup.component';
+import { SearchedProductComponent } from './routingcomponent/searched-product/searched-product.component';
 import { AuthGuard } from './_gaurd/auth.gaurd';
 
 
@@ -30,6 +31,7 @@ const routes: Routes = [{ path:'',component:EnterNoComponent},
 {path:'product-details',component:ProductDetailsComponent,canActivate: [AuthGuard]},
 {path:'profile',component:ProfileComponent,canActivate: [AuthGuard]},
 {path:'sub-categories',component:SubCategoriesPopupComponent,canActivate: [AuthGuard]},
+{path:'searched-results',component:SearchedProductComponent,canActivate: [AuthGuard]},
 {path:'otp',component:OtpComponent},
 { path:'**',redirectTo:'',pathMatch: 'full'}
 ]

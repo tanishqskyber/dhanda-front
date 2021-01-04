@@ -71,6 +71,16 @@ export class EnterNoComponent implements OnInit {
             positionClass:'toast-top-center'
             })
           this.router.navigate(['/otp']);
+        }else if(resp['message']=='Signup successfully & OTP sent!' && resp['status']==202){
+          this.spinner.hide()
+          console.log
+          this.auth.saveToken(resp['data']['secure_set'])
+          localStorage.setItem('contact-no',this.contact_no)
+          this.toastr.success('Sign-up successfully & OTP sent!','Error',{
+            timeOut:3000,
+            positionClass:'toast-top-center'
+            })
+          this.router.navigate(['/otp']);
         }else if(resp['message']=='User not exist!!' && resp['status']==404){
           this.spinner.hide()
           this.auth.saveToken(resp['secure_set'])

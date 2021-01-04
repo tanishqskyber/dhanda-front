@@ -55,6 +55,12 @@ export class OtpComponent implements OnInit {
               timeOut:3000,
               positionClass:'toast-top-center'
               })
+          }else if(resp['message']=='Invalid user!' && resp['status']==401){
+            this.spinner.hide()
+            this.toastr.error('Invalid User!','Error',{
+              timeOut:3000,
+              positionClass:'toast-top-center'
+              })
           }else{
             this.spinner.hide()
             this.toastr.error('Something went wrong!','Error',{

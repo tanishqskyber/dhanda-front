@@ -28,6 +28,7 @@ export class CheckoutComponent implements OnInit {
   pincode:any=null;
   cash_upi_on_del:boolean=false
   delivery_date:any=null;
+  converted_del_time:any=null;
   delievery_time:any=null;
   addressSave:boolean=false;
   delievery_mode:any=null;
@@ -300,6 +301,16 @@ if(this.addressSave==true){
   console.log('Dont save')
 }
 
+ }
+
+ checkTime(event){
+   console.log(event)
+   var H = +event.substr(0, 2);
+var h = (H % 12) || 12;
+var ampm = H < 12 ? "AM" : "PM";
+event = h + event.substr(2, 3) + ampm;
+console.log(event)
+this.delievery_time=event
  }
 
 

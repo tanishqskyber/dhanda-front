@@ -32,6 +32,7 @@ import { AuthInterceptorService } from './_api/authinterceptor.service';
 import { FooterComponent } from './supportingcomponents/footer/footer.component'
 import {CategoryService} from './_api/category.service'
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { SearchedProductComponent } from './routingcomponent/searched-product/searched-product.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -52,6 +53,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     CounterInputComponent,
     CustomModalComponent,
     FooterComponent,
+    SearchedProductComponent,
 
   ],
   imports: [

@@ -16,6 +16,7 @@ params:any;
 
   ngOnInit(): void {
     this.params = this.activatedRoute.snapshot.queryParams["id"];
+    localStorage.setItem('subCategory',this.params)
     this.loadSubcategory()
   }
 

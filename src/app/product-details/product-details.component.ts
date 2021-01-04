@@ -11,7 +11,7 @@ import {Router,ActivatedRoute} from '@angular/router';
 export class ProductDetailsComponent implements OnInit {
 
   constructor(private categoryservice:CategoryService,private toastr: ToastrService,private spinner: NgxSpinnerService,private router: Router,private activatedRoute: ActivatedRoute) { }
-  counter : any = 0;
+  counter : any = 1;
   isBtn = true;
   customOptions: any = {
     loop: true,
@@ -156,7 +156,7 @@ export class ProductDetailsComponent implements OnInit {
         console.log(resp)
         if(resp['message']=='Product added to the cart successfully!' && resp['status']==200){
           this.router.navigate(['/add-cart']);
-          this.toastr.success('Product has been added to the cart!','Error',{
+          this.toastr.success('Product has been added to the cart!','Success',{
             timeOut:3000,
             positionClass:'toast-top-center'
             })

@@ -79,9 +79,10 @@ type="ball-scale-multiple"
 						</tr>
 						<tr>
 						  <td>Delivery Charges</td>
-						 <td class="text-right">{{delieveryCharges}}</td>
+						 <td class="text-right" *ngIf="delieveryCharges>0">{{delieveryCharges}}</td>
+						 <td class="text-right" *ngIf="delieveryCharges==0">Free</td>
 						</tr>
-						<tr>
+						<tr >
 							<td>Coupon Discount</td>
 						   <td class="text-right">{{couponDiscount}}</td>
 						  </tr>

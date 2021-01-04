@@ -19,8 +19,13 @@ export class HomeComponent implements OnInit {
   private modalRef;
   categorydata:any=[]
   counter : any = 0;
+  storeData:any={}
   isBtn = true;
   isModalShow = false;
+  store_name:any="";
+  store_logo:any=""
+  mobile_number:any=""
+  recproductData:any=[]
   customOptions: any = {
     loop: true,
     margin:25,
@@ -53,9 +58,10 @@ export class HomeComponent implements OnInit {
    nav: true
   }
   
+  search:any;
 
 
-
+  searchedProducts:any=[]
 
   constructor(private router: Router,private modalService: NgbModal, config: NgbModalConfig,private comp: AppComponent,private categoryservice:CategoryService,private toastr: ToastrService,private spinner: NgxSpinnerService) {
    
@@ -63,7 +69,11 @@ export class HomeComponent implements OnInit {
     
   }
   ngOnInit() {
+    this.store_name=localStorage.getItem('username')
+    this.mobile_number=localStorage.getItem('contact-no')
+    this.loadStoreDetails()
     this.loadCategories()
+    this.laodRecentProducts()
   }
   open() {
     //this.modalService.open(CustomModalComponent);
@@ -149,4 +159,90 @@ private loadCategories(){
 gotoSubcategory(catid){
   this.router.navigate(['/category-page'],{queryParams:{id:catid}});
 }
+
+private loadStoreDetails(){
+  this.spinner.show()
+  this.categoryservice.getStoreDetails().then(resp=>{
+    console.log(resp)
+    if(resp['message']=='Store location Details!'){
+      // this.allowFreeShipping=resp['data']['allow_free_shipping']
+      // this.minCartAmount=resp['data']['min_order_amount']
+      // this.allowStorePickup=resp['data']['allow_store_pickup']
+      // this.shippingAmount=resp['data']['shipping_amount']
+      this.store_name=resp['data']['store_name']
+      this.store_logo=resp['data']['logo_img']
+      this.spinner.hide()
+      // this.loadCartDetails()
+    }else{
+      this.spinner.hide()
+      this.toastr.error('Something went wrong!!','Error',{
+        timeOut:3000,
+        positionClass:'toast-top-center'
+        })
+    }
+  },error=>{
+    this.spinner.hide()
+    console.log(error)
+    this.toastr.error('Failed in load Store Details','Error',{
+      timeOut:3000,
+      positionClass:'toast-top-center'
+      })
+  })
+}
+
+searhcProductbySearch(){
+  this.spinner.show()
+  this.categoryservice.searchProduct(this.search).then(resp=>{
+    console.log(resp)
+    if(resp['message']=='Product info!'){
+      this.searchedProducts=resp['data']
+      this.spinner.hide()
+      localStorage.setItem('searchedProduct',JSON.stringify(this.searchedProducts))
+      this.router.navigate(['/searched-results']);
+    }else{
+      this.spinner.hide()
+      this.toastr.error('Not able to find the product','Error',{
+        timeOut:3000,
+        positionClass:'toast-top-center'
+        })
+    }
+  },error=>{
+    this.spinner.hide()
+    console.log(error)
+    this.toastr.error('Failed to find the products','Error',{
+      timeOut:3000,
+      positionClass:'toast-top-center'
+      })
+  })
+}
+
+private laodRecentProducts(){
+  this.spinner.show()
+  this.categoryservice.recentProducts().then(resp=>{
+    console.log(resp)
+    if(resp['message']=='Recent product list!'){
+      this.recproductData=resp['data']
+      this.spinner.hide()
+     
+    }else{
+      this.spinner.hide()
+      this.toastr.error('Not able to find the product','Error',{
+        timeOut:3000,
+        positionClass:'toast-top-center'
+        })
+    }
+  },error=>{
+    this.spinner.hide()
+    console.log(error)
+    this.toastr.error('Failed to find the products','Error',{
+      timeOut:3000,
+      positionClass:'toast-top-center'
+      })
+  })
+}
+gotoProductDetails(p_id:any){
+  this.router.navigate(['/product-details'],{queryParams:{id:p_id}});
+}
+
+
 }

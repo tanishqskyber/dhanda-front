@@ -39,7 +39,7 @@ type="ball-scale-multiple"
 							  <div class="tab-pane" [ngClass]="storeActive ? 'active' : ''" *ngIf="storeShow && storeTabShow">
 								<form class="date-time-form">
 									  <input type="date" data-date="" name="delivery_date" [(ngModel)]="delivery_date" data-date-format="DD MMMM YYYY">
-									  <input type="time" id="appt" name="delievery_time" [(ngModel)]="delievery_time" min="09:00" max="18:00" required>
+									  <input type="time" id="appt" name="converted_del_time" [(ngModel)]="converted_del_time" min="09:00" max="18:00" required (ngModelChange)="checkTime($event)">
 									 
 									 <div class="text-center">
 										 <button class="btn btn-proceed" (click)="placeOrder()">BOOK NOW</button>

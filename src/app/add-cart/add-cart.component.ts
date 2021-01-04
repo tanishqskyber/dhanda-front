@@ -51,7 +51,7 @@ cartId:any=[];
           if(data['variations'].length>0){
             
             this.totalPrice+=data['selling_price']*data['qty']
-            if(this.allowFreeShipping==true && this.totalPrice>this.minCartAmount){
+            if(this.allowFreeShipping==true){
               this.totalPaymentb4Discount=this.totalPrice-this.couponDiscount
             }else{
               this.delieveryCharges=this.shippingAmount
@@ -173,53 +173,64 @@ loadCouponDetails(){
    
     console.log(resp)
     if(resp['message']=='Coupon info!' && resp['status']==200){
-     
-      if(resp['data']['coupon_type']=='amount'){
-        if(this.totalPayment>=resp['data']['min_cart_amount']){
-          this.couponDiscount=resp['data']['amount']
-          this.totalPayment=this.totalPayment-this.couponDiscount
-          this.couponId=resp['data']['id']
-          console.log(this.totalPayment)
-          this.couponApplied=true
-          this.TpaymentRefvalue=this.totalPayment
-          this.spinner.hide()
-        }else{
-          this.spinner.hide()
-         
-          this.couponApplied=false
-          this.toastr.error('1Coupon not applicable!','Error',{
-            timeOut:3000,
-            positionClass:'toast-top-center'
-            })
-        }
-      }else if(resp['data']['coupon_type']=='percentage'){
-        if(this.totalPayment>=resp['data']['min_cart_amount']){
-          this.couponDiscount=(this.totalPayment/100)*resp['data']['amount']
-          this.totalPayment=this.totalPayment-this.couponDiscount
-          this.couponId=resp['data']['id']
-          console.log(this.totalPayment)
-          this.couponApplied=true
-          this.TpaymentRefvalue=this.totalPayment
-          this.spinner.hide()
-        }else{
-          this.spinner.hide()
-       
-          this.couponApplied=false
-          this.toastr.error('2Coupon not applicable!','Error',{
-            timeOut:3000,
-            positionClass:'toast-top-center'
-            })
-        }
-   
+     var curr_date=new Date()
+     var expiry_date=new Date(resp['data']['expiry_date'])
+   if(expiry_date.getDate()>curr_date.getDate()){
+    if(resp['data']['coupon_type']=='amount'){
+      if(this.totalPayment>=resp['data']['min_cart_amount']){
+        this.couponDiscount=resp['data']['amount']
+        this.totalPayment=this.totalPayment-this.couponDiscount
+        this.couponId=resp['data']['id']
+        console.log(this.totalPayment)
+        this.couponApplied=true
+        this.TpaymentRefvalue=this.totalPayment
+        this.spinner.hide()
       }else{
         this.spinner.hide()
        
         this.couponApplied=false
-        this.toastr.error('3Coupon not applicable!','Error',{
+        this.toastr.error('1Coupon not applicable!','Error',{
           timeOut:3000,
           positionClass:'toast-top-center'
           })
       }
+    }else if(resp['data']['coupon_type']=='percentage'){
+      if(this.totalPayment>=resp['data']['min_cart_amount']){
+        this.couponDiscount=(this.totalPayment/100)*resp['data']['amount']
+        this.totalPayment=this.totalPayment-this.couponDiscount
+        this.couponId=resp['data']['id']
+        console.log(this.totalPayment)
+        this.couponApplied=true
+        this.TpaymentRefvalue=this.totalPayment
+        this.spinner.hide()
+      }else{
+        this.spinner.hide()
+     
+        this.couponApplied=false
+        this.toastr.error('2Coupon not applicable!','Error',{
+          timeOut:3000,
+          positionClass:'toast-top-center'
+          })
+      }
+ 
+    }else{
+      this.spinner.hide()
+     
+      this.couponApplied=false
+      this.toastr.error('3Coupon not applicable!','Error',{
+        timeOut:3000,
+        positionClass:'toast-top-center'
+        })
+    }
+   }else{
+    this.spinner.hide()
+    this.couponApplied=false
+    this.toastr.error('Coupon has been expired!','Error',{
+      timeOut:3000,
+      positionClass:'toast-top-center'
+      })
+   }
+      
     }else if(resp['message']=='No coupon found!' && resp['status']==404){
       this.spinner.hide()
       this.couponApplied=false
@@ -254,23 +265,58 @@ loadCouponDetails(){
 }
 
 proceesRequest(){
-  var params={
-    "cart_id":this.cartId,
-    "notes":this.orderNotes,
-    "coupon_id":this.couponId,
-    "shipping_amount":this.delieveryCharges,
-    "total_price":this.totalPrice,
-    "coupon_discount":this.couponDiscount,
-   "final_amount":(this.couponApplied)?this.TpaymentRefvalue:this.totalPaymentb4Discount
+  if(this.couponApplied){
+    if(this.minCartAmount<=this.TpaymentRefvalue){
+      var params={
+        "cart_id":this.cartId,
+        "notes":this.orderNotes,
+        "coupon_id":this.couponId,
+        "shipping_amount":this.delieveryCharges,
+        "total_price":this.totalPrice,
+        "coupon_discount":this.couponDiscount,
+       "final_amount":this.TpaymentRefvalue
+      }
+      localStorage.setItem('orderDetails',JSON.stringify(params))
+      if(this.allowStorePickup==true){
+        localStorage.setItem('allowStorePickup',"true")
+      }else if(this.allowStorePickup==false){
+        localStorage.setItem('allowStorePickup',"false")
+      }
+      this.router.navigate(['/checkout']);
+    }else{
+      this.toastr.error('Total amount is less than Minimum cart Amount Value','Error',{
+        timeOut:3000,
+        positionClass:'toast-top-center'
+        })
+    }
+
+  }else if(!this.couponApplied){
+    if(this.minCartAmount<=this.totalPaymentb4Discount){
+    var params={
+      "cart_id":this.cartId,
+      "notes":this.orderNotes,
+      "coupon_id":this.couponId,
+      "shipping_amount":this.delieveryCharges,
+      "total_price":this.totalPrice,
+      "coupon_discount":this.couponDiscount,
+     "final_amount":this.totalPaymentb4Discount
+    }
+    localStorage.setItem('orderDetails',JSON.stringify(params))
+    if(this.allowStorePickup==true){
+      localStorage.setItem('allowStorePickup',"true")
+    }else if(this.allowStorePickup==false){
+      localStorage.setItem('allowStorePickup',"false")
+    }
+    
+    this.router.navigate(['/checkout']);
+  }else{
+    this.toastr.error('Total amount is less than Minimum cart Amount Value','Error',{
+      timeOut:3000,
+      positionClass:'toast-top-center'
+      })
   }
-  localStorage.setItem('orderDetails',JSON.stringify(params))
-  if(this.allowStorePickup==true){
-    localStorage.setItem('allowStorePickup',"true")
-  }else if(this.allowStorePickup==false){
-    localStorage.setItem('allowStorePickup',"false")
   }
-  
-  this.router.navigate(['/checkout']);
+ 
 
 
 }
@@ -283,7 +329,10 @@ private loadStoreDetails(){
       this.allowFreeShipping=resp['data']['allow_free_shipping']
       this.minCartAmount=resp['data']['min_order_amount']
       this.allowStorePickup=resp['data']['allow_store_pickup']
+      if(resp['data']['shipping_amount']!=null)
       this.shippingAmount=resp['data']['shipping_amount']
+      else
+      this.shippingAmount=0
       this.loadCartDetails()
     }else{
       this.spinner.hide()

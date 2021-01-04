@@ -40,21 +40,30 @@ type="ball-scale-multiple"
 							  <p>15/10/2020 <span>04:00 PM</span></p>   
 							</li>
 						  </ul> -->
+						  <!-- <li id="step1" class="step step--incomplete step--inactive">
+							<span class="step__icon delivered"></span>
+							<span class="step__label">
+							  <h5>Placed</h5>
+							  <p>{{orderInfo.order_date}} <span>{{orderInfo.order_time}}</span></p> 
+							</span>
+						  </li> -->
 						  <ul class="steps">
 							<li id="step1" class="step step--incomplete step--active" data-date="12:30 - 1:00pm">
 							  <span class="step__icon"></span>
 							  <span class="step__label">
 								<h5>Accepted</h5>
-								<p>15/10/2020 <span>04:00 PM</span></p>
+								<p>{{orderInfo.order_date}} <span>{{orderInfo.order_time}}</span></p> 
 							  </span>
 							</li>
 							<li id="step1" class="step step--incomplete step--inactive">
 							  <span class="step__icon delivered"></span>
 							  <span class="step__label">
 								<h5>Delivered</h5>
-								<p>15/10/2020 <span>04:00 PM</span></p> 
+								<p>{{orderInfo.order_date}} <span>{{orderInfo.order_time}}</span></p> 
 							  </span>
 							</li>
+						
+							
 						  </ul>						  
 						</div>
 					</div>
@@ -133,12 +142,13 @@ type="ball-scale-multiple"
 							<div class="cart-img-pricing">
 								<h3>{{order.product_name}}</h3>
 								<div class="size-pro">
-									<small>Size: Small</small>
-									<small>Colour: Red</small>
+									<ng-container *ngFor="let variants of order.variations;let j=index;">
+										<small>{{variants.variation_name}}: {{variants.variation_value}}</small>
+										</ng-container>
 								</div>
 								<div class="price-product">
 								<strong class="quantity">Quantity: {{order.qty}}</strong>
-									<small class="prod-amount">500</small>
+									<small class="prod-amount">{{order.product_selling_price}}</small>
 								</div>
 							</div>
 						</div>	
