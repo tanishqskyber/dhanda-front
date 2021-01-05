@@ -19,10 +19,6 @@ export class AppComponent {
     
   }
 
-  checkCart() {
-    console.log("count called");
-    this.cartcounter = localStorage.getItem('cart');
-  }
 
 
 }

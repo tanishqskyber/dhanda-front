@@ -188,7 +188,7 @@ type="ball-scale-multiple"
 							<div class="price-prod">
 								<ins>₹{{product.selling_price}}</ins>
 								<del>₹{{product.mrp}}</del>
-								<a class="cart-btn" (click)="loadProductInfo(product.id)"> + Add</a>
+								<a class="cart-btn" (click)="loadProductInfo(product.id,product.variations)"> + Add</a>
 								<!-- <a class="home-cart-btn" *ngIf="!counter" (click)="open()"> + Add</a>
 								<div *ngIf="counter" id="add-remove-div" class="add-remove-div">
 									<button type="button" class="btn minus-btn"  (click)="decrementproduct()"><i class="fa fa-minus"></i></button><input type="text"  id="input_item" readonly="" class="quantity-input ng-pristine ng-valid ng-touched" [(ngModel)]="counter"><button type="button" class="btn plus-btn" (click)="incrementproduct()"><i class="fa fa-plus"></i></button>

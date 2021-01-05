@@ -47,11 +47,17 @@ type="ball-scale-multiple"
 							<div class="price-prod">
 								<ins>₹{{product.selling_price}}</ins>
 								<del>₹{{product.mrp}}</del>
-								<a class="cart-btn" (click)="loadProductInfo(product.id)"> + Add</a>
-								<!-- <a class="cart-btn" *ngIf="!counter" (click)="loadProductInfo(product.id)"> + Add</a>
-								<div *ngIf="counter" id="add-remove-div" class="add-remove-div">
-									<button type="button" class="btn minus-btn"  (click)="decrementproduct()"><i class="fa fa-minus"></i></button><input type="text"  id="input_item" readonly="" class="quantity-input ng-pristine ng-valid ng-touched" [(ngModel)]="counter"><button type="button" class="btn plus-btn" (click)="incrementproduct()"><i class="fa fa-plus"></i></button>
-								</div> -->
+								<!-- <a class="cart-btn" (click)="loadProductInfo(product.id)"> + Add</a> -->
+								<a class="cart-btn" (click)="loadProductInfo(product.id,product.product_count)" *ngIf="product.cart_added==false"> + Add</a>
+								<div *ngIf="product.cart_added==true" id="add-remove-div" class="add-remove-div">
+									<button type="button" class="btn minus-btn"  (click)="decrementproduct(product.product_count,product.id)">
+										<i class="fa fa-minus"></i>
+									</button>
+									<input type="text"  id="input_item" readonly="" class="quantity-input ng-pristine ng-valid ng-touched" [(ngModel)]="product.product_count">
+									<button type="button" class="btn plus-btn" (click)="incrementproduct(product.product_count,product.id)">
+										<i class="fa fa-plus"></i>
+									</button>
+								</div>
 							</div>
 						</div>
 					</button>
@@ -91,15 +97,15 @@ type="ball-scale-multiple"
 							</div> -->
 							<div id="add-remove-div" class="add-remove-div">
 								<h2>Qty.</h2>
-								<button type="button" class="btn minus-btn" (click)="decrement()"> <i
+								<button type="button" class="btn minus-btn" (click)="decrement(product.product_count,product.id)"> <i
 										class="fa fa-minus"></i></button>
 								<input type="text" value="1" id="input_item" readonly="" class="quantity-input"
-									[(ngModel)]="counter">
-								<button type="button" class="btn plus-btn" (click)="increment()"> <i
+									[(ngModel)]="product.product_count">
+								<button type="button" class="btn plus-btn" (click)="increment(product.product_count,product.id)"> <i
 										class="fa fa-plus"></i></button>
 								<div class="bag-button">
 							
-								<button class="add_product-modal-btn" (click)="addproducttoCart()" *ngIf="isBtn">ADD TO CART</button>
+								<button class="add_product-modal-btn" (click)="addproducttoCart(product.product_count)" *ngIf="isBtn">ADD TO CART</button>
 					
 							</div>
 							</div>

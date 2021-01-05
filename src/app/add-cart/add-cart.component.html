@@ -33,16 +33,14 @@ type="ball-scale-multiple"
 								<ng-container *ngFor="let variants of cart.variations;let j=index;">
 								<small>{{variants.variation_name}}: {{variants.variation_value}}</small>
 								</ng-container>
-								<ng-container *ngIf="cart.variations.length==0">
-									<small>Out of Stock</small>
-								</ng-container>
+							
 								
 							</div>
 							<div class="price-prod">
 								<ins>₹{{cart.selling_price}}</ins>
 								<del>₹{{cart.mrp}}</del> 
 								<small>{{cart.discount}}% off</small>
-								<ng-container *ngIf="cart.variations.length>0">
+								<ng-container>
 								<div id="add-remove-div" class="add-remove-div">
 									<button type="button" class="btn minus-btn" (click)="remove(cart.id)"> <i class="fa fa-minus"></i></button>
 									<input type="text" [value]="cart.qty"  class="quantity-input inputitem">

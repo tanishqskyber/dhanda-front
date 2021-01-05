@@ -62,9 +62,10 @@ export class HomeComponent implements OnInit {
 
 
   searchedProducts:any=[]
-
+  variationData:any=[];
   constructor(private router: Router,private modalService: NgbModal, config: NgbModalConfig,private comp: AppComponent,private categoryservice:CategoryService,private toastr: ToastrService,private spinner: NgxSpinnerService) {
-   
+    config.backdrop = true;
+    config.keyboard = false;
     
     
   }
@@ -109,27 +110,26 @@ decrementproduct() {
   } else{
     this.isBtn = false;
   }
-  localStorage.setItem('cart',this.counter);
-  this.comp.checkCart();
+
+
 }
 
 incrementproduct() {
   this.counter++;
   this.isBtn = false;
-  localStorage.setItem('cart',this.counter);
-  this.comp.checkCart();
+
 }
 
 incrementOne() {
   this.counter++;
   localStorage.setItem('cart',this.counter);
   this.isModalShow = false; 
-  this.comp.checkCart();
+
 }
 
 addToCart() {
   this.isModalShow = false;
-  this.comp.checkCart();
+
 }
 
 private loadCategories(){
@@ -242,6 +242,12 @@ private laodRecentProducts(){
 }
 gotoProductDetails(p_id:any){
   this.router.navigate(['/product-details'],{queryParams:{id:p_id}});
+}
+
+loadProductInfo(id,variations){
+  console.log(id)
+  console.log(variations)
+  this.isModalShow = true;
 }
 
 

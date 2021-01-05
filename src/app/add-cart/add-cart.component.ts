@@ -29,6 +29,7 @@ allowStorePickup:boolean=false;
 shippingAmount:number=0;
 cartId:any=[];
 @Input() counter = 1;
+
   constructor(private catservice:CategoryService,private toastr: ToastrService,private spinner: NgxSpinnerService,private router: Router,private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -57,11 +58,12 @@ cartId:any=[];
               this.delieveryCharges=this.shippingAmount
               this.totalPaymentb4Discount=(this.totalPrice+this.delieveryCharges)-this.couponDiscount
             }
-            this.cartId.push(parseInt(data['id']))
+            
 
             
             
           }
+          this.cartId.push(parseInt(data['id']))
         }
         this.spinner.hide()
       }else{
@@ -118,24 +120,29 @@ cartId:any=[];
       if(data['id']==id){
         if(data['qty'] != 0){
           data['qty']--;
-          this.catservice.updateCartQuantity(id,data['qty']).then(resp=>{
-            if(resp['message']=='Cart updated successfully!' && resp['status']==200){
-              this.loadCartDetails()
-            }else{
+          if(data['qty']>=1){
+            this.catservice.updateCartQuantity(id,data['qty']).then(resp=>{
+              if(resp['message']=='Cart updated successfully!' && resp['status']==200){
+                this.loadCartDetails()
+              }else{
+                this.spinner.hide()
+                this.toastr.error('Something went wrong!!!','Error',{
+                  timeOut:3000,
+                  positionClass:'toast-top-center'
+                  })
+              }
+            },error=>{
               this.spinner.hide()
-              this.toastr.error('Something went wrong!!!','Error',{
+              console.log(error)
+              this.toastr.error('Failed to update quantity!','Error',{
                 timeOut:3000,
                 positionClass:'toast-top-center'
                 })
-            }
-          },error=>{
-            this.spinner.hide()
-            console.log(error)
-            this.toastr.error('Failed to update quantity!','Error',{
-              timeOut:3000,
-              positionClass:'toast-top-center'
-              })
-          })
+            })
+          }else if (data['qty']===0){
+            this.deleteCartData(id)
+          }
+          
         }
       }
     }
