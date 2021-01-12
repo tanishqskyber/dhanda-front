@@ -33,6 +33,8 @@ import { FooterComponent } from './supportingcomponents/footer/footer.component'
 import {CategoryService} from './_api/category.service'
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { SearchedProductComponent } from './routingcomponent/searched-product/searched-product.component';
+import { AddressPageComponent } from './address-page/address-page.component';
+import { NewAddressComponent } from './new-address/new-address.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -54,6 +56,8 @@ import { SearchedProductComponent } from './routingcomponent/searched-product/se
     CustomModalComponent,
     FooterComponent,
     SearchedProductComponent,
+    AddressPageComponent,
+    NewAddressComponent,
 
   ],
   imports: [

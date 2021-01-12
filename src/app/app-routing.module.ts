@@ -16,6 +16,8 @@ import { HomeComponent } from './rountingcomponent/home/home.component';
 import { SubCategoriesPopupComponent } from './sub-categories-popup/sub-categories-popup.component';
 import { SearchedProductComponent } from './routingcomponent/searched-product/searched-product.component';
 import { AuthGuard } from './_gaurd/auth.gaurd';
+import { AddressPageComponent } from './address-page/address-page.component';
+import { NewAddressComponent } from './new-address/new-address.component';
 
 
 const routes: Routes = [{ path:'',component:EnterNoComponent},
@@ -33,6 +35,8 @@ const routes: Routes = [{ path:'',component:EnterNoComponent},
 {path:'sub-categories',component:SubCategoriesPopupComponent,canActivate: [AuthGuard]},
 {path:'searched-results',component:SearchedProductComponent,canActivate: [AuthGuard]},
 {path:'otp',component:OtpComponent},
+{path:'address',component:AddressPageComponent, canActivate:[AuthGuard]},
+{path:'new-address',component:NewAddressComponent,canActivate:[AuthGuard]},
 { path:'**',redirectTo:'',pathMatch: 'full'}
 ]
 

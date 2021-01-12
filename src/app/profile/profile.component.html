@@ -63,7 +63,6 @@ type="ball-scale-multiple"
 									<select name="state_id" id="state" [(ngModel)]="customerData.state_id" class="form-control"(change)="loadCities(customerData.state_id)" [disabled]=editTrue>
 										<option value="" selected>Select State</option>
 										<option  *ngFor ="let state of stateData" value="{{state.id}}">{{state.name}}</option>
-									
 									  </select> 
 								</div>		
                             </div>								
