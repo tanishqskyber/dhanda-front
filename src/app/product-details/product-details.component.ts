@@ -43,6 +43,8 @@ export class ProductDetailsComponent implements OnInit {
   variation_ids_arr:any=[]
   varia_split_arr:any=[]
   variation_ids:any;
+  activeVariation1:number;
+  activeVariation2:number;
   ngOnInit(): void {
     this.params = this.activatedRoute.snapshot.queryParams["id"];
     this.loadProductDetails();
@@ -194,6 +196,16 @@ export class ProductDetailsComponent implements OnInit {
     
 
   }
+
+  // setActive(varia,vid){
+  //   if(this.variationKeys.length>1){
+  //     if(this.activeVariation1==vid){
+
+  //     }
+  //   }
+  //   console.log(varia,vid)
+  //   this.activeVariation1 = vid;
+  // }
 
 
 

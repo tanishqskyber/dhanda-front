@@ -67,11 +67,18 @@
 										class="form-control" (change)="loadCities(customerData.state_id)"
 										[disabled]=editTrue>
 										<option value="" selected>Select State</option>
+<<<<<<< HEAD
 										<option *ngFor="let state of stateData" value="{{state.id}}">{{state.name}}
 										</option>
 									</select>
 								</div>
 							</div>
+=======
+										<option  *ngFor ="let state of stateData" value="{{state.id}}">{{state.name}}</option>
+									  </select> 
+								</div>		
+                            </div>								
+>>>>>>> 345fea20418d6be8f0c97dd913a4c20177286322
 
 							<div class="col-md-6">
 								<div class="form-group">

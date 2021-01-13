@@ -98,7 +98,7 @@ type="ball-scale-multiple"
 							<ul class="nav nav-pills" style="display:flex; list-style: none;">
 								<ng-container *ngFor="let vd of productData.variations">
 									<li *ngIf="vd.variation_name==varia">
-										<a (click)="selectvariation(vd.id,vd.variation_name)" data-toggle="tab">
+										<a (click)="selectvariation(vd.id,vd.variation_name);" data-toggle="tab">
 											{{vd.variation_value}}
 										</a>
 									</li>

@@ -2123,7 +2123,7 @@ td.amout-color {
 }
 
 /* On mouse-over, add a grey background color */
-.container1:hover input ~ .checkmark {
+.container1:hover input~.checkmark {
   background-color: #ccc;
 }
 
@@ -2140,7 +2140,7 @@ td.amout-color {
 }
 
 /* Show the checkmark when checked */
-.container1 input:checked ~ .checkmark:after {
+.container1 input:checked~.checkmark:after {
   display: block;
 }
 
