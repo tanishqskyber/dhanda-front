@@ -23,7 +23,7 @@ type="ball-scale-multiple"
 				
 			</div>
 			<ng-container *ngFor="let cat of categorydata;let i=index;">
-			<div class="col-md-3 col-sm-3 col-xs-6">
+			<div class="col-6 col-md-3">
 				<div class="cloth-categories">
 					<a><img  (click)="gotoSubcategory(cat.id)"  [src]="cat.category_img_url"></a>
 					<h2><a (click)="gotoSubcategory(cat.id)">{{cat.category_name}}</a></h2>

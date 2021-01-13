@@ -108,7 +108,22 @@ type="ball-scale-multiple"
 							</div>
 					</div>
 					</ng-container>
-					<div id="add-remove-div" class="add-remove-div">
+					<div class="row add-remove-div" id="add-remove-div">
+						<div class="col-4">
+							<h2>Qty.</h2>
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<button class="btn btn-outline-secondary-green" (click)="increment()" type="button"><i class="fas fa-plus"></i></button>
+									</div>
+								<input type="text" value="1" readonly="" class="form-control qty-input text-center" placeholder="1" aria-label="1" aria-describedby="basic-addon2" [(ngModel)]="counter">
+								<div class="input-group-append">
+									<button class="btn btn-outline-secondary-green" (click)="decrement()" type="button"><i class="fas fa-minus"></i></button>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- <div id="add-remove-div" class="add-remove-div">
 						<h2>Qty.</h2>
 						<button type="button" class="btn minus-btn" (click)="decrement()"> <i
 								class="fa fa-minus"></i></button>
@@ -116,10 +131,12 @@ type="ball-scale-multiple"
 							[(ngModel)]="counter">
 						<button type="button" class="btn plus-btn" (click)="increment()"> <i
 								class="fa fa-plus"></i></button>
-							</div>
-					<div class="add_cart_product">
-						<button class="buy-now-product" (click)="addproducttoCart()"><a href="javascript:void(0)">Buy Now</a></button>
-						<button class="add-to-product" (click)="addproducttoCart()"><a href="javascript:void(0)">Add To Cart</a></button>
+							</div> -->
+					<div class="add_cart_product mt-4 mb-4">
+						<button type="button" class="btn btn-primary btn-lg mr-3" (click)="addproducttoCart()"><a href="javascript:void(0)">Buy Now</a></button>
+						<button type="button" class="btn btn-primary btn-lg" (click)="addproducttoCart()"><a href="javascript:void(0)">Add To Cart</a></button>
+						<!-- <button class="buy-now-product" (click)="addproducttoCart()"><a href="javascript:void(0)">Buy Now</a></button>
+						<button class="add-to-product" (click)="addproducttoCart()"><a href="javascript:void(0)">Add To Cart</a></button> -->
 					</div>
 					
 				</div>	

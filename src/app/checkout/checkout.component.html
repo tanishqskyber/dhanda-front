@@ -1,136 +1,148 @@
-<ngx-spinner
-bdColor="rgba(51,51,51,0.8)"
-size="medium"
-color="#fff"
-type="ball-scale-multiple"
->
-<p style="font-size: 20px; color: white">Loading...</p>
+<ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#fff" type="ball-scale-multiple">
+	<p style="font-size: 20px; color: white">Loading...</p>
 </ngx-spinner>
 <div class="categories-page">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
 				<div class="back-page">
-					<a [routerLink]="['/add-cart']"><i class="fa fa-angle-left" aria-hidden="true"></i> Checkout Page</a>
-				</div>	
-			</div>	
-		</div>		
-	</div>	
-</div> 
+					<a [routerLink]="['/add-cart']"><i class="fa fa-angle-left" aria-hidden="true"></i> Checkout
+						Page</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 
 <div class="tabing-form">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
-			
-				<h3>Please select an option</h3>
-				<div id="exTab1">	
-				
-				<ul  class="nav nav-pills">
-							<li  [ngClass]="storeActive ? 'active' : ''" *ngIf="storeShow" (click)="loadStorePickup()">
-								<a data-toggle="tab">Collect From Store</a>
-							</li>
-							<li [ngClass]="deliveryActive ? 'active' : ''" (click)="loadDeliverytab()">
-								<a data-toggle="tab">Deliver to My Address</a>
-							</li>
-						</ul>
 
-							<div class="tab-content clearfix">
-							  <div class="tab-pane" [ngClass]="storeActive ? 'active' : ''" *ngIf="storeShow && storeTabShow">
-								<form class="date-time-form">
-									  <input type="date" data-date="" name="delivery_date" [(ngModel)]="delivery_date" data-date-format="DD MMMM YYYY">
-									  <input type="time" id="appt" name="converted_del_time" [(ngModel)]="converted_del_time" min="09:00" max="18:00" required (ngModelChange)="checkTime($event)">
-									 
-									 <div class="text-center">
-										 <button class="btn btn-proceed" (click)="placeOrder()">BOOK NOW</button>
-										</div>
-										</form>
+				<h3 class="mb-0">Please select an option</h3>
+				<div id="exTab1">
+
+					<ul class="nav nav-pills">
+						<li [ngClass]="storeActive ? 'active' : ''" *ngIf="storeShow" (click)="loadStorePickup()">
+							<a data-toggle="tab" class="btn">Collect From Store</a>
+						</li>
+						<li [ngClass]="deliveryActive ? 'active' : ''" (click)="loadDeliverytab()">
+							<a data-toggle="tab" class="btn">Deliver to My Address</a>
+						</li>
+					</ul>
+
+					<div class="tab-content clearfix">
+						<div class="tab-pane" [ngClass]="storeActive ? 'active' : ''" *ngIf="storeShow && storeTabShow">
+							<form class="date-time-form">
+								<input type="date" data-date="" name="delivery_date" [(ngModel)]="delivery_date"
+									data-date-format="DD MMMM YYYY">
+								<input type="time" id="appt" name="converted_del_time" [(ngModel)]="converted_del_time"
+									min="09:00" max="18:00" required (ngModelChange)="checkTime($event)">
+
+								<div class="text-center">
+									<button class="btn btn-proceed" (click)="placeOrder()">BOOK NOW</button>
 								</div>
-								<div class="tab-pane" [ngClass]="deliveryActive ? 'active' : ''" *ngIf="deliveryTabShow">
-										<h3>Please fill the address</h3>
-										
-								<div class="profile-form2">
-									<form>
-										<div class="col-md-12">
-											<div class="form-group">
-												<input name="delivery_contact_no" id="flate-1" [(ngModel)]="delivery_contact_no"  type="tel" placeholder="Contact No." class="form-control" maxlength="10">
-											</div>
-										</div>
-											<div class="col-md-12">
-												<div class="form-group">
-													<input name="flat_no" id="flate-1" [(ngModel)]="flat_no"  type="text" placeholder="Flat No. / Room No." class="form-control">
-												</div>
-											</div>
-											
-											<div class="col-md-12">							
-												<div class="form-group">
-												
-													<input type="text" name="building_no" [(ngModel)]="building_no" id="bulding1" placeholder="Building / Apartment / Society / Colony Name" class="form-control">
-												</div>
-											</div>								
-											
-											<div class="col-md-12">
-												<div class="form-group">
-												   <input name="road_no" id="road-name" [(ngModel)]="road_no" type="text" placeholder="Road Name" class="form-control">
-												</div>
-											</div>								
-
-											<div class="col-md-6">
-												<div class="form-group">
-													<label>State</label>
-													<select name="state_id" [(ngModel)]="state_id" id="state" class="form-control" (change)="loadCities(state_id)">
-														<option value="" selected>Select State</option>
-										<option  *ngFor ="let state of stateData" value="{{state.id}}">{{state.name}}</option>
-													  </select> 
-												</div>		
-											</div>								
-
-											<div class="col-md-6">
-												<div class="form-group">
-													<label>City</label>
-													<select name="city_id" [(ngModel)]="city_id" id="city" form="city-name" placeholder="City">
-														<option  *ngFor ="let city of cityData" value="{{city.id}}">{{city.name}}</option>
-													</select>
-												</div>	
-											</div>								
-
-											<div class="col-md-12">							
-												<div class="form-group">
-													<input type="text" name="pincode" id="Pincode" [(ngModel)]="pincode" placeholder="Pincode" class="form-control">
-												</div>
-											</div>	
-											
-											<div class="col-md-12">
-												<div class="save-info">
-												<label class="container1">Save this address for future
-												  <input type="checkbox" name="addressSave" [(ngModel)]="addressSave" (change)="saveAddress()">
-												  <span class="checkmark"></span>
-												</label>										
-												</div>
-											</div>
-											
-											<div class="col-md-12">
-												<div class="pay-method">
-												<h3>Payment Method</h3>
-												<label class="checkcontainer">CASH/UPI on delivery
-												  <input type="radio" name="cash_upi_on_del" [(ngModel)]=cash_upi_on_del>
-												  <span class="radiobtn"></span>
-												</label>	
-												
-												</div>
-											</div>											
-											
-
-											<div class="col-md-12">
-												<div class="text-center">
-													<button id="send-msg" class="btn default-submit" (click)="placeOrder()" >Book Now</button></div>
-											</div>	
-										</form>
-										</div>										
-										
-								</div>
+							</form>
 						</div>
-				  </div>
+						<div class="tab-pane" [ngClass]="deliveryActive ? 'active' : ''" *ngIf="deliveryTabShow">
+							<h3>Please fill the address</h3>
+
+							<div class="profile-form2">
+								<form>
+									<div class="col-md-12">
+										<div class="form-group">
+											<input name="delivery_contact_no" id="flate-1"
+												[(ngModel)]="delivery_contact_no" type="tel" placeholder="Contact No."
+												class="form-control" maxlength="10">
+										</div>
+									</div>
+									<div class="col-md-12">
+										<div class="form-group">
+											<input name="flat_no" id="flate-1" [(ngModel)]="flat_no" type="text"
+												placeholder="Flat No. / Room No." class="form-control">
+										</div>
+									</div>
+
+									<div class="col-md-12">
+										<div class="form-group">
+
+											<input type="text" name="building_no" [(ngModel)]="building_no"
+												id="bulding1" placeholder="Building / Apartment / Society / Colony Name"
+												class="form-control">
+										</div>
+									</div>
+
+									<div class="col-md-12">
+										<div class="form-group">
+											<input name="road_no" id="road-name" [(ngModel)]="road_no" type="text"
+												placeholder="Road Name" class="form-control">
+										</div>
+									</div>
+
+									<div class="col-md-6">
+										<div class="form-group">
+											<label>State</label>
+											<select name="state_id" [(ngModel)]="state_id" id="state"
+												class="form-control" (change)="loadCities(state_id)">
+												<option value="" selected>Select State</option>
+												<option *ngFor="let state of stateData" value="{{state.id}}">
+													{{state.name}}</option>
+											</select>
+										</div>
+									</div>
+
+									<div class="col-md-6">
+										<div class="form-group">
+											<label>City</label>
+											<select name="city_id" [(ngModel)]="city_id" id="city" form="city-name"
+												placeholder="City">
+												<option *ngFor="let city of cityData" value="{{city.id}}">{{city.name}}
+												</option>
+											</select>
+										</div>
+									</div>
+
+									<div class="col-md-12">
+										<div class="form-group">
+											<input type="text" name="pincode" id="Pincode" [(ngModel)]="pincode"
+												placeholder="Pincode" class="form-control">
+										</div>
+									</div>
+
+									<div class="col-md-12">
+										<div class="save-info">
+											<label class="container1">Save this address for future
+												<input type="checkbox" name="addressSave" [(ngModel)]="addressSave"
+													(change)="saveAddress()">
+												<span class="checkmark"></span>
+											</label>
+										</div>
+									</div>
+
+									<div class="col-md-12">
+										<div class="pay-method">
+											<h3>Payment Method</h3>
+											<label class="checkcontainer">CASH/UPI on delivery
+												<input type="radio" name="cash_upi_on_del" [(ngModel)]=cash_upi_on_del>
+												<span class="radiobtn"></span>
+											</label>
+
+										</div>
+									</div>
+
+
+									<div class="col-md-12">
+										<div class="text-center">
+											<button id="send-msg" class="btn default-submit" (click)="placeOrder()">Book
+												Now</button>
+										</div>
+									</div>
+								</form>
+							</div>
+
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

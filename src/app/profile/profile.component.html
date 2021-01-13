@@ -1,98 +1,106 @@
-<ngx-spinner
-bdColor="rgba(51,51,51,0.8)"
-size="medium"
-color="#fff"
-type="ball-scale-multiple"
->
-<p style="font-size: 20px; color: white">Loading...</p>
+<ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#fff" type="ball-scale-multiple">
+	<p style="font-size: 20px; color: white">Loading...</p>
 </ngx-spinner>
 <div class="customer_profile">
-	<div class="container-fluid">
+	<div class="container">
 		<div class="row">
-			<div class="col-md-12">
-				<div class="profile-heading">
-					<h3>Profile</h3>
-					<a *ngIf="editTrue" (click)="editProfile()">Edit</a>
+			<div class="col-md-12 mb-4">
+				<div class="profile-heading-page d-flex align-items-center justify-content-between">
+					<h2>Profile</h2>
+					<p><a *ngIf="editTrue" (click)="editProfile()">Edit</a></p>
 				</div>
 			</div>
 			<div class="col-md-12">
 				<div class="profile-form">
 					<form>
-							<div class="row">
+						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
-									<input name="customer_name" [(ngModel)]="customerData.customer_name" id="name" type="text" placeholder="Full Name" class="form-control" [readonly]=editTrue>
+									<input name="customer_name" [(ngModel)]="customerData.customer_name" id="name"
+										type="text" placeholder="Full Name" class="form-control" [readonly]=editTrue>
 								</div>
-                            </div>
-							
-							<div class="col-md-12">							
-								<div class="form-group">
-									<input type="tel" name="mobile_number" [(ngModel)]="customerData.mobile_number" id="phone" placeholder="Mobile Number" maxlength="10" class="form-control" readonly=true>
-								</div>
-                            </div>								
-							
-							<div class="col-md-12">
-								<div class="form-group">
-								   <input name="email" id="email" [(ngModel)]="customerData.email" type="text" placeholder="Email ID" class="form-control" [readonly]=editTrue>
-								</div>
-                            </div>								
-							
-							<div class="col-md-12">
-								<div class="form-group">
-								<label class="saved-add">Saved Address</label>
-									<input type="text" name="flat_no" [(ngModel)]="customerData.flat_no" id="add" placeholder="Flat No. / Room No." class="form-control" [readonly]=editTrue>
-								</div>
-                            </div>								
-
-							<div class="col-md-12">
-								<div class="form-group">
-									<input type="text" name="apartment_name" [(ngModel)]="customerData.apartment_name" id="society" placeholder="Building / Apartment / Society / Colony Name" class="form-control" [readonly]=editTrue>
-								</div>
-                            </div>								
-									
-							
-							<div class="col-md-12">							
-								<div class="form-group">
-									<input type="text" name="road_name" [(ngModel)]="customerData.road_name" id="road-name" placeholder="Road Name" class="form-control" [readonly]=editTrue>
-								</div>	
-                            </div>								
 							</div>
-							<div class="row">
-							<div class="col-md-6">
-								<div class="form-group">
-									<select name="state_id" id="state" [(ngModel)]="customerData.state_id" class="form-control"(change)="loadCities(customerData.state_id)" [disabled]=editTrue>
-										<option value="" selected>Select State</option>
-										<option  *ngFor ="let state of stateData" value="{{state.id}}">{{state.name}}</option>
-									
-									  </select> 
-								</div>		
-                            </div>								
-
-							<div class="col-md-6">
-								<div class="form-group">
-									<select name="city_id" id="city" [(ngModel)]="customerData.city_id" class="form-control"  [disabled]=editTrue>
-										<option  *ngFor ="let city of cityData" value="{{city.id}}">{{city.name}}</option>
-									  </select> 
-								</div>	
-							</div>	
-						</div>
-						<div class="row">							
-
-							<div class="col-md-12">							
-								<div class="form-group">
-									<input type="text" name="pincode" [(ngModel)]="customerData.pincode" id="Pincode" placeholder="Pincode" class="form-control" [readonly]=editTrue>
-								</div>
-                            </div>	
 
 							<div class="col-md-12">
-								<div class="text-center"><button id="send-msg" class="btn default-submit" type="submit" *ngIf="!editTrue" (click)="updateProfile()">Update</button></div>
-								<a class="logout-noe" (click)="logout()">Logout</a>
-							</div>							
+								<div class="form-group">
+									<input type="tel" name="mobile_number" [(ngModel)]="customerData.mobile_number"
+										id="phone" placeholder="Mobile Number" maxlength="10" class="form-control"
+										readonly=true>
+								</div>
+							</div>
+
+							<div class="col-md-12">
+								<div class="form-group">
+									<input name="email" id="email" [(ngModel)]="customerData.email" type="text"
+										placeholder="Email ID" class="form-control" [readonly]=editTrue>
+								</div>
+							</div>
+
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="saved-add">Saved Address</label>
+									<input type="text" name="flat_no" [(ngModel)]="customerData.flat_no" id="add"
+										placeholder="Flat No. / Room No." class="form-control" [readonly]=editTrue>
+								</div>
+							</div>
+
+							<div class="col-md-12">
+								<div class="form-group">
+									<input type="text" name="apartment_name" [(ngModel)]="customerData.apartment_name"
+										id="society" placeholder="Building / Apartment / Society / Colony Name"
+										class="form-control" [readonly]=editTrue>
+								</div>
+							</div>
+
+
+							<div class="col-md-12">
+								<div class="form-group">
+									<input type="text" name="road_name" [(ngModel)]="customerData.road_name"
+										id="road-name" placeholder="Road Name" class="form-control" [readonly]=editTrue>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<select name="state_id" id="state" [(ngModel)]="customerData.state_id"
+										class="form-control" (change)="loadCities(customerData.state_id)"
+										[disabled]=editTrue>
+										<option value="" selected>Select State</option>
+										<option *ngFor="let state of stateData" value="{{state.id}}">{{state.name}}
+										</option>
+									</select>
+								</div>
+							</div>
+
+							<div class="col-md-6">
+								<div class="form-group">
+									<select name="city_id" id="city" [(ngModel)]="customerData.city_id"
+										class="form-control" [disabled]=editTrue>
+										<option *ngFor="let city of cityData" value="{{city.id}}">{{city.name}}</option>
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+
+							<div class="col-md-12">
+								<div class="form-group">
+									<input type="text" name="pincode" [(ngModel)]="customerData.pincode" id="Pincode"
+										placeholder="Pincode" class="form-control" [readonly]=editTrue>
+								</div>
+							</div>
+
+							<div class="col-md-12">
+								<div class="text-center"><button id="send-msg" class="btn default-submit" type="submit"
+										*ngIf="!editTrue" (click)="updateProfile()">Update</button></div>
+								<a class="logout-noe text-danger" (click)="logout()">Logout</a>
+							</div>
 						</div>
 					</form>
-				</div>	
-			</div>	
-		</div>	
-	</div>	
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 <app-footer></app-footer>

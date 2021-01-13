@@ -27,12 +27,18 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CustomModalComponent } from './custom-modal/custom-modal.component';
 import { ToastrModule } from 'ngx-toastr';
 import { NgxSpinnerModule } from "ngx-spinner";
-import { AuthService } from './_api/auth.service'
+import { AuthService } from './_api/auth.service';
+
 import { AuthInterceptorService } from './_api/authinterceptor.service';
 import { FooterComponent } from './supportingcomponents/footer/footer.component'
 import {CategoryService} from './_api/category.service'
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { SearchedProductComponent } from './routingcomponent/searched-product/searched-product.component';
+import { AddressPageComponent } from './address-page/address-page.component';
+import { NewAddressComponent } from './new-address/new-address.component';
+import { DhandaLandingComponent } from './dhanda-landing/dhanda-landing.component';
+import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
+import { TermsAndConditionsComponent } from './terms-and-conditions/terms-and-conditions.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -54,6 +60,11 @@ import { SearchedProductComponent } from './routingcomponent/searched-product/se
     CustomModalComponent,
     FooterComponent,
     SearchedProductComponent,
+    AddressPageComponent,
+    NewAddressComponent,
+    DhandaLandingComponent,
+    PrivacyPolicyComponent,
+    TermsAndConditionsComponent,
 
   ],
   imports: [

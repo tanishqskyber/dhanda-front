@@ -16,8 +16,8 @@ export class OtpComponent implements OnInit {
     disableAutoFocus: false,
     placeholder: '',
     inputStyles: {
-      'width': '60px',
-      'height': '60px',
+      'width': '50px',
+      'height': '50px',
       'outline':'none'
     }
   };

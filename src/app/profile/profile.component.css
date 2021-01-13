@@ -12,3 +12,7 @@ input[type="text"]:read-only {
   select:disabled{
     background: transparent;
   }
+
+  .profile-heading-page h2{
+    color: #1fb055;
+  }
