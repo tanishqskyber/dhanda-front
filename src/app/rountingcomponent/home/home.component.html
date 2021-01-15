@@ -183,7 +183,8 @@
 			</div>
 
 			<div class="row">
-				<div class="col-6 col-md-3" *ngFor="let product of recproductData ;let j=index;">
+				<ng-container  *ngFor="let product of recproductData ;let j=index;">
+				<div class="col-6 col-md-3">
 
 					<button type="button" class="btn bg-transparent">
 
@@ -212,7 +213,52 @@
 						</div>
 
 					</button>
+					
 				</div>
+				<div class="modal modalcatadd" *ngIf="isModalShow">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-body">
+								<ng-container *ngFor="let varia of variationKeys">
+									<div class="size-select">
+										<h2>{{varia}}</h2>
+										<div class="exTab1">
+											<ul class="nav nav-pills" style="display:flex; list-style: none;">
+												<ng-container *ngFor="let vd of product.variations">
+													<li *ngIf="vd.variation_name==varia">
+														<a (click)="selectvariation(vd.id,vd.variation_name)"
+															data-toggle="tab">
+															{{vd.variation_value}}
+														</a>
+													</li>
+												</ng-container>
+												<!-- <li><a data-toggle="tab">small</a></li>
+										<li><a data-toggle="tab">small</a></li> -->
+											</ul>
+										</div>
+									</div>
+								</ng-container>
+							
+								<div id="add-remove-div" class="add-remove-div">
+									<h2>Qty.</h2>
+									<button type="button" class="btn minus-btn"(click)="decrement(product.product_count,product.id)"> <i
+											class="fa fa-minus"></i></button>
+									<input type="text" value="1" id="input_item" readonly="" class="quantity-input"
+									[(ngModel)]="product.product_count">
+									<button type="button" class="btn plus-btn" (click)="increment(product.product_count,product.id)"> <i
+											class="fa fa-plus"></i></button>
+									<div class="bag-button">
+										<button class="add_product-modal-btn" (click)="incrementOne()" *ngIf="isBtn">ADD TO BAG</button>
+										<button class="add_product-modal-btn" (click)="addToCart()" *ngIf="!isBtn">ADD TO CART</button>
+										<button class="add_product-modal-btn">ADD PRODUCT</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="backdrop" *ngIf="isModalShow" (click)="backDrop()"></div>
+			</ng-container>
 			</div>
 
 			<!-- <ng-container *ngFor="let product of recproductData ;let j=index;">
@@ -263,47 +309,5 @@
 </div>
 
 <!-- Custom -->
-<div class="modal modalcatadd" *ngIf="isModalShow">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-body">
-				<div class="size-select">
-					<h2>Small</h2>
-					<div class="exTab1">
-						<ul class="nav nav-pills" style="display:flex; list-style: none;">
-							<li clas="active"><a data-toggle="tab">small</a></li>
-							<li><a data-toggle="tab">small</a></li>
-							<li><a data-toggle="tab">small</a></li>
-						</ul>
-					</div>
-				</div>
-				<div class="size-select">
-					<h2>Small</h2>
-					<div class="exTab2">
-						<ul class="nav nav-pills" style="display:flex; list-style: none;">
-							<li clas="active"><a data-toggle="tab">small</a></li>
-							<li><a data-toggle="tab">small</a></li>
-							<li><a data-toggle="tab">small</a></li>
-						</ul>
-					</div>
-				</div>
-				<div id="add-remove-div" class="add-remove-div">
-					<h2>Qty.</h2>
-					<button type="button" class="btn minus-btn" (click)="decrement()"> <i
-							class="fa fa-minus"></i></button>
-					<input type="text" value="1" id="input_item" readonly="" class="quantity-input"
-						[(ngModel)]="counter">
-					<button type="button" class="btn plus-btn" (click)="increment()"> <i
-							class="fa fa-plus"></i></button>
-					<div class="bag-button">
-						<button class="add_product-modal-btn" (click)="incrementOne()" *ngIf="isBtn">ADD TO BAG</button>
-						<button class="add_product-modal-btn" (click)="addToCart()" *ngIf="!isBtn">ADD TO CART</button>
-						<button class="add_product-modal-btn">ADD PRODUCT</button>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-<div class="backdrop" *ngIf="isModalShow" (click)="backDrop()"></div>
+
 <app-footer></app-footer>

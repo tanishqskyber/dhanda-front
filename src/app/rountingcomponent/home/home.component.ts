@@ -70,6 +70,10 @@ export class HomeComponent implements OnInit {
   usermobile:any='XXXXXXXXXX'
   whatsappchat:any;
   callnow:any;
+  variation_ids: any;
+  variationKeys: any = []
+  product_id: any;
+  cartData:any=[]
   constructor(private router: Router, private modalService: NgbModal, config: NgbModalConfig, private comp: AppComponent, private categoryservice: CategoryService, private toastr: ToastrService, private spinner: NgxSpinnerService,private route:ActivatedRoute,private auth: AuthService) {
     config.backdrop = true;
     config.keyboard = false;
@@ -98,22 +102,43 @@ export class HomeComponent implements OnInit {
   backDrop() {
     this.isModalShow = false;
   }
-  decrement() {
-    if (this.counter > 0) {
-      this.counter--;
+  decrement(p_count, id) {
+    for (var data of this.recproductData) {
+      if (data['id'] == id) {
+        data['product_count'] = p_count
+        if (data['product_count'] > 0) {
+          data['product_count']--;
+        }
+        if (data['product_count'] === 0) {
+          this.isBtn = false;
+        } else {
+          this.isBtn = true;
+        }
+      }
+
+
     }
-    if (this.counter === 0) {
-      this.isBtn = true;
-    } else {
-      this.isBtn = false;
-    }
+    // if(this.counter > 0){
+    //   this.counter--;
+    // }
+    // if(this.counter === 0){
+    //   this.isBtn = false;
+    // } else{
+    //   this.isBtn = true;
+    // }
   }
 
-  increment() {
-    this.counter++;
-    this.isBtn = false;
-    localStorage.setItem('cart', this.counter);
+  increment(p_count, id) {
+    for (var data of this.recproductData) {
+      if (data['id'] == id) {
+        data['product_count'] = p_count
+        data['product_count']++;
+        this.isBtn = true;
+      }
+    }
+
   }
+
 
   decrementproduct() {
     if (this.counter > 0) {
@@ -235,8 +260,37 @@ export class HomeComponent implements OnInit {
     this.categoryservice.recentProducts().then(resp => {
       console.log(resp)
       if (resp['message'] == 'Recent product list!') {
-        this.recproductData = resp['data']
-       
+        var recdata= resp['data']
+        for(var data of recdata){
+          var obj={
+            category_id:data['category_id'],
+        category_name:data['category_name'],
+        created_at:data['created_at'],
+        discount:data['discount'],
+        id:data['id'],
+        mrp:data['mrp'],
+        pieces:data['pieces'],
+        product_description:data['product_description'],
+        product_img_url:data['product_img_url'],
+        product_img_url_2:data['product_img_url_2'],
+        product_img_url_3:data['product_img_url_3'],
+        product_img_url_4:data['product_img_url_4'],
+        product_img_url_5:data['product_img_url_5'],
+        product_name:data['product_name'],
+        product_type_id:data['product_type_id'],
+        product_type_name:data['product_type_name'],
+        selling_price:data['selling_price'],
+        status:data['status'],
+        sub_category_id:data['sub_category_id'],
+        subcategory_name:data['subcategory_name'],
+        user_id:data['user_id'],
+        user_name:data['user_name'],
+        variations:data['variations'],
+        cart_added:false,
+        product_count:0
+          }
+          this.recproductData.push(obj)
+        }
 
       } else {
        console.log('Something went wrong in recent products')
@@ -255,7 +309,29 @@ export class HomeComponent implements OnInit {
   loadProductInfo(id, variations) {
     console.log(id)
     console.log(variations)
-    this.isModalShow = true;
+    this.product_id = id
+    this.counter = 0
+    this.variation_ids = null;
+    this.variationKeys = []
+    if (variations.length > 0) {
+      var groupBy = function (xs, key) {
+        return xs.reduce(function (rv, x) {
+          (rv[x[key]] = rv[x[key]] || []).push(x);
+          return rv;
+        }, []);
+      };
+      this.isModalShow = true;
+      this.variationData = groupBy(variations, 'variation_name')
+      console.log(this.variationData);
+      console.log(Object.keys(this.variationData))
+      this.variationKeys = Object.keys(this.variationData)
+      
+    } else {
+      this.variationData = {}
+      this.variationKeys = []
+      this.isModalShow = true;
+    }
+   
   }
 
   private loadStoreId(){
@@ -296,4 +372,6 @@ export class HomeComponent implements OnInit {
         })
     })
   }
+
+ 
 }
