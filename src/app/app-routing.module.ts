@@ -21,28 +21,35 @@ import { NewAddressComponent } from './new-address/new-address.component';
 import { DhandaLandingComponent } from './dhanda-landing/dhanda-landing.component';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 import { TermsAndConditionsComponent } from './terms-and-conditions/terms-and-conditions.component';
+import { EmptyCategoryComponent } from './supportingcomponents/empty-category/empty-category.component';
+import { EmptyProductsComponent } from './supportingcomponents/empty-products/empty-products.component';
+import { EmptySubCategoryComponent } from './supportingcomponents/empty-sub-category/empty-sub-category.component';
+import { EmptyOrdersComponent } from './supportingcomponents/empty-orders/empty-orders.component';
 
-
-const routes: Routes = [{ path:'',component:EnterNoComponent},
+const routes: Routes = [{ path:'signin-signup',component:EnterNoComponent},
 {path:'add-cart',component:AddCartComponent,canActivate: [AuthGuard]},
-{path:'categories',component:CategoriesComponent,canActivate: [AuthGuard]},
-{path:'category-page',component:CategoryPageComponent,canActivate: [AuthGuard]},
-{path:'home',component:HomeComponent,canActivate: [AuthGuard]},
+{path:'categories',component:CategoriesComponent},
+{path:'category-page',component:CategoryPageComponent},
+{path:'in/:username',component:HomeComponent},
 {path:'checkout',component:CheckoutComponent,canActivate: [AuthGuard]},
-{path:'empty-cart',component:EmptyCartComponent},
+{path:'empty-cart',component:EmptyCartComponent,canActivate: [AuthGuard]},
 {path:'order-details',component:OrderDetailsComponent,canActivate: [AuthGuard]},
 {path:'order-placed',component:OrderPlacedComponent,canActivate: [AuthGuard]},
 {path:'order',component:OrderComponent,canActivate: [AuthGuard]},
-{path:'product-details',component:ProductDetailsComponent,canActivate: [AuthGuard]},
+{path:'product-details',component:ProductDetailsComponent},
 {path:'profile',component:ProfileComponent,canActivate: [AuthGuard]},
-{path:'sub-categories',component:SubCategoriesPopupComponent,canActivate: [AuthGuard]},
-{path:'searched-results',component:SearchedProductComponent,canActivate: [AuthGuard]},
+{path:'products',component:SubCategoriesPopupComponent},
+{path:'searched-results',component:SearchedProductComponent},
 {path:'otp',component:OtpComponent},
 {path:'address',component:AddressPageComponent, canActivate:[AuthGuard]},
 {path:'new-address',component:NewAddressComponent,canActivate:[AuthGuard]},
-{path:'dhanda-landing',component:DhandaLandingComponent,canActivate:[AuthGuard]},
+{path:'',component:DhandaLandingComponent},
 {path:'privacy',component:PrivacyPolicyComponent,canActivate:[AuthGuard]},
 {path:'terms',component:TermsAndConditionsComponent,canActivate:[AuthGuard]},
+{path:'empty-product',component:EmptyProductsComponent,canActivate: [AuthGuard]},
+{path:'empty-category',component:EmptyCategoryComponent,canActivate: [AuthGuard]},
+{path:'empty-subcategory',component:EmptySubCategoryComponent,canActivate: [AuthGuard]},
+{path:'empty-orders',component:EmptyOrdersComponent,canActivate: [AuthGuard]},
 { path:'**',redirectTo:'',pathMatch: 'full'}
 ]
 

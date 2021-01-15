@@ -15,7 +15,7 @@ export class AuthGuard implements CanActivate {
         console.log("Redirect to login")
         console.log(this.router.url);
         // not logged in so redirect to login page with the return url
-        this.router.navigate([ '/'],{queryParams:{username:localStorage.getItem('username')}});
+        this.router.navigate([ '/signin-signup']);
         this.toastr.error('Please Login to Continue!','Error',{
             timeOut:3000,
             positionClass:'toast-top-center'

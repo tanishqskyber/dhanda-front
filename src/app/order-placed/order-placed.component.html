@@ -3,15 +3,15 @@
 		<div class="row">
 			<div class="col-md-12">	
 				<div class="my-cart">	
-					<h2>My Cart</h2>
+					<h2>My Orders</h2>
 				</div>
             </div>
             <div class="col-md-12 text-center">
-            <img class="empty-img" src="../../assets/img/empty.png">
+            <img class="empty-img" src="../../assets/img/order_placed.png">
             </div>
             <div class="col-md-12 buttons text-center">
                 <button class="track"><a [routerLink]="['/order']">Track your order</a></button>
-                <button class="proceed-empty"><a [routerLink]="['/home']">Back to Shopping</a></button>
+                <button class="proceed-empty"><a [routerLink]="['/in',username]">Back to Shopping</a></button>
             </div>
 			
 		</div>

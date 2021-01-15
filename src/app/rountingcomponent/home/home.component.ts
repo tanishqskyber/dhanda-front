@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router ,ActivatedRoute} from '@angular/router';
 import { NgbModal, NgbModalConfig, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import * as $ from 'jquery';
 import { AppComponent } from 'src/app/app.component';
@@ -7,7 +7,7 @@ import { CategoryService } from './../../_api/category.service'
 import { ToastrService } from 'ngx-toastr'
 import { NgxSpinnerService } from "ngx-spinner";
 import { OwlOptions } from 'ngx-owl-carousel-o';
-
+import {AuthService} from '../../_api/auth.service'
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -65,18 +65,30 @@ export class HomeComponent implements OnInit {
 
   searchedProducts: any = []
   variationData: any = [];
-  constructor(private router: Router, private modalService: NgbModal, config: NgbModalConfig, private comp: AppComponent, private categoryservice: CategoryService, private toastr: ToastrService, private spinner: NgxSpinnerService) {
+  stroreid:any;
+  params:any;
+  usermobile:any='XXXXXXXXXX'
+  whatsappchat:any;
+  callnow:any;
+  constructor(private router: Router, private modalService: NgbModal, config: NgbModalConfig, private comp: AppComponent, private categoryservice: CategoryService, private toastr: ToastrService, private spinner: NgxSpinnerService,private route:ActivatedRoute,private auth: AuthService) {
     config.backdrop = true;
     config.keyboard = false;
 
 
   }
   ngOnInit() {
-    this.store_name = localStorage.getItem('username')
+    this.params = this.route.snapshot.paramMap.get('username');
+    if(this.params==undefined || this.params==null){
+      this.params=localStorage.getItem('username')
+    }
+   // console.log(username)
+    localStorage.setItem('username',this.params)
+    this.store_name =  this.params
     this.mobile_number = localStorage.getItem('contact-no')
-    this.loadStoreDetails()
-    this.loadCategories()
+    
+  
     this.laodRecentProducts()
+    this.loadStoreId()
   }
   open() {
     //this.modalService.open(CustomModalComponent);
@@ -136,7 +148,7 @@ export class HomeComponent implements OnInit {
 
   private loadCategories() {
     this.spinner.show()
-    this.categoryservice.getcategories().then(resp => {
+    this.categoryservice.getcategories(this.stroreid).then(resp => {
       if (resp['status'] == 200 && resp['message'] == 'Category list!') {
         this.spinner.hide()
         this.categorydata = resp['data']
@@ -164,7 +176,7 @@ export class HomeComponent implements OnInit {
 
   private loadStoreDetails() {
     this.spinner.show()
-    this.categoryservice.getStoreDetails().then(resp => {
+    this.categoryservice.getStoreDetails(this.stroreid).then(resp => {
       console.log(resp)
       if (resp['message'] == 'Store location Details!') {
         // this.allowFreeShipping=resp['data']['allow_free_shipping']
@@ -194,7 +206,7 @@ export class HomeComponent implements OnInit {
 
   searhcProductbySearch() {
     this.spinner.show()
-    this.categoryservice.searchProduct(this.search).then(resp => {
+    this.categoryservice.searchProduct(this.search,localStorage.getItem('storeId')).then(resp => {
       console.log(resp)
       if (resp['message'] == 'Product info!') {
         this.searchedProducts = resp['data']
@@ -219,27 +231,21 @@ export class HomeComponent implements OnInit {
   }
 
   private laodRecentProducts() {
-    this.spinner.show()
+   
     this.categoryservice.recentProducts().then(resp => {
       console.log(resp)
       if (resp['message'] == 'Recent product list!') {
         this.recproductData = resp['data']
-        this.spinner.hide()
+       
 
       } else {
-        this.spinner.hide()
-        this.toastr.error('Not able to find the product', 'Error', {
-          timeOut: 3000,
-          positionClass: 'toast-top-center'
-        })
+       console.log('Something went wrong in recent products')
+       
       }
     }, error => {
-      this.spinner.hide()
+      console.log('Failed to load Recent products')
       console.log(error)
-      this.toastr.error('Failed to find the products', 'Error', {
-        timeOut: 3000,
-        positionClass: 'toast-top-center'
-      })
+    
     })
   }
   gotoProductDetails(p_id: any) {
@@ -250,5 +256,44 @@ export class HomeComponent implements OnInit {
     console.log(id)
     console.log(variations)
     this.isModalShow = true;
+  }
+
+  private loadStoreId(){
+    this.spinner.show()
+    this.auth.getStoreId(this.params).then(resp=>{
+      console.log(resp)
+      if(resp['message']=='Vendor!'){
+        this.spinner.hide()
+        this.stroreid=resp['data']['id']
+        this.usermobile=resp['data']['contact_no']
+        this.whatsappchat=`//api.whatsapp.com/send?phone=91${this.usermobile}&text=Hi`
+        this.callnow=`tel:0${this.usermobile}`
+        localStorage.setItem('storeId',this.stroreid)
+        this.loadStoreDetails()
+        this.loadCategories()
+        console.log(this.stroreid,)
+      }else if(resp['message']=='Vendor not found!'){
+        this.spinner.hide()
+        this.toastr.error('Store not found!','Error',{
+          timeOut:3000,
+          positionClass:'toast-top-center'
+          })
+      }else{
+        this.spinner.hide()
+        this.toastr.error('Something Went Wrong!','Error',{
+          timeOut:3000,
+          positionClass:'toast-top-center'
+          })
+      }
+     
+      
+    },error=>{
+      this.spinner.hide()
+      console.log(error)
+      this.toastr.error('Failed to load store details!','Error',{
+        timeOut:3000,
+        positionClass:'toast-top-center'
+        })
+    })
   }
 }

@@ -8,7 +8,8 @@ import { ToastrService } from 'ngx-toastr'
 import { NgxSpinnerService } from "ngx-spinner";
 import { Router, ActivatedRoute } from '@angular/router';
 import { ThrowStmt } from '@angular/compiler';
-
+import {AuthService} from '../_api/auth.service'
+import {FooterComponent} from '.././supportingcomponents/footer/footer.component'
 @Component({
   selector: 'app-sub-categories-popup',
   templateUrl: './sub-categories-popup.component.html',
@@ -37,7 +38,7 @@ export class SubCategoriesPopupComponent implements OnInit {
   product_id: any;
   cartId: any = [];
   cartData: any = []
-  constructor(private modalService: NgbModal, config: NgbModalConfig, private comp: AppComponent, private categoryservice: CategoryService, private toastr: ToastrService, private spinner: NgxSpinnerService, private router: Router, private activatedRoute: ActivatedRoute) {
+  constructor(private modalService: NgbModal, config: NgbModalConfig, private comp: AppComponent, private categoryservice: CategoryService, private toastr: ToastrService, private spinner: NgxSpinnerService, private router: Router, private activatedRoute: ActivatedRoute,private auth:AuthService,private foot:FooterComponent) {
     config.backdrop = true;
     config.keyboard = false;
   }
@@ -251,6 +252,7 @@ export class SubCategoriesPopupComponent implements OnInit {
           timeOut: 3000,
           positionClass: 'toast-top-center'
         })
+        this.router.navigate(['/empty-product']);
       } else if (resp['message'] == 'Product list!' && resp['status'] == 200) {
         this.spinner.hide()
         var pdata = resp['data']
@@ -344,6 +346,7 @@ export class SubCategoriesPopupComponent implements OnInit {
 
           this.productData.push(obje)
         }
+        console.log(this.productData)
         //this.category_id=this.productData[0]['category_id']
       } else {
         this.spinner.hide()
@@ -427,110 +430,123 @@ export class SubCategoriesPopupComponent implements OnInit {
   }
 
   addproducttoCart(p_count: any) {
+
     this.spinner.show()
-    if (this.varia_split_arr.length == 2) {
-      if (p_count > 0) {
-        var obj = {
-          "product_id": this.product_id,
-          "price": this.productInfo['selling_price'],
-          "qty": p_count,
-          "variation_id": this.variation_ids
-        }
-        this.categoryservice.addcart(obj).then(resp => {
-          console.log(resp)
-          if (resp['message'] == 'Product added to the cart successfully!' && resp['status'] == 200) {
-            this.isModalShow = false;
-            this.spinner.hide()
-            this.loadCartData()
-            //this.foot.loadCartDetails()
-            this.toastr.success('Product has been added to the cart!', 'Success', {
-              timeOut: 3000,
-              positionClass: 'toast-top-center'
-            })
-          } else if (resp['message'] == 'Product in the cart has been updated!' && resp['status'] == 200) {
-            this.isModalShow = false;
-            this.spinner.hide()
-            this.loadCartData()
-            // this.foot.loadCartDetails()
-            this.toastr.success('Product in the cart has been updated!', 'Error', {
-              timeOut: 3000,
-              positionClass: 'toast-top-center'
-            })
-          } else {
-            this.spinner.hide()
-            this.toastr.error('Something Went Wrong!', 'Error', {
-              timeOut: 3000,
-              positionClass: 'toast-top-center'
-            })
+    if(this.auth.getIsLoggedIn()){
+      if (this.varia_split_arr.length == 2) {
+        if (p_count > 0) {
+          var obj = {
+            "product_id": this.product_id,
+            "price": this.productInfo['selling_price'],
+            "qty": p_count,
+            "variation_id": this.variation_ids
           }
-        }, error => {
+     
+          this.categoryservice.addcart(obj).then(resp => {
+            console.log(resp)
+            if (resp['message'] == 'Product added to the cart successfully!' && resp['status'] == 200) {
+              this.isModalShow = false;
+              this.spinner.hide()
+              this.loadCartData()
+              this.foot.loadCartDetails()
+              this.toastr.success('Product has been added to the cart!', 'Success', {
+                timeOut: 3000,
+                positionClass: 'toast-top-center'
+              })
+            } else if (resp['message'] == 'Product in the cart has been updated!' && resp['status'] == 200) {
+              this.isModalShow = false;
+              this.spinner.hide()
+              this.loadCartData()
+              // this.foot.loadCartDetails()
+              this.toastr.success('Product in the cart has been updated!', 'Error', {
+                timeOut: 3000,
+                positionClass: 'toast-top-center'
+              })
+            } else {
+              this.spinner.hide()
+              this.toastr.error('Something Went Wrong!', 'Error', {
+                timeOut: 3000,
+                positionClass: 'toast-top-center'
+              })
+            }
+          }, error => {
+            this.spinner.hide()
+            console.log(error)
+            this.toastr.error('Failed to add to the cart!', 'Error', {
+              timeOut: 3000,
+              positionClass: 'toast-top-center'
+            })
+          })
+        } else {
           this.spinner.hide()
-          console.log(error)
-          this.toastr.error('Failed to add to the cart!', 'Error', {
+          this.toastr.error('Please Select the Quantity!', 'Error', {
             timeOut: 3000,
             positionClass: 'toast-top-center'
           })
-        })
-      } else {
-        this.spinner.hide()
-        this.toastr.error('Please Select the Quantity!', 'Error', {
-          timeOut: 3000,
-          positionClass: 'toast-top-center'
-        })
-      }
-    } else {
-      if (p_count > 0) {
-        var obje = {
-          "product_id": this.product_id,
-          "price": this.productInfo['selling_price'],
-          "qty": p_count,
-          "variation_id": ""
         }
-        this.categoryservice.addcart(obje).then(resp => {
-          console.log(resp)
-          if (resp['message'] == 'Product added to the cart successfully!' && resp['status'] == 200) {
-            this.isModalShow = false;
-            this.spinner.hide()
-            this.loadCartData()
-            //this.foot.loadCartDetails()
-            this.toastr.success('Product has been added to the cart!', 'Success', {
-              timeOut: 3000,
-              positionClass: 'toast-top-center'
-            })
-          } else if (resp['message'] == 'Product in the cart has been updated!' && resp['status'] == 200) {
-            this.isModalShow = false;
-            this.spinner.hide()
-            this.loadCartData()
-            //this.foot.loadCartDetails()
-            this.toastr.success('Product in the cart has been updated!', 'Error', {
-              timeOut: 3000,
-              positionClass: 'toast-top-center'
-            })
-          } else {
-            this.spinner.hide()
-            this.toastr.error('Something Went Wrong!', 'Error', {
-              timeOut: 3000,
-              positionClass: 'toast-top-center'
-            })
+      } else {
+        if (p_count > 0) {
+          var obje = {
+            "product_id": this.product_id,
+            "price": this.productInfo['selling_price'],
+            "qty": p_count,
+            "variation_id": ""
           }
-        }, error => {
-          console.log(error)
+          this.categoryservice.addcart(obje).then(resp => {
+            console.log(resp)
+            if (resp['message'] == 'Product added to the cart successfully!' && resp['status'] == 200) {
+              this.isModalShow = false;
+              this.spinner.hide()
+              this.loadCartData()
+              //this.foot.loadCartDetails()
+              this.toastr.success('Product has been added to the cart!', 'Success', {
+                timeOut: 3000,
+                positionClass: 'toast-top-center'
+              })
+            } else if (resp['message'] == 'Product in the cart has been updated!' && resp['status'] == 200) {
+              this.isModalShow = false;
+              this.spinner.hide()
+              this.loadCartData()
+              //this.foot.loadCartDetails()
+              this.toastr.success('Product in the cart has been updated!', 'Error', {
+                timeOut: 3000,
+                positionClass: 'toast-top-center'
+              })
+            } else {
+              this.spinner.hide()
+              this.toastr.error('Something Went Wrong!', 'Error', {
+                timeOut: 3000,
+                positionClass: 'toast-top-center'
+              })
+            }
+          }, error => {
+            console.log(error)
+            this.spinner.hide()
+            this.toastr.error('Failed to add to the cart!', 'Error', {
+              timeOut: 3000,
+              positionClass: 'toast-top-center'
+            })
+          })
+        } else {
           this.spinner.hide()
-          this.toastr.error('Failed to add to the cart!', 'Error', {
+          this.toastr.error('Please Select the Quantity!', 'Error', {
             timeOut: 3000,
             positionClass: 'toast-top-center'
           })
-        })
-      } else {
-        this.spinner.hide()
-        this.toastr.error('Please Select the Quantity!', 'Error', {
-          timeOut: 3000,
-          positionClass: 'toast-top-center'
-        })
+        }
+  
+  
       }
-
-
+    }else{
+      this.spinner.hide()
+      this.toastr.warning('Please Login to Continue!', 'Alert', {
+        timeOut: 3000,
+        positionClass: 'toast-top-center'
+      })
+      localStorage.setItem('currentpath',this.router.url)
+      this.router.navigate(['/signin-signup'])
     }
+    
 
 
   }
@@ -538,13 +554,12 @@ export class SubCategoriesPopupComponent implements OnInit {
   private loadCartData() {
     this.spinner.show()
     this.categoryservice.getCartList().then(resp => {
+      console.log(resp)
       if (resp['message'] == 'Record not found!' && resp['status'] == 404) {
         this.spinner.hide()
         this.loadProductdata()
       } else if (resp['message'] == 'Cart info!' && resp['status'] == 200) {
-
         this.cartData = resp['data']
-
         this.loadProductdata()
         this.spinner.hide()
       } else {

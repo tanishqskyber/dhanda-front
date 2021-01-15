@@ -1,22 +1,30 @@
 import { Component, OnInit } from '@angular/core';
+import { Injectable,EventEmitter,Output } from '@angular/core';
 import * as $ from 'jquery';
 import {CategoryService} from '../../_api/category.service'
+import { Router, ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-footer',
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.css']
 })
+@Injectable({
+  providedIn: 'root'
+})
 export class FooterComponent implements OnInit {
   title = 'dhanda';
   cartcounter : any = 0;
   cartData:any=[]
-  constructor(private catservice:CategoryService) { }
+  username:any;
+  curpath:any;
+  constructor(private catservice:CategoryService,private router: Router) { }
 
   ngOnInit(): void {
     $("#bottom-menu a").on('click', function () {
       $("#bottom-menu a").removeClass('active');
       $(this).addClass('active');
    });
+   this.username=localStorage.getItem('username')
    this.loadCartDetails()
   }
   // checkCart() {
@@ -47,5 +55,9 @@ loadCartDetails(){
       console.log(error)
      
     })
+  }
+
+  getCurrentPath(){
+    localStorage.setItem('currentpath',this.router.url)
   }
 }

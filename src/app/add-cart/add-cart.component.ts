@@ -330,7 +330,7 @@ proceesRequest(){
 
 private loadStoreDetails(){
   this.spinner.show()
-  this.catservice.getStoreDetails().then(resp=>{
+  this.catservice.getStoreDetails(localStorage.getItem('storeId')).then(resp=>{
     console.log(resp)
     if(resp['message']=='Store location Details!'){
       this.allowFreeShipping=resp['data']['allow_free_shipping']

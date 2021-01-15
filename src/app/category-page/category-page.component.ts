@@ -30,6 +30,7 @@ params:any;
           timeOut:3000,
           positionClass:'toast-top-center'
           })
+          this.router.navigate(['/empty-subcategory']);
       }else if(resp['message']=='SubCategory list!' && resp['status']==200){
         this.spinner.hide()
         this.subcategorydata=resp['data']
@@ -52,7 +53,7 @@ params:any;
 
   gotoProducts(s_id:any,sub_category_name:any){
     localStorage.setItem('sub_cat_name',sub_category_name)
-    this.router.navigate(['/sub-categories'],{queryParams:{id:s_id}});
+    this.router.navigate(['/products'],{queryParams:{id:s_id}});
   }
 
 }

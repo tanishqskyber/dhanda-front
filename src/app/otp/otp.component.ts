@@ -48,7 +48,24 @@ export class OtpComponent implements OnInit {
             this.spinner.hide()
             console.log(resp)
             this.auth.saveToken(resp['data'])
-            this.router.navigate(['/home']);
+            var curpath=localStorage.getItem('currentpath')
+            if(curpath.includes('/in/')){
+              this.router.navigate([ '/in',localStorage.getItem('username')]);
+            }else{
+              if(curpath.includes('?')){
+                console.log(curpath.split('?')[0])
+                console.log(curpath.split('?')[1])
+                console.log(curpath.split('?')[1].split('=')[0])
+                console.log(curpath.split('?')[1].split('=')[1])
+                var id=curpath.split('?')[1].split('=')[0]
+                var value=curpath.split('?')[1].split('=')[1]
+                this.router.navigate([`${curpath.split('?')[0]}`],{queryParams:{id:value}});
+              }else{
+                this.router.navigate([`${localStorage.getItem('currentpath')}`]);
+              }
+            }
+            
+            
           }else if(resp['status']==400 && resp['message']=='Invalid Otp!'){
             this.spinner.hide()
             this.toastr.error('Invalid OTP!','Error',{

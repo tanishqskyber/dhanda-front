@@ -55,21 +55,27 @@ export class ProfileComponent implements OnInit {
       console.log(resp)
       if(resp['message']=='Logout successfully!'){
         this.spinner.hide()
-   localStorage.removeItem('token')
+      localStorage.removeItem('token')
       localStorage.removeItem('contact-no')
-      this.router.navigate([ '/'],{queryParams:{username:localStorage.getItem('username')}});
+      localStorage.removeItem('subCategory')
+      localStorage.removeItem('storeId')
+      this.router.navigate([ '/in',localStorage.getItem('username')]);
       }else{
         this.spinner.hide()
-           localStorage.removeItem('token')
-      localStorage.removeItem('contact-no')
-      this.router.navigate([ '/'],{queryParams:{username:localStorage.getItem('username')}});
+        localStorage.removeItem('token')
+        localStorage.removeItem('contact-no')
+        localStorage.removeItem('subCategory')
+        localStorage.removeItem('storeId')
+      this.router.navigate([ '/in',localStorage.getItem('username')]);
       }
    
     },error=>{
       this.spinner.hide()
-        localStorage.removeItem('token')
+      localStorage.removeItem('token')
       localStorage.removeItem('contact-no')
-      this.router.navigate([ '/'],{queryParams:{username:localStorage.getItem('username')}});
+      localStorage.removeItem('subCategory')
+      localStorage.removeItem('storeId')
+      this.router.navigate([ '/in',localStorage.getItem('username')]);
       console.log(error)
     })
   }

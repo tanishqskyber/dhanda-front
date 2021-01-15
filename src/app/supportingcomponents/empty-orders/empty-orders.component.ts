@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-empty-cart',
-  templateUrl: './empty-cart.component.html',
-  styleUrls: ['./empty-cart.component.css']
+  selector: 'app-empty-orders',
+  templateUrl: './empty-orders.component.html',
+  styleUrls: ['./empty-orders.component.css']
 })
-export class EmptyCartComponent implements OnInit {
+export class EmptyOrdersComponent implements OnInit {
+
   username:any;
   constructor() { }
 

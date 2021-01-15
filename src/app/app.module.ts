@@ -39,6 +39,10 @@ import { NewAddressComponent } from './new-address/new-address.component';
 import { DhandaLandingComponent } from './dhanda-landing/dhanda-landing.component';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 import { TermsAndConditionsComponent } from './terms-and-conditions/terms-and-conditions.component';
+import { EmptyCategoryComponent } from './supportingcomponents/empty-category/empty-category.component';
+import { EmptyProductsComponent } from './supportingcomponents/empty-products/empty-products.component';
+import { EmptySubCategoryComponent } from './supportingcomponents/empty-sub-category/empty-sub-category.component';
+import { EmptyOrdersComponent } from './supportingcomponents/empty-orders/empty-orders.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -65,6 +69,10 @@ import { TermsAndConditionsComponent } from './terms-and-conditions/terms-and-co
     DhandaLandingComponent,
     PrivacyPolicyComponent,
     TermsAndConditionsComponent,
+    EmptyCategoryComponent,
+    EmptyProductsComponent,
+    EmptySubCategoryComponent,
+    EmptyOrdersComponent,
 
   ],
   imports: [

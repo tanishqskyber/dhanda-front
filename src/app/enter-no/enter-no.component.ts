@@ -17,9 +17,9 @@ export class EnterNoComponent implements OnInit {
   ngOnInit(): void {
    
     this.params = this.route.snapshot.queryParams["username"];
-    localStorage.setItem('username',this.params)
+    this.stroreid = localStorage.getItem('storeId')
     console.log(this.params)
-    this.loadStoreId()
+  //  this.loadStoreId()
 
   }
 

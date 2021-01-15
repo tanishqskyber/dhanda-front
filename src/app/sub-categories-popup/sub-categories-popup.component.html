@@ -42,6 +42,7 @@
 								<div class="price-prod">
 									<ins>₹{{product.selling_price}}</ins>
 									<del>₹{{product.mrp}}</del>
+									
 									<!-- <a class="cart-btn" (click)="loadProductInfo(product.id)"> + Add</a> -->
 
 									<!-- <div *ngIf="product.cart_added==true" id="add-remove-div" class="add-remove-div">
@@ -56,8 +57,9 @@
 								</div>
 								<div class="price-prod">
 									<div class="text-left">
-										<a class="cart-btn btn" (click)="loadProductInfo(product.id,product.variations)"
+										<a class="cart-btn btn addcartbtn" (click)="loadProductInfo(product.id,product.variations)"
 											*ngIf="product.cart_added==false">Add</a>
+											
 									</div>
 									<!-- <a class="cart-btn" (click)="loadProductInfo(product.id,product.product_count)"
 										*ngIf="product.cart_added==false"> + Add</a> -->

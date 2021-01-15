@@ -6,10 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./order-placed.component.css']
 })
 export class OrderPlacedComponent implements OnInit {
-
+  username:any;
   constructor() { }
 
   ngOnInit(): void {
+    this.username=localStorage.getItem('username')
   }
 
 }

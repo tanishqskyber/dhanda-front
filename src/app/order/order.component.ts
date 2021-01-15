@@ -26,7 +26,11 @@ export class OrderComponent implements OnInit {
       if(resp['message']=='Order info!'){
         this.spinner.hide()
         this.orderData=resp['data']['sanitized_orders_data']
-      }else{
+      }else if(resp['message']=='No order found!'){
+        this.spinner.hide()
+        this.router.navigate(['/empty-orders']);
+      }
+      else{
         this.spinner.hide()
         this.toastr.error('Something went wrong while loading Orders!','Error',{
           timeOut:3000,

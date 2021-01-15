@@ -13,11 +13,12 @@ export class CategoriesComponent implements OnInit {
   constructor(private categoryservice:CategoryService,private toastr: ToastrService,private spinner: NgxSpinnerService,private router: Router) { }
 
   ngOnInit(): void {
+
     this.loadCategories()
   }
   private loadCategories(){
     this.spinner.show()
-    this.categoryservice.getcategories().then(resp=>{
+    this.categoryservice.getcategories(localStorage.getItem('storeId')).then(resp=>{
       if(resp['status']==200 && resp['message']=='Category list!'){
         this.spinner.hide()
         this.categorydata=resp['data']

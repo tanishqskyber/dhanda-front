@@ -15,9 +15,9 @@ const path = new Config().getBaseURL();
     @Output() isLoggedIn: EventEmitter<string> = new EventEmitter();
     constructor(private http: HttpClient,private router: Router,private toastr: ToastrService){}
 
-    getcategories(): Promise<any> {  
+    getcategories(store_id:any): Promise<any> {  
         let promise = new Promise((resolve, reject) => {
-            this.http.get(`${path}category/category_list`)
+            this.http.get(`${path}category/category_list?vendor_id=${store_id}`)
                 .subscribe(
                     res => {
                         
@@ -211,9 +211,9 @@ const path = new Config().getBaseURL();
        }
 
 
-       getStoreDetails(): Promise<any> {  
+       getStoreDetails(store_id): Promise<any> {  
          let promise = new Promise((resolve, reject) => {
-             this.http.get(`${path}store/customer_store_location_details`)
+             this.http.get(`${path}store/customer_store_location_details?vendor_id=${store_id}`)
                  .subscribe(
                      res => {
                          
@@ -407,9 +407,10 @@ const path = new Config().getBaseURL();
         return promise;
       }
 
-      searchProduct(search_text:any): Promise<any> { 
+      searchProduct(search_text:any,vendor_id:any): Promise<any> { 
         var params={
-            "search_text":search_text
+            "search_text":search_text,
+            "vendor_id":vendor_id
         }
       let promise = new Promise((resolve, reject) => {
           this.http.post(`${path}sub-category/category_search`,params)

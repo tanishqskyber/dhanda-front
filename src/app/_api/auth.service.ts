@@ -27,7 +27,7 @@ get isAuthenticated(){
 }
 
 getIsLoggedIn(){
-    if(localStorage.getItem('data')){
+    if(localStorage.getItem('token')){
         console.log("User is logged in")
         return true;
     }else{
