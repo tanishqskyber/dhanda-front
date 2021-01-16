@@ -174,4 +174,8 @@ export class ProfileComponent implements OnInit {
    
   }
 
+  gotoAddress(){
+    this.router.navigate([ '/address']);
+  }
+
 }

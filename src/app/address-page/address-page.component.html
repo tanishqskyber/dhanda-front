@@ -13,17 +13,20 @@ type="ball-scale-multiple"
 <h4 class="my-add">My Address</h4>
 </div>
 <div class="col-md-6 text-right">
-<button class="btn btn-proceed">Add New</button>
+<button class="btn btn-proceed" (click)="addNewAddress()">Add New</button>
 </div>
 </div>
 <div class="row"> 
+  <ng-container *ngFor="let address of addressData ;let i=index;">
 <div class="col-md-12 card">
 <div class="card-body">
 <div class="container">
     <label for="d3_graph_chart0017day">
         <input type="radio" name="date_range" id="d3_graph_chart0017day" value="7day">
-        <span>Shreyash Shah</span>
-        <p class="add">A 205, Akshar Kandivali West</p>
+        <span>Name</span>
+        <p class="add">{{address.flat_no}}, {{address.apartment_name}}, {{address.road_name}}</p>
+        <p class="add">{{address.city}}, {{address.state}}-{{address.pincode}}</p>
+        <p class="add">+91-{{address.contact_no}}</p>
       </label>
       <div class="dropdown-container" tabindex="-1">
         <div class="test"></div>
@@ -35,6 +38,7 @@ type="ball-scale-multiple"
 </div>
 </div>
 </div>
+</ng-container>
 </div>
 </div>
 </div>

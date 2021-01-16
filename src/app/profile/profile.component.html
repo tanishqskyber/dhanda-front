@@ -7,7 +7,11 @@
 			<div class="col-md-12 mb-4">
 				<div class="profile-heading-page d-flex align-items-center justify-content-between">
 					<h2>Profile</h2>
-					<p><a *ngIf="editTrue" (click)="editProfile()">Edit</a></p>
+					<p>
+						<a *ngIf="editTrue" (click)="editProfile()">Edit</a>
+				
+					</p>
+				
 				</div>
 			</div>
 			<div class="col-md-12">
@@ -90,7 +94,14 @@
 										placeholder="Pincode" class="form-control" [readonly]=editTrue>
 								</div>
 							</div>
-
+							<div class="col-md-3">
+								<div class="text-center">
+									<button id="send-msg" class="btn default-submit" (click)="gotoAddress()">Manage Address</button>
+								</div>
+							</div>
+							<div class="col-md-3"></div>
+							<div class="col-md-3"></div>
+							<div class="col-md-3"></div>
 							<div class="col-md-12">
 								<div class="text-center"><button id="send-msg" class="btn default-submit" type="submit"
 										*ngIf="!editTrue" (click)="updateProfile()">Update</button></div>
