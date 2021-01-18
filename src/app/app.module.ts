@@ -43,6 +43,8 @@ import { EmptyCategoryComponent } from './supportingcomponents/empty-category/em
 import { EmptyProductsComponent } from './supportingcomponents/empty-products/empty-products.component';
 import { EmptySubCategoryComponent } from './supportingcomponents/empty-sub-category/empty-sub-category.component';
 import { EmptyOrdersComponent } from './supportingcomponents/empty-orders/empty-orders.component';
+
+declare const $: any;
 @NgModule({
   declarations: [
     AppComponent,

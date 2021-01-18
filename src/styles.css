@@ -3161,14 +3161,16 @@ td.amout-color {
   padding: 0 5px;
 }
 
-.btn-outline-secondary-green i {
-  position: relative;
-  top: -2px;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  padding: 0;
-  margin: 0;
+@media(max-width: 414px){
+  .btn-outline-secondary-green i {
+    position: relative;
+    top: -2px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 0;
+    margin: 0;
+  }
 }
 
 .cart-listing{
@@ -3206,3 +3208,13 @@ td.amout-color {
   font-weight: 500;
   margin: 0;
 }
+
+a.cart-btn {
+    background: #39b969;
+    color: #ffffff !important;
+    /* border-radius: 50px; */
+    /* margin-left: 5px; */
+    border: solid 2px #39b969;
+    padding: 0 5px;
+    /* padding: 5px 10px; */
+  }

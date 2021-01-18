@@ -462,8 +462,8 @@ Default CSS
   /*================================================
   Banner Area CSS
   =================================================*/
-  .main-banner {
-    /* position: relative;
+  /* .main-banner {
+    position: relative;
     height: 800px;
     background-position: center;
     background-size: cover;
@@ -471,8 +471,8 @@ Default CSS
     background-image: url(../img/main-banner.jpg);
     background-attachment: fixed;
     overflow: hidden;
-    z-index: 1; */
-  }
+    z-index: 1;
+  } */
   
   .main-banner .container-fluid {
     max-width: 1400px;
