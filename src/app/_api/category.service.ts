@@ -34,6 +34,25 @@ const path = new Config().getBaseURL();
         return promise;
       }
 
+      getstoreimpressions(store_id:any): Promise<any> {  
+        let promise = new Promise((resolve, reject) => {
+            this.http.get(`${path}store/store_impression?vendor_id=${store_id}`)
+                .subscribe(
+                    res => {
+                        
+                        resolve(res);
+                    },
+                    err => {
+                        console.log("Error occured : " + err);
+                        reject(err);
+                    }
+                );
+      
+        });
+      
+        return promise;
+      }
+
       getSubcategories(id:any): Promise<any> {  
           var params={
             "category_id":id

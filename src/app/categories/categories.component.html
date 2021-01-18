@@ -17,7 +17,7 @@ type="ball-scale-multiple"
 				
 					<div class="product-list-form">
 						<form>
-							<input type="text" name="search" placeholder="Search">
+							<input type="text" name="search" placeholder="Search" [(ngModel)]="search"  (change)="searhcProductbySearch()">
 						</form>				
 					</div>
 				

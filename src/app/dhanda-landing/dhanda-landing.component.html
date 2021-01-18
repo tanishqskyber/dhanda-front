@@ -1,4 +1,12 @@
  <!-- Start Navbar Area -->
+ <ngx-spinner
+bdColor="rgba(51,51,51,0.8)"
+size="medium"
+color="#fff"
+type="ball-scale-multiple"
+>
+<p style="font-size: 20px; color: white">Loading...</p>
+</ngx-spinner>
  <nav class="navbar navbar-expand-lg navbar-light">
     <div class="container-fluid">
       <div class="logo">
@@ -609,7 +617,7 @@
                 <div class="col-lg-6 col-md-6">
                   <div class="form-group">
                     <input type="text" name="name" id="name" class="form-control" required
-                      data-error="Please enter your name" placeholder="Name">
+                      data-error="Please enter your name" placeholder="Name" [(ngModel)]="enquiryData.name" autocomplete="off">
                     <div class="help-block with-errors"></div>
                   </div>
                 </div>
@@ -617,23 +625,23 @@
                 <div class="col-lg-6 col-md-6">
                   <div class="form-group">
                     <input type="email" name="email" id="email" class="form-control" required
-                      data-error="Please enter your email" placeholder="Email">
+                      data-error="Please enter your email" placeholder="Email" [(ngModel)]="enquiryData.email" autocomplete="off">
                     <div class="help-block with-errors"></div>
                   </div>
                 </div>
  
                 <div class="col-lg-6 col-md-6">
                   <div class="form-group">
-                    <input type="text" name="phone_number" id="phone_number" required
-                      data-error="Please enter your number" class="form-control" placeholder="Contact">
+                    <input type="text" name="contact_no" id="phone_number" required
+                      data-error="Please enter your number" class="form-control" placeholder="Contact" [(ngModel)]="enquiryData.contact_no" maxlength="10" autocomplete="off" (keypress)="validateMobileNo($event)">
                     <div class="help-block with-errors"></div>
                   </div>
                 </div>
  
                 <div class="col-lg-6 col-md-6">
                   <div class="form-group">
-                    <input type="text" name="msg_subject" id="msg_subject" class="form-control" required
-                      data-error="Please enter your subject" placeholder="Subject">
+                    <input type="text" name="subject" id="msg_subject" class="form-control" required
+                      data-error="Please enter your subject" placeholder="Subject" [(ngModel)]="enquiryData.subject" autocomplete="off">
                     <div class="help-block with-errors"></div>
                   </div>
                 </div>
@@ -641,14 +649,14 @@
                 <div class="col-lg-12 col-md-12">
                   <div class="form-group">
                     <textarea name="message" class="form-control" id="message" cols="30" rows="6" required
-                      data-error="Write your message" placeholder="Message"></textarea>
+                      data-error="Write your message" placeholder="Message" [(ngModel)]="enquiryData.message"></textarea>
                     <div class="help-block with-errors"></div>
                   </div>
                 </div>
  
                 <div class="col-lg-12 col-md-12">
                   <div class="send-btn">
-                    <button type="submit" class="default-btn">
+                    <button type="submit" class="default-btn" (click)="senEnquiry()">
                       Send Message
                       <span></span>
                     </button>
@@ -756,7 +764,7 @@
               <i class="fas fa-store"></i>
             </div>
             <h3>
-              <span class="odometer" data-count="10000">00</span>
+              <span>{{total_store_created}}</span>
             </h3>
             <p>Stores Created</p>
           </div>
@@ -768,7 +776,7 @@
               <i class="fas fa-dolly-flatbed"></i>
             </div>
             <h3>
-              <span class="odometer" data-count="25000">00</span>
+              <span>{{total_order_processed}}</span>
             </h3>
             <p>Orders Processed</p>
           </div>
@@ -780,7 +788,7 @@
               <i class="fas fa-rupee-sign"></i>
             </div>
             <h3>
-              <span class="odometer" data-count="20">00</span>
+              <span>{{total_transaction_credited}}</span>
             </h3>
             <p>Transactions (CR)</p>
           </div>
@@ -792,7 +800,7 @@
               <i class="far fa-eye"></i>
             </div>
             <h3>
-              <span class="odometer" data-count="100000">00</span>
+              <span>{{total_store_impressions}}</span>
             </h3>
             <p>Store Impressions</p>
           </div>

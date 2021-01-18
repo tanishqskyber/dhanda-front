@@ -347,6 +347,7 @@ export class HomeComponent implements OnInit {
         localStorage.setItem('storeId',this.stroreid)
         this.loadStoreDetails()
         this.loadCategories()
+        this.loadStoreImpressions()
         console.log(this.stroreid,)
       }else if(resp['message']=='Vendor not found!'){
         this.spinner.hide()
@@ -371,6 +372,14 @@ export class HomeComponent implements OnInit {
         positionClass:'toast-top-center'
         })
     })
+  }
+
+  private loadStoreImpressions(){
+      this.categoryservice.getstoreimpressions(this.stroreid).then(resp=>{
+        console.log(resp)
+      },error=>{
+        console.log(error)
+      })
   }
 
  

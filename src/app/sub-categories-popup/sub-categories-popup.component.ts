@@ -38,6 +38,8 @@ export class SubCategoriesPopupComponent implements OnInit {
   product_id: any;
   cartId: any = [];
   cartData: any = []
+  searchedProducts: any = []
+
   constructor(private modalService: NgbModal, config: NgbModalConfig, private comp: AppComponent, private categoryservice: CategoryService, private toastr: ToastrService, private spinner: NgxSpinnerService, private router: Router, private activatedRoute: ActivatedRoute,private auth:AuthService,private foot:FooterComponent) {
     config.backdrop = true;
     config.keyboard = false;
@@ -575,6 +577,32 @@ export class SubCategoriesPopupComponent implements OnInit {
       this.loadProductdata()
       console.log(error)
       this.toastr.error('Failed to get Cart Details!', 'Error', {
+        timeOut: 3000,
+        positionClass: 'toast-top-center'
+      })
+    })
+  }
+
+  searhcProductbySearch() {
+    this.spinner.show()
+    this.categoryservice.searchProduct(this.search,localStorage.getItem('storeId')).then(resp => {
+      console.log(resp)
+      if (resp['message'] == 'Product info!') {
+        this.searchedProducts = resp['data']
+        this.spinner.hide()
+        localStorage.setItem('searchedProduct', JSON.stringify(this.searchedProducts))
+        this.router.navigate(['/searched-results']);
+      } else {
+        this.spinner.hide()
+        this.toastr.error('Not able to find the product', 'Error', {
+          timeOut: 3000,
+          positionClass: 'toast-top-center'
+        })
+      }
+    }, error => {
+      this.spinner.hide()
+      console.log(error)
+      this.toastr.error('Failed to find the products', 'Error', {
         timeOut: 3000,
         positionClass: 'toast-top-center'
       })
