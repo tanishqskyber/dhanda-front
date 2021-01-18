@@ -11,7 +11,7 @@ type="ball-scale-multiple"
 		<div class="row">
 			<div class="col-md-12">
 				<div class="back-page">
-					<a [routerLink]="['/sub-categories']" [queryParams]="{id:productData.sub_category_id}"><i class="fa fa-angle-left" aria-hidden="true"></i>Product Details Page</a>
+					<a [routerLink]="['/products']" [queryParams]="{id:productData.sub_category_id}"><i class="fas fa-angle-left" aria-hidden="true"></i>Product Details Page</a>
 				</div>	
 			</div>	
 		</div>		
@@ -108,16 +108,16 @@ type="ball-scale-multiple"
 							</div>
 					</div>
 					</ng-container>
-					<div class="row add-remove-div" id="add-remove-div">
-						<div class="col-4">
+					<div class="add-remove-div" id="add-remove-div">
+						<div style="width: 100px">
 							<h2>Qty.</h2>
 							<div class="input-group">
 								<div class="input-group-prepend">
-									<button class="btn btn-outline-secondary-green" (click)="increment()" type="button"><i class="fas fa-plus"></i></button>
+									<button class="btn btn-outline-secondary-green" (click)="decrement()" type="button"><i class="fas fa-minus"></i></button>
 									</div>
 								<input type="text" value="1" readonly="" class="form-control qty-input text-center" placeholder="1" aria-label="1" aria-describedby="basic-addon2" [(ngModel)]="counter">
 								<div class="input-group-append">
-									<button class="btn btn-outline-secondary-green" (click)="decrement()" type="button"><i class="fas fa-minus"></i></button>
+									<button class="btn btn-outline-secondary-green" (click)="increment()" type="button"><i class="fas fa-plus"></i></button>
 								</div>
 							</div>
 						</div>

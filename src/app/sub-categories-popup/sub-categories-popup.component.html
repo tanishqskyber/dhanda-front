@@ -6,7 +6,7 @@
 		<div class="row">
 			<div class="col-md-12">
 				<div class="back-page">
-					<a [routerLink]="['/category-page']" [queryParams]="{id:category_id}"><i class="fa fa-angle-left"
+					<a [routerLink]="['/category-page']" [queryParams]="{id:category_id}"><i class="fas fa-angle-left"
 							aria-hidden="true"></i>{{subcategory_name}}</a>
 				</div>
 			</div>
@@ -88,7 +88,7 @@
 					</div>
 				</div>
 				<div class="modal modalcatadd" *ngIf="isModalShow">
-					<div class="modal-dialog">
+					<div class="modal-dialog sub-categories-modal-dialog">
 						<div class="modal-content">
 							<div class="modal-body">
 								<ng-container *ngFor="let varia of variationKeys">
@@ -120,31 +120,33 @@
 									</ul>
 								</div>
 							</div> -->
-							<div class="row add-remove-div" >
-								<div class="col-12">
-									<h2 style="font-size: 19px;">Qty.</h2>
-									<div class="input-group add-cart-input" style="width: 30%;">
-										<div class="input-group-prepend">
-											<button class="btn btn-outline-secondary-green"
-											(click)="decrement(product.product_count,product.id)"
-												type="button"><i class="fas fa-minus"></i></button>
-										</div>
-										<input type="text" readonly=""  id="input_item" class="form-control qty-input text-center"
-											placeholder="1" aria-label="1" aria-describedby="basic-addon2"
-											[(ngModel)]="product.product_count">
-										<div class="input-group-append">
-											<button class="btn btn-outline-secondary-green"
-											(click)="increment(product.product_count,product.id)"
-												type="button"><i class="fas fa-plus"></i></button>
+							<div class="row add-remove-div mb-3" >
+								<div class="col-6">
+									<div style="width: 100px;">
+										<h2 style="font-size: 19px;">Qty.</h2>
+										<div class="input-group add-cart-input">
+											<div class="input-group-prepend">
+												<button class="btn btn-outline-secondary-green"
+												(click)="decrement(product.product_count,product.id)"
+													type="button"><i class="fas fa-minus"></i></button>
+											</div>
+											<input type="text" readonly=""  id="input_item" class="form-control qty-input text-center"
+												placeholder="1" aria-label="1" aria-describedby="basic-addon2"
+												[(ngModel)]="product.product_count">
+											<div class="input-group-append">
+												<button class="btn btn-outline-secondary-green"
+												(click)="increment(product.product_count,product.id)"
+													type="button"><i class="fas fa-plus"></i></button>
+											</div>
 										</div>
 									</div>
-									<div class="bag-button">
+								</div>
+								<div class="bag-button col-6 text-right">
 
-										<button class="add_product-modal-btn"
-											(click)="addproducttoCart(product.product_count)" *ngIf="isBtn">ADD TO
-											CART</button>
+									<button class="add_product-modal-btn"
+										(click)="addproducttoCart(product.product_count)" *ngIf="isBtn">ADD TO
+										CART</button>
 
-									</div>
 								</div>
 							</div>
 

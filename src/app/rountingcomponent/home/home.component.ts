@@ -29,7 +29,7 @@ export class HomeComponent implements OnInit {
   mobile_number: any = ""
   recproductData: any = []
   customOptions: any = {
-    loop: true,
+    loop: false,
     margin: 25,
     autoplay: true,
     responsiveClass: true,
@@ -42,14 +42,13 @@ export class HomeComponent implements OnInit {
 
     responsive: {
       0: {
-        items: 2,
-        nav: true
-      },
-      400: {
         items: 2
       },
-      740: {
+      400: {
         items: 3
+      },
+      740: {
+        items: 4
       },
       940: {
         items: 4
@@ -81,6 +80,7 @@ export class HomeComponent implements OnInit {
 
   }
   ngOnInit() {
+    
     this.params = this.route.snapshot.paramMap.get('username');
     if(this.params==undefined || this.params==null){
       this.params=localStorage.getItem('username')
