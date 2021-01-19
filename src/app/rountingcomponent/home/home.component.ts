@@ -90,8 +90,10 @@ export class HomeComponent implements OnInit {
     this.store_name =  this.params
     this.mobile_number = localStorage.getItem('contact-no')
     
-  
+  if(this.auth.getIsLoggedIn()){
     this.laodRecentProducts()
+  }
+   
     this.loadStoreId()
   }
   open() {

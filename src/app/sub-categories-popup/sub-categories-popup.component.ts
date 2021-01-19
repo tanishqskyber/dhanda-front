@@ -435,7 +435,7 @@ export class SubCategoriesPopupComponent implements OnInit {
 
     this.spinner.show()
     if(this.auth.getIsLoggedIn()){
-      if (this.varia_split_arr.length == 2) {
+      if (this.varia_split_arr.length >= 1) {
         if (p_count > 0) {
           var obj = {
             "product_id": this.product_id,

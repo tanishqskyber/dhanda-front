@@ -40,6 +40,7 @@ cartId:any=[];
   private loadCartDetails(){
     this.spinner.show()
     this.totalPrice=0
+    this.cartId=[]
     this.catservice.getCartList().then(resp=>{
       console.log(resp)
       if(resp['message']=='Record not found!' && resp['status']==404){
@@ -49,7 +50,7 @@ cartId:any=[];
       
         this.cartData=resp['data']
         for(var data of this.cartData){
-          if(data['variations'].length>0){
+         
             
             this.totalPrice+=data['selling_price']*data['qty']
             if(this.allowFreeShipping==true){
@@ -62,7 +63,7 @@ cartId:any=[];
 
             
             
-          }
+          
           this.cartId.push(parseInt(data['id']))
         }
         this.spinner.hide()

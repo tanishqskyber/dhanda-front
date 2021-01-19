@@ -3,6 +3,7 @@ import {CategoryService} from './../_api/category.service'
 import { ToastrService } from 'ngx-toastr'
 import { NgxSpinnerService } from "ngx-spinner";
 import {Router,ActivatedRoute} from '@angular/router';
+import {AuthService} from '../_api/auth.service'
 @Component({
   selector: 'app-product-details',
   templateUrl: './product-details.component.html',
@@ -10,7 +11,7 @@ import {Router,ActivatedRoute} from '@angular/router';
 })
 export class ProductDetailsComponent implements OnInit {
 
-  constructor(private categoryservice:CategoryService,private toastr: ToastrService,private spinner: NgxSpinnerService,private router: Router,private activatedRoute: ActivatedRoute) { }
+  constructor(private categoryservice:CategoryService,private toastr: ToastrService,private spinner: NgxSpinnerService,private router: Router,private activatedRoute: ActivatedRoute,private auth:AuthService) { }
   counter : any = 1;
   isBtn = true;
   customOptions: any = {
@@ -146,7 +147,10 @@ export class ProductDetailsComponent implements OnInit {
 }
 
   addproducttoCart(){
-    if(this.varia_split_arr.length==2){
+
+    if(this.auth.getIsLoggedIn()){
+    if(this.variationKeys.length>=1){
+    if(this.varia_split_arr.length>=1){
     if(this.counter>0){
       var obj={
         "product_id":this.params,
@@ -188,11 +192,62 @@ export class ProductDetailsComponent implements OnInit {
         })
     }
   }else{
-    this.toastr.error('Please Select the All the variations!','Error',{
+    this.toastr.error('Please Select any variations!','Error',{
       timeOut:3000,
       positionClass:'toast-top-center'
       })
   }
+}else{
+  if(this.counter>0){
+    var obje={
+      "product_id":this.params,
+      "price":this.productData['selling_price'],
+      "qty":this.counter,
+      "variation_id":""
+    }
+    this.categoryservice.addcart(obje).then(resp=>{
+      console.log(resp)
+      if(resp['message']=='Product added to the cart successfully!' && resp['status']==200){
+        this.router.navigate(['/add-cart']);
+        this.toastr.success('Product has been added to the cart!','Success',{
+          timeOut:3000,
+          positionClass:'toast-top-center'
+          })
+      }else if(resp['message']=='Product in the cart has been updated!' && resp['status']==200){
+        this.router.navigate(['/add-cart']);
+        this.toastr.success('Product in the cart has been updated!','Error',{
+          timeOut:3000,
+          positionClass:'toast-top-center'
+          })
+      }else{
+        this.toastr.error('Something Went Wrong!','Error',{
+          timeOut:3000,
+          positionClass:'toast-top-center'
+          })
+      }
+    },error=>{
+      console.log(error)
+      this.toastr.error('Failed to add to the cart!','Error',{
+        timeOut:3000,
+        positionClass:'toast-top-center'
+        })
+    })
+  }else{
+    this.toastr.error('Please Select the Quantity!','Error',{
+      timeOut:3000,
+      positionClass:'toast-top-center'
+      })
+  }
+}
+}else{
+  this.spinner.hide()
+  this.toastr.warning('Please Login to Continue!', 'Alert', {
+    timeOut: 3000,
+    positionClass: 'toast-top-center'
+  })
+  localStorage.setItem('currentpath',this.router.url)
+  this.router.navigate(['/signin-signup'])
+}
     
 
   }
