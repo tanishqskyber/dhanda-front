@@ -6,7 +6,7 @@
 		<div class="row">
 			<div class="col-md-12">
 				<div class="back-page">
-					<a href="#"><i class="fas fa-angle-left" aria-hidden="true"></i>Order Page</a>
+					<a [routerLink]="['/order']"><i class="fas fa-angle-left" aria-hidden="true"></i>Order Page</a>
 				</div>
 			</div>
 
@@ -73,7 +73,7 @@
 						</li>
 
 					</ul> -->
-					<div class="order-track mt-4">
+					<div class="order-track mt-4" *ngIf="orderInfo.order_status=='Pending'">
 						<div class="order-track-step">
 						  <div class="order-track-status">
 							<span class="order-track-status-dot active"></span>
@@ -86,7 +86,7 @@
 						</div>
 						<div class="order-track-step">
 						  <div class="order-track-status">
-							<span class="order-track-status-dot active"></span>
+							<span class="order-track-status-dot"></span>
 							<span class="order-track-status-line"></span>
 						  </div>
 						  <div class="order-track-text">
@@ -105,7 +105,70 @@
 						  </div>
 						</div>
 					  </div>
-
+					  <div class="order-track mt-4" *ngIf="orderInfo.order_status=='Accepted'">
+						<div class="order-track-step">
+						  <div class="order-track-status">
+							<span class="order-track-status-dot active"></span>
+							<span class="order-track-status-line active"></span>
+						  </div>
+						  <div class="order-track-text">
+							<p class="order-track-text-stat">Order Placed</p>
+							<time datetime="10:03"></time>
+						  </div>
+						</div>
+						<div class="order-track-step">
+						  <div class="order-track-status">
+							<span class="order-track-status-dot active"></span>
+							<span class="order-track-status-line active"></span>
+						  </div>
+						  <div class="order-track-text">
+							<p class="order-track-text-stat">Accepted</p>
+							<time></time>
+						  </div>
+						</div>
+						<div class="order-track-step">
+						  <div class="order-track-status">
+							<span class="order-track-status-dot"></span>
+							<span class="order-track-status-line"></span>
+						  </div>
+						  <div class="order-track-text">
+							<p class="order-track-text-stat">Deliverd</p>
+							<time></time>
+						  </div>
+						</div>
+					  </div>
+					  <div class="order-track mt-4" *ngIf="orderInfo.order_status=='Delivered'">
+						<div class="order-track-step">
+						  <div class="order-track-status">
+							<span class="order-track-status-dot active"></span>
+							<span class="order-track-status-line active"></span>
+						  </div>
+						  <div class="order-track-text">
+							<p class="order-track-text-stat">Order Placed</p>
+							<time datetime="10:03"></time>
+						  </div>
+						</div>
+						<div class="order-track-step">
+						  <div class="order-track-status">
+							<span class="order-track-status-dot active"></span>
+							<span class="order-track-status-line active"></span>
+						  </div>
+						  <div class="order-track-text">
+							<p class="order-track-text-stat">Accepted</p>
+							<time></time>
+						  </div>
+						</div>
+						<div class="order-track-step">
+						  <div class="order-track-status">
+							<span class="order-track-status-dot active"></span>
+							<span class="order-track-status-line active"></span>
+						  </div>
+						  <div class="order-track-text">
+							<p class="order-track-text-stat">Deliverd</p>
+							<time></time>
+						  </div>
+						</div>
+					  </div>
 					<!-- </div>
 					</div> -->
 

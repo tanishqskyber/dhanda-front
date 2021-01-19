@@ -25,7 +25,14 @@ export class AddressPageComponent implements OnInit {
       if(resp['message']=='Customer address list!'){
         this.spinner.hide()
         this.addressData=resp['data']
-      }else{
+      }else if(resp['message']=='Customer address not found!'){
+        this.spinner.hide()
+        this.toastr.warning('There are no saved delivery address!','Alert',{
+          timeOut:3000,
+          positionClass:'toast-top-center'
+          })
+      }
+      else{
         this.spinner.hide()
         this.toastr.error('Something Went Wrong!','Error',{
           timeOut:3000,

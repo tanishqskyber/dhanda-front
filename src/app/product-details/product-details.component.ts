@@ -46,6 +46,12 @@ export class ProductDetailsComponent implements OnInit {
   variation_ids:any;
   activeVariation1:number;
   activeVariation2:number;
+  activeElement1 :number;
+  activeElement2 :number;
+  variation1:any=[]
+  variation2:any=[]
+  variationname1:any;
+  variationname2:any;
   ngOnInit(): void {
     this.params = this.activatedRoute.snapshot.queryParams["id"];
     this.loadProductDetails();
@@ -75,6 +81,46 @@ export class ProductDetailsComponent implements OnInit {
         console.log(this.variationData);
         console.log(Object.keys(this.variationData))
         this.variationKeys=Object.keys(this.variationData)
+        if(this.variationKeys.length==2){
+          this.variationname1=this.variationKeys[0]
+          this.variationname2=this.variationKeys[1]
+          for(var data of this.productData['variations']){
+            if(data['variation_name']==this.variationKeys[0]){
+              var obj={
+                id:data['id'],
+                status:data['status'],
+                variation_name:data['variation_name'],
+                variation_value:data['variation_value']
+              }
+              this.variation1.push(obj)
+            }else if(data['variation_name']==this.variationKeys[1]){
+              var obje={
+                id:data['id'],
+                status:data['status'],
+                variation_name:data['variation_name'],
+                variation_value:data['variation_value']
+              }
+              this.variation2.push(obje)
+            }
+           
+          }
+        }else if(this.variationKeys.length==1){
+          for(var data of this.productData['variations']){
+            if(data['variation_name']==this.variationKeys[0]){
+              var obj={
+                id:data['id'],
+                status:data['status'],
+                variation_name:data['variation_name'],
+                variation_value:data['variation_value']
+              }
+              this.variation1.push(obj)
+            }
+           
+          }
+        }else{
+          this.variation1=[]
+          this.variation2=[]
+        }
       }else{
         this.variationData={}
       }
@@ -249,6 +295,18 @@ export class ProductDetailsComponent implements OnInit {
   this.router.navigate(['/signin-signup'])
 }
     
+
+  }
+
+  setActiveVar1(id:any){
+  
+    this.activeElement1 = id;
+
+  }
+
+  setActiveVar2(id:any){
+  
+    this.activeElement2 = id;
 
   }
 

@@ -73,6 +73,7 @@ export class HomeComponent implements OnInit {
   variationKeys: any = []
   product_id: any;
   cartData:any=[]
+  storeLocation:any;
   constructor(private router: Router, private modalService: NgbModal, config: NgbModalConfig, private comp: AppComponent, private categoryservice: CategoryService, private toastr: ToastrService, private spinner: NgxSpinnerService,private route:ActivatedRoute,private auth: AuthService) {
     config.backdrop = true;
     config.keyboard = false;
@@ -212,6 +213,7 @@ export class HomeComponent implements OnInit {
         // this.shippingAmount=resp['data']['shipping_amount']
         this.store_name = resp['data']['store_name']
         this.store_logo = resp['data']['logo_img']
+        this.storeLocation=`https://maps.google.com/?q=${resp['data']['latitude']},${resp['data']['longitude']}`
         this.spinner.hide()
         // this.loadCartDetails()
       } else {
@@ -322,6 +324,7 @@ export class HomeComponent implements OnInit {
           return rv;
         }, []);
       };
+      console.log(this.isModalShow)
       this.isModalShow = true;
       this.variationData = groupBy(variations, 'variation_name')
       console.log(this.variationData);
@@ -346,6 +349,7 @@ export class HomeComponent implements OnInit {
         this.usermobile=resp['data']['contact_no']
         this.whatsappchat=`//api.whatsapp.com/send?phone=91${this.usermobile}&text=Hi`
         this.callnow=`tel:0${this.usermobile}`
+       
         localStorage.setItem('storeId',this.stroreid)
         this.loadStoreDetails()
         this.loadCategories()

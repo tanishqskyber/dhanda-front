@@ -39,7 +39,13 @@ export class SubCategoriesPopupComponent implements OnInit {
   cartId: any = [];
   cartData: any = []
   searchedProducts: any = []
-
+  activeClass:any=""
+  activeElement1 :number;
+  activeElement2 :number;
+  variation1:any=[]
+  variation2:any=[]
+  variationname1:any;
+  variationname2:any;
   constructor(private modalService: NgbModal, config: NgbModalConfig, private comp: AppComponent, private categoryservice: CategoryService, private toastr: ToastrService, private spinner: NgxSpinnerService, private router: Router, private activatedRoute: ActivatedRoute,private auth:AuthService,private foot:FooterComponent) {
     config.backdrop = true;
     config.keyboard = false;
@@ -119,6 +125,7 @@ export class SubCategoriesPopupComponent implements OnInit {
       return item['id'];
     });
     this.variation_ids = this.varia_split_arr.toString()
+
   }
 
   removeByAttr = function (arr, attr, value) {
@@ -396,6 +403,7 @@ export class SubCategoriesPopupComponent implements OnInit {
       } else if (resp['message'] == 'Product info!' && resp['status'] == 200) {
         this.spinner.hide()
         this.productInfo = resp['data']
+        console.log(this.productInfo['variations'])
         if (this.productInfo['variations'].length > 0) {
           var groupBy = function (xs, key) {
             return xs.reduce(function (rv, x) {
@@ -405,9 +413,51 @@ export class SubCategoriesPopupComponent implements OnInit {
           };
 
           this.variationData = groupBy(this.productInfo['variations'], 'variation_name')
-          console.log(this.variationData);
-          console.log(Object.keys(this.variationData))
+          //console.log(this.variationData);
+          //console.log(Object.keys(this.variationData))
           this.variationKeys = Object.keys(this.variationData)
+
+          if(this.variationKeys.length==2){
+            this.variationname1=this.variationKeys[0]
+            this.variationname2=this.variationKeys[1]
+            for(var data of this.productInfo['variations']){
+              if(data['variation_name']==this.variationKeys[0]){
+                var obj={
+                  id:data['id'],
+                  status:data['status'],
+                  variation_name:data['variation_name'],
+                  variation_value:data['variation_value']
+                }
+                this.variation1.push(obj)
+              }else if(data['variation_name']==this.variationKeys[1]){
+                var obje={
+                  id:data['id'],
+                  status:data['status'],
+                  variation_name:data['variation_name'],
+                  variation_value:data['variation_value']
+                }
+                this.variation2.push(obje)
+              }
+             
+            }
+          }else if(this.variationKeys.length==1){
+            for(var data of this.productInfo['variations']){
+              if(data['variation_name']==this.variationKeys[0]){
+                var obj={
+                  id:data['id'],
+                  status:data['status'],
+                  variation_name:data['variation_name'],
+                  variation_value:data['variation_value']
+                }
+                this.variation1.push(obj)
+              }
+             
+            }
+          }else{
+            this.variation1=[]
+            this.variation2=[]
+          }
+       
           this.isModalShow = true;
         } else {
           this.variationData = {}
@@ -494,6 +544,7 @@ export class SubCategoriesPopupComponent implements OnInit {
             "qty": p_count,
             "variation_id": ""
           }
+          console.log("No Variation Product")
           this.categoryservice.addcart(obje).then(resp => {
             console.log(resp)
             if (resp['message'] == 'Product added to the cart successfully!' && resp['status'] == 200) {
@@ -607,6 +658,18 @@ export class SubCategoriesPopupComponent implements OnInit {
         positionClass: 'toast-top-center'
       })
     })
+  }
+
+  setActiveVar1(id:any){
+  
+    this.activeElement1 = id;
+
+  }
+
+  setActiveVar2(id:any){
+  
+    this.activeElement2 = id;
+
   }
 
 

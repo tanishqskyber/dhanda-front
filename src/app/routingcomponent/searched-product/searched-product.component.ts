@@ -31,6 +31,12 @@ export class SearchedProductComponent implements OnInit {
   variationKeys:any=[]
   product_id:any;
   cartData:any=[]
+  variation1:any=[]
+  variation2:any=[]
+  variationname1:any;
+  variationname2:any;
+  activeElement1 :number;
+  activeElement2 :number;
   constructor(private modalService: NgbModal, config: NgbModalConfig,private comp: AppComponent,private categoryservice:CategoryService,private toastr: ToastrService,private spinner: NgxSpinnerService,private router: Router,private activatedRoute: ActivatedRoute) { 
     config.backdrop = true;
     config.keyboard = false;
@@ -159,9 +165,47 @@ export class SearchedProductComponent implements OnInit {
       };
     
       this.variationData=groupBy(variations, 'variation_name')
-      console.log(this.variationData);
-      console.log(Object.keys(this.variationData))
       this.variationKeys=Object.keys(this.variationData)
+      if(this.variationKeys.length==2){
+        this.variationname1=this.variationKeys[0]
+        this.variationname2=this.variationKeys[1]
+        for(var data of variations){
+          if(data['variation_name']==this.variationKeys[0]){
+            var obj={
+              id:data['id'],
+              status:data['status'],
+              variation_name:data['variation_name'],
+              variation_value:data['variation_value']
+            }
+            this.variation1.push(obj)
+          }else if(data['variation_name']==this.variationKeys[1]){
+            var obje={
+              id:data['id'],
+              status:data['status'],
+              variation_name:data['variation_name'],
+              variation_value:data['variation_value']
+            }
+            this.variation2.push(obje)
+          }
+         
+        }
+      }else if(this.variationKeys.length==1){
+        for(var data of variations){
+          if(data['variation_name']==this.variationKeys[0]){
+            var obj={
+              id:data['id'],
+              status:data['status'],
+              variation_name:data['variation_name'],
+              variation_value:data['variation_value']
+            }
+            this.variation1.push(obj)
+          }
+         
+        }
+      }else{
+        this.variation1=[]
+        this.variation2=[]
+      }
       this.isModalShow = true;
     
    
@@ -477,6 +521,18 @@ export class SearchedProductComponent implements OnInit {
         positionClass:'toast-top-center'
         })
     })
+  }
+
+  setActiveVar1(id:any){
+  
+    this.activeElement1 = id;
+
+  }
+
+  setActiveVar2(id:any){
+  
+    this.activeElement2 = id;
+
   }
 
 }

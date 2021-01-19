@@ -40,8 +40,8 @@
 							<div class="product-title">
 								<h3><a>{{product.product_name}}</a></h3>
 								<div class="price-prod">
-									<ins>₹{{product.selling_price}}</ins>
-									<del>₹{{product.mrp}}</del>
+									<ins>₹{{product.selling_price}}/{{product.product_type_name}}</ins>
+									<del>₹{{product.mrp}}/{{product.product_type_name}}</del>
 									
 									<!-- <a class="cart-btn" (click)="loadProductInfo(product.id)"> + Add</a> -->
 
@@ -91,14 +91,14 @@
 					<div class="modal-dialog sub-categories-modal-dialog">
 						<div class="modal-content">
 							<div class="modal-body">
-								<ng-container *ngFor="let varia of variationKeys">
+								<ng-container *ngIf="variationKeys.length==2">
 									<div class="size-select">
-										<h2>{{varia}}</h2>
+										<h2>{{variationname1}}</h2>
 										<div class="exTab1">
 											<ul class="nav nav-pills" style="display:flex; list-style: none;">
-												<ng-container *ngFor="let vd of productInfo.variations">
-													<li *ngIf="vd.variation_name==varia">
-														<a (click)="selectvariation(vd.id,vd.variation_name)"
+												<ng-container *ngFor="let vd of variation1">
+													<li  [ngClass]="vd.id === activeElement1 ? 'active' : 'none'">
+														<a (click)="selectvariation(vd.id,vd.variation_name);setActiveVar1(vd.id)"
 															data-toggle="tab">
 															{{vd.variation_value}}
 														</a>
@@ -109,6 +109,43 @@
 											</ul>
 										</div>
 									</div>
+									<div class="size-select">
+										<h2>{{variationname2}}</h2>
+										<div class="exTab1">
+											<ul class="nav nav-pills" style="display:flex; list-style: none;">
+												<ng-container *ngFor="let vd of variation2">
+													<li  [ngClass]="vd.id === activeElement2 ? 'active' : 'none'">
+														<a (click)="selectvariation(vd.id,vd.variation_name);setActiveVar2(vd.id)"
+															data-toggle="tab">
+															{{vd.variation_value}}
+														</a>
+													</li>
+												</ng-container>
+												<!-- <li><a data-toggle="tab">small</a></li>
+										<li><a data-toggle="tab">small</a></li> -->
+											</ul>
+										</div>
+									</div>
+								</ng-container>
+								<ng-container *ngIf="variationKeys.length==1">
+									<div class="size-select">
+										<h2>{{variationname1}}</h2>
+										<div class="exTab1">
+											<ul class="nav nav-pills" style="display:flex; list-style: none;">
+												<ng-container *ngFor="let vd of variation1">
+													<li  [ngClass]="vd.id === activeElement1 ? 'active' : 'none'">
+														<a (click)="selectvariation(vd.id,vd.variation_name);setActiveVar1(vd.id)"
+															data-toggle="tab">
+															{{vd.variation_value}}
+														</a>
+													</li>
+												</ng-container>
+												<!-- <li><a data-toggle="tab">small</a></li>
+										<li><a data-toggle="tab">small</a></li> -->
+											</ul>
+										</div>
+									</div>
+									
 								</ng-container>
 								<!-- <div class="size-select">
 								<h2>Small</h2>
