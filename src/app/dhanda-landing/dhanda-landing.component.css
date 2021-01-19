@@ -372,7 +372,7 @@ Default CSS
   
   .navbar-light .navbar-nav {
     margin: auto;
-    margin-right:2rem;
+    /* margin-right:1rem; */
   }
   
   .navbar-light .navbar-nav .nav-item {
@@ -386,7 +386,7 @@ Default CSS
   }
   
   .navbar-light .navbar-nav .nav-item a {
-    font-size: 18px;
+    font-size: 16px;
     color: #000000;
     text-transform: capitalize;
     position: relative;
@@ -396,7 +396,7 @@ Default CSS
     padding-bottom: 0;
     font-weight: 600;
     margin-left: 14px;
-    margin-right: 14px;
+    margin-right: 18px;
   }
   
   .navbar-light .navbar-nav .nav-item a:hover, .navbar-light .navbar-nav .nav-item a:focus, .navbar-light .navbar-nav .nav-item a.active {
@@ -416,7 +416,7 @@ Default CSS
   }
   
   .navbar-light .navbar-nav .nav-item:last-child a {
-    margin-right: 0;
+    /* margin-right: 0; */
   }
   
   .navbar-light .navbar-nav .nav-item:first-child a {
@@ -480,7 +480,7 @@ Default CSS
   }
   
   .main-banner .banner-content h1 {
-    font-size: 65px;
+    font-size: 60px;
     color: #000000;
     margin: 0 0 10px 0;
     line-height: 1.1s;
@@ -510,7 +510,7 @@ Default CSS
     margin-bottom: 0;
     color: #646464;
     line-height: 1.8;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 500;
     font-family: "Apercu",sans-serif;
     text-align: left;
@@ -3703,14 +3703,14 @@ Default CSS
   }
   
   .copy-right-content p {
-    font-size: 14px;
+    font-size: 12px;
     margin-bottom: 0;
     color: #000000;
     font-weight: 600;
   }
   
   .copy-right-content p a {
-    font-size: 18px;
+    font-size: 14px;
     font-weight: bold;
   }
   
@@ -3843,7 +3843,7 @@ Default CSS
 
   @media screen and (max-width:500px){
     .section-title h2{
-      font-size:30px;
+      font-size:24px;
     }
     .btn-sign{
       font-size:30px;

@@ -81,7 +81,7 @@
    background: #ddd;
 }
 .order-track-status-line {
-   display: block;
+      display: block;
    margin: 0 auto;
    width: 2px;
    height: 4rem;
@@ -114,4 +114,5 @@
 
 .img-middle img{
    border-radius: 5px;
+   width:130px;
 }
