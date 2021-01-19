@@ -235,6 +235,12 @@ div#demo1 {
 .product-title h3 a {
   font-size: 20px;
   color: #5f5f5f;
+  white-space: normal;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1; /* number of lines to show */
+  -webkit-box-orient: vertical;
 }
 
 .price-prod ins {
@@ -271,7 +277,9 @@ div#demo1 {
   margin-top: 10px;
   margin-right: 10px;
   font-weight: bold;
-  border-radius: 5px;
+  border-radius: 5px;  
+  font-size: 12px;
+
 }
 
 .price-prod del {
@@ -303,11 +311,9 @@ div#demo1 {
   border-radius: 5px;
 } */
 
-/* .recent-product-list img {
-  border: solid 2px #525252;
-  padding: 2px;
-  border-radius: 10px;
-} */
+.recent-product-list img {
+  width:260px;
+}
 
 .cat-heading {
   padding-bottom: 20px;
@@ -1255,6 +1261,7 @@ a.del-icon img {
 
 .quantity {
   font-weight: 300;
+  font-size:18px;
 }
 
 .prod-amount {
@@ -1422,7 +1429,7 @@ form.date-time-form input:focus {
 
 .profile-form2 .form-control {
   height: auto;
-  padding: 10px 0 !important;
+  padding: 5px 0 !important;
   border-top: transparent !important;
   border-left: transparent !important;
   border-right: transparent !important;
@@ -1435,10 +1442,13 @@ form.date-time-form input:focus {
   color: #000000 !important;
 }
 
-.profile-form2 .form-control::placeholder {
-  color: #000000 !important;
-}
 
+.profile-form2 .form-control::placeholder {
+  color: #7d7d7d !important;
+}
+.profile-form2 label{
+  color:#7d7d7d;
+}
 .profile-form2 button#send-msg {
   background: #1fb055;
   color: #ffffff;
@@ -2292,6 +2302,7 @@ td.amout-color {
 
   .product-title h3 a {
     font-size: 14px;
+    white-space: pre-line!important;
   }
 
   .price-prod ins {
@@ -2586,11 +2597,29 @@ td.amout-color {
   .order-heading h2 {
     font-size: 18px;
   }
+  .customer-details{
+    padding:30px;
+    margin-top:0px;
+  }
+  .quantity{
+    font-size:14px;
+  }
+  .ng-star-inserted h5{
+    font-size: 15px;
+    padding-top:8px;
+  }
+
+  .img-middle{
+    padding:.20rem!important;
+    width:175px;
+  }
 
   .size-select a {
     margin-right: 3px;
   }
-
+  .fa-angle-left{
+    padding:0px 10px 0px 0px;
+  }
   /* .add_cart_product button {
     margin-right: 5px;
     width: 130px;
@@ -2628,6 +2657,7 @@ td.amout-color {
 
   .product-title h3 a {
     font-size: 13px;
+    white-space: pre-line;
   }
 
   .price-prod del {
@@ -2636,6 +2666,7 @@ td.amout-color {
 
   .back-page a {
     font-size: 18px;
+    margin-left:5px;
   }
 
   .header-icon img {
@@ -3154,7 +3185,7 @@ td.amout-color {
 .btn-outline-secondary-green {
   background-color: #1fb055;
   color: #ffffff;
-  padding: 0 10px;
+  padding: 0 6px;
 }
 
 .qty-input {

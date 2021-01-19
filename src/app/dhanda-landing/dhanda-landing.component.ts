@@ -35,6 +35,7 @@ export class DhandaLandingComponent implements OnInit {
       console.log(error)
       console.log('Error Occured!')
     })
+
   }
 
   senEnquiry(){
@@ -63,6 +64,7 @@ export class DhandaLandingComponent implements OnInit {
         positionClass:'toast-top-center'
         })
     })
+
   }
 
 
