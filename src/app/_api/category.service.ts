@@ -495,7 +495,7 @@ const path = new Config().getBaseURL();
            
         }
       let promise = new Promise((resolve, reject) => {
-          this.http.get(`${path}user/${id}/delete_address`)
+          this.http.post(`${path}user/${id}/delete_address`,params)
               .subscribe(
                   res => {
                       

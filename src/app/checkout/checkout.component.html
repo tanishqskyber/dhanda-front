@@ -45,6 +45,7 @@
 							</form>
 						</div>
 						<div class="tab-pane" [ngClass]="deliveryActive ? 'active' : ''" *ngIf="deliveryTabShow">
+							<a class="btn" [routerLink]="['/address']" [queryParams]="{id: 'checkout'}">Select Address</a>
 							<h3>Please fill the address</h3>
 
 							<div class="profile-form2">
@@ -109,7 +110,7 @@
 										</div>
 									</div>
 
-									<div class="col-md-12">
+									<div class="col-md-12" *ngIf="saveAddressOption">
 										<div class="save-info">
 											<label class="container1">Save this address for future
 												<input type="checkbox" name="addressSave" [(ngModel)]="addressSave"

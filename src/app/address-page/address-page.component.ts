@@ -12,9 +12,17 @@ import { error } from 'protractor';
 })
 export class AddressPageComponent implements OnInit {
   addressData:any=[]
+  params:any;
+  showgetAddressOption:boolean=false;
   constructor(private catservice:CategoryService,private toastr: ToastrService,private spinner: NgxSpinnerService,private router: Router,private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.params=this.activatedRoute.snapshot.queryParams["id"];
+    if(this.params!=undefined){
+      this.showgetAddressOption=true
+    }else{
+      this.showgetAddressOption=false
+    }
     this.loadAddressData();
   }
 
@@ -81,6 +89,10 @@ export class AddressPageComponent implements OnInit {
 
   gotoEditAddress(id){
     this.router.navigate(['/new-address'],{queryParams:{id:id}})
+  }
+
+  getAddress(addrid){
+    this.router.navigate(['/checkout'],{queryParams:{id:addrid}});
   }
 
 }

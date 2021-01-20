@@ -23,6 +23,7 @@ export class NewAddressComponent implements OnInit {
   delivery_contact_no:any=null
   params:string;
   updateAddress:boolean=false;
+  getCityName:any;
   constructor(private catservice:CategoryService,private toastr: ToastrService,private spinner: NgxSpinnerService,private router: Router,private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -102,11 +103,17 @@ export class NewAddressComponent implements OnInit {
               console.log(resp)
               this.flat_no=resp['data']['flat_no']
               this.building_no=resp['data']['apartment_name']
-              this.road_no=resp['data']['road_no']
+              this.road_no=resp['data']['road_name']
               this.pincode=resp['data']['pincode']
               this.delivery_contact_no=resp['data']['contact_no']
               this.flat_no=resp['data']['flat_no']
-             
+              this.getCityName=resp['data']['city']
+              for(var data of this.stateData){
+                if(data['name']==resp['data']['state']){
+                  this.state_id=data['id']
+                  this.loadCities(this.state_id)
+                }
+              }
 
               
               this.spinner.hide();
@@ -142,6 +149,13 @@ export class NewAddressComponent implements OnInit {
          
          this.spinner.hide()
          this.cityData=resp['data']
+         if(this.updateAddress==true){
+           for(var data of this.cityData){
+             if(data['name']==this.getCityName){
+               this.city_id=data['id']
+             }
+           }
+         }
        }else{
          this.spinner.hide()
          this.toastr.error('Something Went Wrong in cities!','Error',{
@@ -158,6 +172,59 @@ export class NewAddressComponent implements OnInit {
            })
        
      })
+   }
+
+   updateAddr(){
+    for(var sdata of this.stateData){
+      if(sdata['id']==this.state_id){
+        this.state_name=sdata['name']
+      }
+    }
+  
+    for(var cdata of this.cityData){
+      if(cdata['id']==this.city_id){
+        this.city_name=cdata['name']
+      }
+    }
+
+    if(this.flat_no!=null && this.building_no!=null && this.state_name!=null && this.city_name!=null && this.pincode!=null && this.delivery_contact_no!=null){
+      var par={
+        "flat_no":this.flat_no,
+        "apartment_name":this.building_no,
+        "road_name":this.road_no,
+        "state":this.state_name,
+        "city":this.city_name,
+        "pincode":this.pincode,
+        "is_default_address":true,
+        "contact_no":this.delivery_contact_no
+      }
+      this.catservice.updateAddress(this.params,par).then(resp=>{
+        console.log(resp)
+        if(resp['message']=='Customer address updated successfully!'){
+         this.router.navigate(['/address']);
+        }else{
+          this.spinner.hide()
+          this.toastr.error('Something went wront while updating address!','Error',{
+            timeOut:3000,
+            positionClass:'toast-top-center'
+            })
+        }
+       
+      },error=>{
+        this.spinner.hide()
+        console.log(error)
+        this.toastr.error('Failed to save address!','Error',{
+          timeOut:3000,
+          positionClass:'toast-top-center'
+          })
+      })
+    }else{
+      this.spinner.hide()
+      this.toastr.error('Please fill all the details to save the address!','Error',{
+        timeOut:3000,
+        positionClass:'toast-top-center'
+        })
+    }
    }
 
    

@@ -25,7 +25,10 @@ type="ball-scale-multiple"
 			<ng-container *ngFor="let cat of categorydata;let i=index;">
 			<div class="col-6 col-md-3">
 				<div class="cloth-categories">
-					<a><img  (click)="gotoSubcategory(cat.id)"  [src]="cat.category_img_url"></a>
+					<a>
+						<img *ngIf="cat.category_img_url!=null" (click)="gotoSubcategory(cat.id)" [src]="cat.category_img_url">
+						<img *ngIf="cat.category_img_url==null" (click)="gotoSubcategory(cat.id)" src="../../../assets/img/no_image.png">
+					</a>
 					<h2><a (click)="gotoSubcategory(cat.id)">{{cat.category_name}}</a></h2>
 				</div>
 			</div>

@@ -73,14 +73,14 @@
 						</li>
 
 					</ul> -->
-					<div class="order-track mt-4" *ngIf="orderInfo.order_status=='Pending'">
+					<div class="order-track mt-4" *ngIf="orderInfo.order_status=='Pending' && orderInfo.delivery_mode=='Delivery'">
 						<div class="order-track-step">
 						  <div class="order-track-status">
 							<span class="order-track-status-dot active"></span>
 							<span class="order-track-status-line active"></span>
 						  </div>
 						  <div class="order-track-text">
-							<p class="order-track-text-stat">Order Placed</p>
+							<p class="order-track-text-stat">Order Placed<br>{{orderInfo.order_date}} | {{orderInfo.order_time}}</p>
 							<time datetime="10:03"></time>
 						  </div>
 						</div>
@@ -100,26 +100,26 @@
 							<span class="order-track-status-line"></span>
 						  </div>
 						  <div class="order-track-text">
-							<p class="order-track-text-stat">Deliverd</p>
+							<p class="order-track-text-stat">Delivered</p>
 							<time></time>
 						  </div>
 						</div>
 					  </div>
-					  <div class="order-track mt-4" *ngIf="orderInfo.order_status=='Accepted'">
+					  <div class="order-track mt-4" *ngIf="orderInfo.order_status=='Pending' && orderInfo.delivery_mode=='Pickup'">
 						<div class="order-track-step">
 						  <div class="order-track-status">
 							<span class="order-track-status-dot active"></span>
 							<span class="order-track-status-line active"></span>
 						  </div>
 						  <div class="order-track-text">
-							<p class="order-track-text-stat">Order Placed</p>
+							<p class="order-track-text-stat">Order Placed<br>{{orderInfo.order_date}} | {{orderInfo.order_time}}</p>
 							<time datetime="10:03"></time>
 						  </div>
 						</div>
 						<div class="order-track-step">
 						  <div class="order-track-status">
-							<span class="order-track-status-dot active"></span>
-							<span class="order-track-status-line active"></span>
+							<span class="order-track-status-dot"></span>
+							<span class="order-track-status-line"></span>
 						  </div>
 						  <div class="order-track-text">
 							<p class="order-track-text-stat">Accepted</p>
@@ -132,19 +132,19 @@
 							<span class="order-track-status-line"></span>
 						  </div>
 						  <div class="order-track-text">
-							<p class="order-track-text-stat">Deliverd</p>
+							<p class="order-track-text-stat">Collected</p>
 							<time></time>
 						  </div>
 						</div>
 					  </div>
-					  <div class="order-track mt-4" *ngIf="orderInfo.order_status=='Delivered'">
+					  <div class="order-track mt-4" *ngIf="orderInfo.order_status=='Accepted' && orderInfo.delivery_mode=='Delivery'">
 						<div class="order-track-step">
 						  <div class="order-track-status">
 							<span class="order-track-status-dot active"></span>
 							<span class="order-track-status-line active"></span>
 						  </div>
 						  <div class="order-track-text">
-							<p class="order-track-text-stat">Order Placed</p>
+							<p class="order-track-text-stat">Order Placed<br>{{orderInfo.order_date}} | {{orderInfo.order_time}}</p>
 							<time datetime="10:03"></time>
 						  </div>
 						</div>
@@ -154,7 +154,71 @@
 							<span class="order-track-status-line active"></span>
 						  </div>
 						  <div class="order-track-text">
-							<p class="order-track-text-stat">Accepted</p>
+							<p class="order-track-text-stat">Accepted<br>{{orderInfo.order_confirm_date}} | {{orderInfo.order_confirm_time}}</p>
+							<time></time>
+						  </div>
+						</div>
+						<div class="order-track-step">
+						  <div class="order-track-status">
+							<span class="order-track-status-dot"></span>
+							<span class="order-track-status-line"></span>
+						  </div>
+						  <div class="order-track-text">
+							<p class="order-track-text-stat">Delivered</p>
+							<time></time>
+						  </div>
+						</div>
+					  </div>
+					  <div class="order-track mt-4" *ngIf="orderInfo.order_status=='Accepted' && orderInfo.delivery_mode=='Pickup'">
+						<div class="order-track-step">
+						  <div class="order-track-status">
+							<span class="order-track-status-dot active"></span>
+							<span class="order-track-status-line active"></span>
+						  </div>
+						  <div class="order-track-text">
+							<p class="order-track-text-stat">Order Placed<br>{{orderInfo.order_date}} | {{orderInfo.order_time}}</p>
+							<time datetime="10:03"></time>
+						  </div>
+						</div>
+						<div class="order-track-step">
+						  <div class="order-track-status">
+							<span class="order-track-status-dot active"></span>
+							<span class="order-track-status-line active"></span>
+						  </div>
+						  <div class="order-track-text">
+							<p class="order-track-text-stat">Accepted<br>{{orderInfo.order_confirm_date}} | {{orderInfo.order_confirm_time}}</p>
+							<time></time>
+						  </div>
+						</div>
+						<div class="order-track-step">
+						  <div class="order-track-status">
+							<span class="order-track-status-dot"></span>
+							<span class="order-track-status-line"></span>
+						  </div>
+						  <div class="order-track-text">
+							<p class="order-track-text-stat">Collected</p>
+							<time></time>
+						  </div>
+						</div>
+					  </div>
+					  <div class="order-track mt-4" *ngIf="orderInfo.order_status=='Delivered' && orderInfo.delivery_mode=='Delivery'">
+						<div class="order-track-step">
+						  <div class="order-track-status">
+							<span class="order-track-status-dot active"></span>
+							<span class="order-track-status-line active"></span>
+						  </div>
+						  <div class="order-track-text">
+							<p class="order-track-text-stat">Order Placed<br>{{orderInfo.order_delivered_date}} | {{orderInfo.order_delivered_time}}</p>
+							<time datetime="10:03"></time>
+						  </div>
+						</div>
+						<div class="order-track-step">
+						  <div class="order-track-status">
+							<span class="order-track-status-dot active"></span>
+							<span class="order-track-status-line active"></span>
+						  </div>
+						  <div class="order-track-text">
+							<p class="order-track-text-stat">Accepted<br>{{orderInfo.order_confirm_date}} | {{orderInfo.order_confirm_time}}</p>
 							<time></time>
 						  </div>
 						</div>
@@ -164,7 +228,39 @@
 							<span class="order-track-status-line active"></span>
 						  </div>
 						  <div class="order-track-text">
-							<p class="order-track-text-stat">Deliverd</p>
+							<p class="order-track-text-stat">Delivered<br>{{orderInfo.order_delivered_date}} | {{orderInfo.order_delivered_time}}</p>
+							<time></time>
+						  </div>
+						</div>
+					  </div>
+					  <div class="order-track mt-4" *ngIf="orderInfo.order_status=='Delivered' && orderInfo.delivery_mode=='Pickup'">
+						<div class="order-track-step">
+						  <div class="order-track-status">
+							<span class="order-track-status-dot active"></span>
+							<span class="order-track-status-line active"></span>
+						  </div>
+						  <div class="order-track-text">
+							<p class="order-track-text-stat">Order Placed<br>{{orderInfo.order_delivered_date}} | {{orderInfo.order_delivered_time}}</p>
+							<time datetime="10:03"></time>
+						  </div>
+						</div>
+						<div class="order-track-step">
+						  <div class="order-track-status">
+							<span class="order-track-status-dot active"></span>
+							<span class="order-track-status-line active"></span>
+						  </div>
+						  <div class="order-track-text">
+							<p class="order-track-text-stat">Accepted<br>{{orderInfo.order_confirm_date}} | {{orderInfo.order_confirm_time}}</p>
+							<time></time>
+						  </div>
+						</div>
+						<div class="order-track-step">
+						  <div class="order-track-status">
+							<span class="order-track-status-dot active"></span>
+							<span class="order-track-status-line active"></span>
+						  </div>
+						  <div class="order-track-text">
+							<p class="order-track-text-stat">Collected<br>{{orderInfo.collecting_date}} | {{orderInfo.collecting_time}}</p>
 							<time></time>
 						  </div>
 						</div>
@@ -176,7 +272,7 @@
 							<span class="order-track-status-line active"></span>
 						  </div>
 						  <div class="order-track-text">
-							<p class="order-track-text-stat">Order Placed</p>
+							<p class="order-track-text-stat">Order Placed<br>{{orderInfo.order_delivered_date}} | {{orderInfo.order_delivered_time}}</p>
 							<time datetime="10:03"></time>
 						  </div>
 						</div>
@@ -186,11 +282,11 @@
 							<span class="order-track-status-line deactive"></span>
 						  </div>
 						  <div class="order-track-text">
-							<p class="order-track-text-stat">Rejected</p>
+							<p class="order-track-text-stat">Rejected<br>{{orderInfo.order_reject_date}} | {{orderInfo.order_reject_time}}</p>
 							<time></time>
 						  </div>
 						</div>
-						<div class="order-track-step">
+						<!-- <div class="order-track-step">
 						  <div class="order-track-status">
 							<span class="order-track-status-dot"></span>
 							<span class="order-track-status-line"></span>
@@ -199,7 +295,7 @@
 							<p class="order-track-text-stat">Deliverd</p>
 							<time></time>
 						  </div>
-						</div>
+						</div> -->
 					  </div>
 					<!-- </div>
 					</div> -->
@@ -282,8 +378,8 @@
 									</div>
 								</td>
 								<td class="text-right">
-									<strong class="quantity">Quantity: {{order.qty}}</strong>
-									<small class="prod-amount">{{order.product_selling_price}}</small>
+									<strong class="quantity">Qty: {{order.qty}}</strong>
+									<small class="prod-amount"><i class="fa fa-inr" aria-hidden="true"></i> {{order.product_selling_price}}</small>
 								</td>
 							</tr>
 						</tbody>

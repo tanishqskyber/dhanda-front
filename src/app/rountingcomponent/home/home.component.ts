@@ -180,6 +180,9 @@ export class HomeComponent implements OnInit {
       if (resp['status'] == 200 && resp['message'] == 'Category list!') {
         this.spinner.hide()
         this.categorydata = resp['data']
+        console.log(this.categorydata)
+        console.log(this.categorydata[0]['category_img_url'])
+        console.log(this.categorydata[1]['category_img_url'])
       } else {
         this.spinner.hide()
         this.toastr.error('Something went wrong!', 'Error', {
@@ -348,7 +351,7 @@ export class HomeComponent implements OnInit {
         this.spinner.hide()
         this.stroreid=resp['data']['id']
         this.usermobile=resp['data']['contact_no']
-        this.whatsappchat=`//api.whatsapp.com/send?phone=91${this.usermobile}&text=Hi`
+        this.whatsappchat=`//api.whatsapp.com/send?phone=91${this.usermobile}&text=Hi, I found your online store on mydhanda.com and wanted to know more about your products and offerings.`
         this.callnow=`tel:0${this.usermobile}`
        
         localStorage.setItem('storeId',this.stroreid)

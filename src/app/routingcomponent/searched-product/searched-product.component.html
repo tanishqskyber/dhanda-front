@@ -46,7 +46,7 @@ type="ball-scale-multiple"
 							<h3><a>{{product.product_name}}</a></h3>
 							<div class="price-prod">
 								<ins>₹{{product.selling_price}}/{{product.product_type_name}}</ins>
-								<del>₹{{product.mrp}}/{{product.product_type_name}}</del>
+								<del>₹{{product.mrp}}</del>
 								<!-- <a class="cart-btn" (click)="loadProductInfo(product.id,product.variations)"> + Add</a> -->
 								<a class="cart-btn"  *ngIf="product.cart_added==false"  (click)="loadProductInfo(product.id,product.variations)"> + Add</a>
 								<div *ngIf="product.cart_added==true" id="add-remove-div" class="add-remove-div">

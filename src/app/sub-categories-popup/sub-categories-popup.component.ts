@@ -618,19 +618,13 @@ export class SubCategoriesPopupComponent implements OnInit {
       } else {
         this.spinner.hide()
         this.loadProductdata()
-        this.toastr.error('Something Went Wrong!', 'Error', {
-          timeOut: 3000,
-          positionClass: 'toast-top-center'
-        })
+     
       }
     }, error => {
       this.spinner.hide()
       this.loadProductdata()
       console.log(error)
-      this.toastr.error('Failed to get Cart Details!', 'Error', {
-        timeOut: 3000,
-        positionClass: 'toast-top-center'
-      })
+     
     })
   }
 

@@ -14,8 +14,12 @@ type="ball-scale-multiple"
         <div class="otp">
             <ng-otp-input  (onInputChange)="onOtpChange($event)" class="otp-input" [config]="config"></ng-otp-input>
           <div class="edit-no text-center">
-            <p>+91 - {{mobilenumber}} <a href="#">(Edit?)</a></p>
-            <span class="time-counting">00:59</span>
+            <p>+91 - {{mobilenumber}} <a [routerLink]="['/signin-signup']">(Edit?)</a></p>
+            <!-- <span class="time-counting">{{timerValue}}</span> -->
+            <span class="time-counting"><countdown #cd1 [config]="{leftTime: 60,format: 'mm:ss'}" (event)="handleEvent($event)"></countdown></span>
+            <p *ngIf="showresendbutton">
+              <a (click)="resendOtp();cd1.restart()">Resend OTP</a>
+            </p>
           </div>
           <button class="btn btn-primary btn-update" (click)="postOtp()">Verify</button>
         </div>

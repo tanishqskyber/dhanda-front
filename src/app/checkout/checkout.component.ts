@@ -34,10 +34,47 @@ export class CheckoutComponent implements OnInit {
   delievery_mode:any=null;
   is_address_save:boolean=false;
   delivery_contact_no:any=null
+  savedAddres:any={}
+  paramsid:any;
+  savecityname:any;
+  saveAddressOption:boolean=true;
   constructor(private catservice:CategoryService,private toastr: ToastrService,private spinner: NgxSpinnerService,private router: Router,private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.orderData=JSON.parse(localStorage.getItem('orderDetails'))
+    this.paramsid=this.activatedRoute.snapshot.queryParams["id"];
+    if(this.paramsid!=undefined){
+      this.spinner.show();
+     
+      this.catservice.getAddressbyId(this.paramsid).then(resp=>{
+        console.log(resp)
+        this.flat_no=resp['data']['flat_no']
+        this.building_no=resp['data']['apartment_name']
+        this.road_no=resp['data']['road_name']
+        this.pincode=resp['data']['pincode']
+        this.delivery_contact_no=resp['data']['contact_no']
+        this.flat_no=resp['data']['flat_no']
+        this.savecityname=resp['data']['city']
+        for(var data of this.stateData){
+          if(data['name']==resp['data']['state']){
+            this.state_id=data['id']
+            this.loadCities(this.state_id)
+          }
+        }
+        this.saveAddressOption=false;
+
+
+        
+        this.spinner.hide();
+      },error=>{
+        this.saveAddressOption=true;
+        console.log(error)
+        this.spinner.hide();
+      })
+    }else{
+      this.saveAddressOption=true;
+    }
+  
   console.log(this.orderData)
     this.allowStorePickup=localStorage.getItem('allowStorePickup')
     if(this.allowStorePickup=='true'){
@@ -200,6 +237,22 @@ export class CheckoutComponent implements OnInit {
       if(resp['message']=='States list!'){
         this.spinner.hide()
         this.stateData=resp['data']
+        if(this.paramsid!=undefined){
+          this.flat_no=this.savedAddres['flat_no']
+          this.building_no=this.savedAddres['apartment_name']
+          this.road_no=this.savedAddres['road_name']
+          this.pincode=this.savedAddres['pincode']
+          this.savecityname=this.savedAddres['city']
+          for(var data of this.stateData){
+            if(data['name']==this.savedAddres['state']){
+              this.state_id=data['id']
+              this.state_name=this.savedAddres['state']
+              this.loadCities(this.state_id)
+             
+            }
+          }
+          
+        }
       }else{
         this.spinner.hide()
         this.toastr.error('Something Went Wrong states!','Error',{
@@ -224,6 +277,14 @@ export class CheckoutComponent implements OnInit {
        
        this.spinner.hide()
        this.cityData=resp['data']
+       if(this.paramsid!=undefined){
+         for(var data of this.cityData){
+           if(data['name']==this.savecityname){
+             this.city_id=data['id']
+             this.city_name=data['name']
+           }
+         }
+       }
      }else{
        this.spinner.hide()
        this.toastr.error('Something Went Wrong in cities!','Error',{

@@ -24,13 +24,19 @@ export class OtpComponent implements OnInit {
 
   otpstring:any;
  mobilenumber:any;
-
-
+ timerOn:boolean=true;
+min:number;
+sec:number;
+cd1:any
+showresendbutton:boolean=false
   constructor(private auth: AuthService,private route: ActivatedRoute, private router: Router,private toastr: ToastrService,private spinner: NgxSpinnerService) { }
 
   
   ngOnInit(): void {
+
  this.mobilenumber=localStorage.getItem('contact-no')
+
+
     
   }
   
@@ -109,5 +115,29 @@ export class OtpComponent implements OnInit {
         })
     }
   }
+
+  handleEvent(event){
+    console.log(event)
+    if(event.action=='done'){
+      this.showresendbutton=true
+    }else{
+      this.showresendbutton=false
+    }
+  }
+
+  resendOtp(){
+    this.toastr.success('Otp has been re-send!','Msg',{
+      timeOut:3000,
+      positionClass:'toast-top-center'
+      })
+     
+  }
+
+
+
+
+
+
+
 
 }

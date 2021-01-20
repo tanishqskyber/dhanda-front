@@ -172,7 +172,8 @@
 
 				<owl-carousel-o [options]="customOptions">
 					<ng-template carouselSlide *ngFor="let cat of categorydata;let i=index;">
-						<img (click)="gotoSubcategory(cat.id)" [src]="cat.category_img_url" class="mb-2">
+						<img *ngIf="cat.category_img_url!=null" (click)="gotoSubcategory(cat.id)" [src]="cat.category_img_url" class="mb-2">
+						<img *ngIf="cat.category_img_url==null" (click)="gotoSubcategory(cat.id)" src="../../../assets/img/no_image.png" class="mb-2">
 						<h6 (click)="gotoSubcategory(cat.id)" class="text-center">{{cat.category_name}}</h6>
 					</ng-template>
 				</owl-carousel-o>
@@ -200,7 +201,9 @@
 						<button type="button" class="btn bg-transparent">
 
 							<div class="off-overlay"><small>{{product.discount}}%</small>
-								<img (click)="gotoProductDetails(product.id)" [src]="product.product_img_url">
+								<img *ngIf="product.product_img_url!=null" (click)="gotoProductDetails(product.id)" [src]="product.product_img_url">
+								<img *ngIf="product.product_img_url==null" (click)="gotoProductDetails(product.id)" src="../../../assets/img/no_image.png">
+								
 							</div>
 
 							<div class="text-left mt-3 home-product">
@@ -210,7 +213,7 @@
 							<div class="d-flex align-items-center justify-content-between price-prod">
 
 								<div>
-									<ins>₹{{product.selling_price}}</ins>
+									<ins>₹{{product.selling_price}}/{{product.product_type_name}}</ins>
 								</div>
 
 								<div>

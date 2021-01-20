@@ -44,7 +44,7 @@ import { EmptyProductsComponent } from './supportingcomponents/empty-products/em
 import { EmptySubCategoryComponent } from './supportingcomponents/empty-sub-category/empty-sub-category.component';
 import { EmptyOrdersComponent } from './supportingcomponents/empty-orders/empty-orders.component';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
-
+import { CountdownModule } from 'ngx-countdown';
 declare const $: any;
 @NgModule({
   declarations: [
@@ -92,7 +92,8 @@ declare const $: any;
     ToastrModule.forRoot(), // ToastrModule added
     NgxSpinnerModule,
     Ng2SearchPipeModule,
-    SlickCarouselModule
+    SlickCarouselModule,
+    CountdownModule
   ],
   entryComponents:[CustomModalComponent],
   providers: [AuthService,CategoryService,SupportService,{
