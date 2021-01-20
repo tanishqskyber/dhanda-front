@@ -15,6 +15,17 @@ export class DhandaLandingComponent implements OnInit {
   enquiryData:any={}
   constructor(private support: SupportService,private spinner:NgxSpinnerService,private toastr: ToastrService) { }
 
+  slides = [
+    { img: "assets/img/client/1.jpg" },
+    { img: "assets/img/client/2.jpg" },
+    { img: "assets/img/client/3.jpg" },
+    { img: "assets/img/client/4.jpg" },
+    { img: "assets/img/client/5.jpg" },
+    { img: "assets/img/client/6.jpg" },
+  ];
+  
+  slideConfig = { "slidesToShow": 1, "slidesToScroll": 1, "autoplay":true, "autoplaySpeed":4000};
+
   ngOnInit(): void {
     this.loadDhandaSummary()
   }

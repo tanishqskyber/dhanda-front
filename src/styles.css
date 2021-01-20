@@ -3249,3 +3249,7 @@ a.cart-btn {
     padding: 0 5px;
     /* padding: 5px 10px; */
   }
+
+  .slick-prev:before, .slick-next:before{
+    color: #1fb055 !important;
+  }
