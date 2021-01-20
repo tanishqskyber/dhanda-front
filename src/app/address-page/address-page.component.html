@@ -31,8 +31,8 @@ type="ball-scale-multiple"
       <div class="dropdown-container" tabindex="-1">
         <div class="test"></div>
         <div class="dropdown">
-          <a href="#"><div><span><i class="fa fa-edit"></i>Edit</span></div></a>
-          <a href="#"><div><span><i class="fa fa-trash"></i>Delete</span></div></a>
+          <a (click)="gotoEditAddress(address.id)"><div><span><i class="fa fa-edit"></i>Edit</span></div></a>
+          <a (click)="addressdelete(address.id)"><div><span><i class="fa fa-trash"></i>Delete</span></div></a>
         </div>
       </div>
 </div>

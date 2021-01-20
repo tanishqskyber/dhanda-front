@@ -91,6 +91,10 @@
 .order-track-status-dot.active{
    background: #1fb055;
 }
+.order-track-status-line.deactive,
+.order-track-status-dot.deactive{
+   background: red;
+}
 
 .order-track-text-stat {
    font-size: 16px;

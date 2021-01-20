@@ -324,8 +324,9 @@ export class HomeComponent implements OnInit {
           return rv;
         }, []);
       };
-      console.log(this.isModalShow)
+      
       this.isModalShow = true;
+      console.log(this.isModalShow)
       this.variationData = groupBy(variations, 'variation_name')
       console.log(this.variationData);
       console.log(Object.keys(this.variationData))

@@ -169,6 +169,38 @@
 						  </div>
 						</div>
 					  </div>
+					  <div class="order-track mt-4" *ngIf="orderInfo.order_status=='Rejected'">
+						<div class="order-track-step">
+						  <div class="order-track-status">
+							<span class="order-track-status-dot active"></span>
+							<span class="order-track-status-line active"></span>
+						  </div>
+						  <div class="order-track-text">
+							<p class="order-track-text-stat">Order Placed</p>
+							<time datetime="10:03"></time>
+						  </div>
+						</div>
+						<div class="order-track-step">
+						  <div class="order-track-status">
+							<span class="order-track-status-dot deactive"></span>
+							<span class="order-track-status-line deactive"></span>
+						  </div>
+						  <div class="order-track-text">
+							<p class="order-track-text-stat">Rejected</p>
+							<time></time>
+						  </div>
+						</div>
+						<div class="order-track-step">
+						  <div class="order-track-status">
+							<span class="order-track-status-dot"></span>
+							<span class="order-track-status-line"></span>
+						  </div>
+						  <div class="order-track-text">
+							<p class="order-track-text-stat">Deliverd</p>
+							<time></time>
+						  </div>
+						</div>
+					  </div>
 					<!-- </div>
 					</div> -->
 

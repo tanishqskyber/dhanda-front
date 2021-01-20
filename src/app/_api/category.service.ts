@@ -489,4 +489,70 @@ const path = new Config().getBaseURL();
     
       return promise;
     }
+
+    deleteAddress(id): Promise<any> { 
+        var params={
+           
+        }
+      let promise = new Promise((resolve, reject) => {
+          this.http.get(`${path}user/${id}/delete_address`)
+              .subscribe(
+                  res => {
+                      
+                      resolve(res);
+                  },
+                  err => {
+                      console.log("Error occured : " + err);
+                      reject(err);
+                  }
+              );
+    
+      });
+    
+      return promise;
+    }
+
+    getAddressbyId(id): Promise<any> { 
+        var params={
+           
+        }
+      let promise = new Promise((resolve, reject) => {
+          this.http.get(`${path}user/${id}/get_address_by_id`)
+              .subscribe(
+                  res => {
+                      
+                      resolve(res);
+                  },
+                  err => {
+                      console.log("Error occured : " + err);
+                      reject(err);
+                  }
+              );
+    
+      });
+    
+      return promise;
+    }
+
+    updateAddress(id,params): Promise<any> { 
+    
+      let promise = new Promise((resolve, reject) => {
+          this.http.post(`${path}user/${id}/update_customer_address`,params)
+              .subscribe(
+                  res => {
+                      
+                      resolve(res);
+                  },
+                  err => {
+                      console.log("Error occured : " + err);
+                      reject(err);
+                  }
+              );
+    
+      });
+    
+      return promise;
+    }
+
+
   }

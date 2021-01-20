@@ -54,4 +54,33 @@ export class AddressPageComponent implements OnInit {
     console.log(id)
   }
 
+
+  addressdelete(id){
+    this.spinner.show()
+    this.catservice.deleteAddress(id).then(resp=>{
+      console.log(resp)
+      if(resp['message']=='Customer address remove successfully!'){
+        this.loadAddressData()
+      }else{
+        this.spinner.hide()
+        this.toastr.error('Something went wrong while deleting address!','Error',{
+          timeOut:3000,
+          positionClass:'toast-top-center'
+          })
+      }
+    },error=>{
+      this.spinner.hide()
+      console.log(error)
+      this.toastr.error('Failed to delete address!','Error',{
+        timeOut:3000,
+        positionClass:'toast-top-center'
+        })
+    })
+  }
+
+
+  gotoEditAddress(id){
+    this.router.navigate(['/new-address'],{queryParams:{id:id}})
+  }
+
 }
