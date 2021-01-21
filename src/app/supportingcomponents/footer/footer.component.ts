@@ -41,10 +41,13 @@ loadCartDetails(){
             this.cartcounter=0;
           
       }else if(resp['message']=='Cart info!' && resp['status']==200){
-      
+    
         this.cartData=resp['data']
+       
+        for(var data of this.cartData){
+          this.cartcounter+=data['qty']
+        }
       
-       this.cartcounter=this.cartData.length
 
       }else{
       console.log("Something Went Wrong")
