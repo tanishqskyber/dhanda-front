@@ -23,7 +23,7 @@
 							<div class="col-8 p-0">
 								<div class="row cart-img-price">
 									<div class="col-9">
-										<h3>{{cart.product_name}}</h3>
+										<h3 class="text-truncate" style="max-width: 150px;">{{cart.product_name}}</h3>
 										<div class="size-pro">
 											<ng-container *ngFor="let variants of cart.variations;let j=index;">
 												<small>{{variants.variation_name}}: {{variants.variation_value}}</small>
@@ -38,19 +38,21 @@
 										</div>
 										<div class="row mt-2 add-remove-div" id="add-remove-div">
 											<div class="col-12">
-												<div class="input-group add-cart-input w-50">
-													<div class="input-group-prepend">
-														<button class="btn btn-outline-secondary-green"
-														(click)="remove(cart.id)" type="button"><i
-															class="fas fa-minus"></i></button>
-													</div>
-													<input type="text" [value]="cart.qty" readonly=""
-														class="form-control qty-input text-center"
-														aria-describedby="basic-addon2" [(ngModel)]="cart.qty">
-													<div class="input-group-append">
-														<button class="btn btn-outline-secondary-green"
-															(click)="add(cart.id)" type="button"><i
-																class="fas fa-plus"></i></button>
+												<div style="width: 100px;">
+													<div class="input-group add-cart-input">
+														<div class="input-group-prepend">
+															<button class="btn btn-outline-secondary-green"
+															(click)="remove(cart.id)" type="button"><i
+																class="fas fa-minus"></i></button>
+														</div>
+														<input type="text" [value]="cart.qty" readonly=""
+															class="form-control qty-input text-center"
+															aria-describedby="basic-addon2" [(ngModel)]="cart.qty">
+														<div class="input-group-append">
+															<button class="btn btn-outline-secondary-green"
+																(click)="add(cart.id)" type="button"><i
+																	class="fas fa-plus"></i></button>
+														</div>
 													</div>
 												</div>
 											</div>
