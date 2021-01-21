@@ -30,16 +30,16 @@ export class HomeComponent implements OnInit {
   recproductData: any = []
 
 
-  slides = [
-    { img: "http://placehold.it/350x150/000000" },
-    { img: "http://placehold.it/350x150/111111" },
-    { img: "http://placehold.it/350x150/333333" },
-    { img: "http://placehold.it/350x150/666666" },
-    { img: "http://placehold.it/350x150/000000" },
-    { img: "http://placehold.it/350x150/111111" },
-    { img: "http://placehold.it/350x150/333333" },
-    { img: "http://placehold.it/350x150/666666" }
-  ];
+  // slides = [
+  //   { img: "http://placehold.it/350x150/000000" },
+  //   { img: "http://placehold.it/350x150/111111" },
+  //   { img: "http://placehold.it/350x150/333333" },
+  //   { img: "http://placehold.it/350x150/666666" },
+  //   { img: "http://placehold.it/350x150/000000" },
+  //   { img: "http://placehold.it/350x150/111111" },
+  //   { img: "http://placehold.it/350x150/333333" },
+  //   { img: "http://placehold.it/350x150/666666" }
+  // ];
   slideConfig = { "slidesToShow": 4, "slidesToScroll": 1, "autoplay": true, "autoplaySpeed": 4000,
     responsive: [
       {
@@ -352,12 +352,13 @@ export class HomeComponent implements OnInit {
       console.log(resp)
       if (resp['message'] == 'Vendor!') {
         this.spinner.hide()
-        this.stroreid = resp['data']['id']
-        this.usermobile = resp['data']['contact_no']
-        this.whatsappchat = `//api.whatsapp.com/send?phone=91${this.usermobile}&text=Hi, I found your online store on mydhanda.com and wanted to know more about your products and offerings.`
-        this.callnow = `tel:0${this.usermobile}`
-
-        localStorage.setItem('storeId', this.stroreid)
+        this.stroreid=resp['data']['id']
+        this.usermobile=resp['data']['contact_no']
+        this.whatsappchat=`//api.whatsapp.com/send?phone=91${this.usermobile}&text=Hi, I found your online store on mydhanda.com and wanted to know more about your products and offerings.`
+        this.callnow=`tel:0${this.usermobile}`
+        // <a href="tel:0120-4888488"><img src="/static/images/common/phone_icon.svg" alt="">0120 - 4888488</a>
+       
+        localStorage.setItem('storeId',this.stroreid)
         this.loadStoreDetails()
         this.loadCategories()
         this.loadStoreImpressions()

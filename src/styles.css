@@ -1091,10 +1091,44 @@ div#slider-home {
 }
 
 .modal {
-  top: auto !important;
+  top: auto ;
   background: #ffffff;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
+}
+
+.sub-categories-modal{
+  top: 290px;
+}
+
+@media(max-width:1024px){
+  .sub-categories-modal{
+    top: 75%;
+  } 
+}
+
+@media(max-width:768px){
+  .sub-categories-modal{
+    top: 67% !important;
+  } 
+}
+
+@media(max-width:414px){
+  .sub-categories-modal{
+    top: 57% !important;
+  } 
+}
+
+@media(max-width: 375px){
+  .sub-categories-modal{
+    top: 53% !important;
+  } 
+}
+
+@media(max-width: 320px){
+  .sub-categories-modal{
+    top: 43% !important;
+  } 
 }
 
 .minus-btn,
