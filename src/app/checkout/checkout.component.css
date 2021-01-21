@@ -1,3 +1,8 @@
 .btn-proceed a{
     color:#fff;
 }
+.tab-pane .btn1{
+    text-decoration: underline;
+    line-height:40px;
+    color: #000;
+}

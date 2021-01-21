@@ -8,7 +8,7 @@
 				<div class="profile-heading-page d-flex align-items-center justify-content-between">
 					<h2>Profile</h2>
 					<p>
-						<a *ngIf="editTrue" (click)="editProfile()">Edit</a>
+					<button class="edit"><a *ngIf="editTrue" (click)="editProfile()">Edit</a></button>
 				
 					</p>
 				
@@ -96,7 +96,7 @@
 							</div>
 							<div class="col-md-3">
 								<div class="text-center">
-									<button id="send-msg" class="btn default-submit" (click)="gotoAddress()">Manage Address</button>
+									<button id="send-msg" class="btn default-submit mb-2" (click)="gotoAddress()">Manage Address</button>
 								</div>
 							</div>
 							<div class="col-md-3"></div>

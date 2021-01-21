@@ -17,7 +17,7 @@ type="ball-scale-multiple"
             <p>+91 - {{mobilenumber}} <a [routerLink]="['/signin-signup']">(Edit?)</a></p>
             <!-- <span class="time-counting">{{timerValue}}</span> -->
             <span class="time-counting"><countdown #cd1 [config]="{leftTime: 60,format: 'mm:ss'}" (event)="handleEvent($event)"></countdown></span>
-            <p *ngIf="showresendbutton">
+            <p *ngIf="showresendbutton" class="resend">
               <a (click)="resendOtp();cd1.restart()">Resend OTP</a>
             </p>
           </div>

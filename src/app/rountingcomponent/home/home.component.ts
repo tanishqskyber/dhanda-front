@@ -82,7 +82,6 @@ export class HomeComponent implements OnInit {
     config.backdrop = true;
     config.keyboard = false;
 
-
   }
   ngOnInit() {
 
