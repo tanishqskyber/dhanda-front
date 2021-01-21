@@ -379,7 +379,7 @@
 								</td>
 								<td class="text-right">
 									<strong class="quantity">Qty: {{order.qty}}</strong>
-									<small class="prod-amount"><i class="fa fa-inr" aria-hidden="true"></i> {{order.product_selling_price}}</small>
+									<small class="prod-amount ml-2"><i class="fa fa-inr" aria-hidden="true"></i> {{order.product_selling_price}}</small>
 								</td>
 							</tr>
 						</tbody>
@@ -413,7 +413,7 @@
 						<h2>Delivery Mode : {{orderInfo.delivery_mode}}</h2>
 						<p *ngIf="orderInfo.delivery_mode=='Pickup'">Date: {{orderInfo.collecting_date}} &nbsp; &nbsp;
 							&nbsp; Time: {{orderInfo.collecting_time}}</p>
-						<p *ngIf="orderInfo.delivery_mode=='Delivery'">{{orderInfo.delivery_address}}</p>
+						<p *ngIf="orderInfo.delivery_mode=='Delivery'" class="text-wrap">{{orderInfo.delivery_address}}</p>
 					</div>
 
 

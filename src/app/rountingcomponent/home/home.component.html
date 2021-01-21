@@ -16,7 +16,8 @@
 							<span>{{store_name}}</span>
 						</li>
 						<li>
-							<a [href]=whatsappchat target="_blank"><img class="header-logos" src="../../../assets/img/icon-2.png"></a>
+							<a [href]=whatsappchat target="_blank"><img class="header-logos"
+									src="../../../assets/img/icon-2.png"></a>
 							<span>
 								+91-{{usermobile}}
 							</span>
@@ -25,10 +26,10 @@
 									target="_blank"></a>{{usermobile}}</span></li>
 						<li>
 							<a [href]=storeLocation target="_blank">
-							<img class="header-logos" src="../../../assets/img/icon-4.png">
+								<img class="header-logos" src="../../../assets/img/icon-4.png">
 							</a>
 							<span>Location</span>
-							
+
 						</li>
 					</ul>
 				</div>
@@ -136,7 +137,7 @@
 			<a href="#" [routerLink]="['/categories']">View All</a>
 		</div>
 		<div class="row">
-			<div class="col-md-12 pr-0">
+			<div class="col-md-12">
 				<!-- <div class="row press-images" id="pressContent">
 								<div class="col-md-12">
 								  <div class="press-scroll">
@@ -172,11 +173,19 @@
 
 				<owl-carousel-o [options]="customOptions">
 					<ng-template carouselSlide *ngFor="let cat of categorydata;let i=index;">
-						<img *ngIf="cat.category_img_url!=null" (click)="gotoSubcategory(cat.id)" [src]="cat.category_img_url" class="mb-2">
-						<img *ngIf="cat.category_img_url==null" (click)="gotoSubcategory(cat.id)" src="../../../assets/img/no_image.png" class="mb-2">
+						<img *ngIf="cat.category_img_url!=null" (click)="gotoSubcategory(cat.id)"
+							[src]="cat.category_img_url" class="mb-2">
+						<img *ngIf="cat.category_img_url==null" (click)="gotoSubcategory(cat.id)"
+							src="../../../assets/img/no_image.png" class="mb-2">
 						<h6 (click)="gotoSubcategory(cat.id)" class="text-center">{{cat.category_name}}</h6>
 					</ng-template>
 				</owl-carousel-o>
+
+				<ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig">
+					<div ngxSlickItem *ngFor="let slide of slides" class="slide">
+						<img src="{{ slide.img }}" alt="" width="100%">
+					</div>
+				</ngx-slick-carousel>
 
 			</div>
 		</div>
@@ -201,9 +210,11 @@
 						<button type="button" class="btn bg-transparent">
 
 							<div class="off-overlay"><small>{{product.discount}}%</small>
-								<img *ngIf="product.product_img_url!=null" (click)="gotoProductDetails(product.id)" [src]="product.product_img_url">
-								<img *ngIf="product.product_img_url==null" (click)="gotoProductDetails(product.id)" src="../../../assets/img/no_image.png">
-								
+								<img *ngIf="product.product_img_url!=null" (click)="gotoProductDetails(product.id)"
+									[src]="product.product_img_url">
+								<img *ngIf="product.product_img_url==null" (click)="gotoProductDetails(product.id)"
+									src="../../../assets/img/no_image.png">
+
 							</div>
 
 							<div class="text-left mt-3 home-product">
@@ -253,22 +264,23 @@
 										</div>
 									</ng-container>
 
-									<div class="row add-remove-div mb-3" >
+									<div class="row add-remove-div mb-3">
 										<div class="col-4">
 											<div style="width: 100px;">
 												<h2 style="font-size: 19px;">Qty.</h2>
 												<div class="input-group add-cart-input">
 													<div class="input-group-prepend">
 														<button class="btn btn-outline-secondary-green"
-														(click)="decrement(product.product_count,product.id)"
+															(click)="decrement(product.product_count,product.id)"
 															type="button"><i class="fas fa-minus"></i></button>
 													</div>
-													<input type="text" readonly=""  id="input_item" class="form-control qty-input text-center"
-														placeholder="1" aria-label="1" aria-describedby="basic-addon2"
+													<input type="text" readonly="" id="input_item"
+														class="form-control qty-input text-center" placeholder="1"
+														aria-label="1" aria-describedby="basic-addon2"
 														[(ngModel)]="product.product_count">
 													<div class="input-group-append">
 														<button class="btn btn-outline-secondary-green"
-														(click)="increment(product.product_count,product.id)"
+															(click)="increment(product.product_count,product.id)"
 															type="button"><i class="fas fa-plus"></i></button>
 													</div>
 												</div>
@@ -285,7 +297,7 @@
 										</div>
 									</div>
 
-									
+
 									<!-- <div id="add-remove-div" class="add-remove-div">
 										<h2>Qty.</h2>
 										<button type="button" class="btn minus-btn"

@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
-import { Router ,ActivatedRoute} from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { NgbModal, NgbModalConfig, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import * as $ from 'jquery';
 import { AppComponent } from 'src/app/app.component';
@@ -7,7 +7,7 @@ import { CategoryService } from './../../_api/category.service'
 import { ToastrService } from 'ngx-toastr'
 import { NgxSpinnerService } from "ngx-spinner";
 import { OwlOptions } from 'ngx-owl-carousel-o';
-import {AuthService} from '../../_api/auth.service'
+import { AuthService } from '../../_api/auth.service'
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -28,73 +28,77 @@ export class HomeComponent implements OnInit {
   store_logo: any = ""
   mobile_number: any = ""
   recproductData: any = []
-  customOptions: any = {
-    loop: false,
-    margin: 25,
-    autoplay: true,
-    responsiveClass: true,
-    mouseDrag: true,
-    touchDrag: true,
-    pullDrag: false,
-    dots: false,
-    navSpeed: 600,
-    navText: ["<div class='nav-btn prev-slide'></div>", "<div class='nav-btn next-slide'></div>"],
 
-    responsive: {
-      0: {
-        items: 2
+
+  slides = [
+    { img: "http://placehold.it/350x150/000000" },
+    { img: "http://placehold.it/350x150/111111" },
+    { img: "http://placehold.it/350x150/333333" },
+    { img: "http://placehold.it/350x150/666666" },
+    { img: "http://placehold.it/350x150/000000" },
+    { img: "http://placehold.it/350x150/111111" },
+    { img: "http://placehold.it/350x150/333333" },
+    { img: "http://placehold.it/350x150/666666" }
+  ];
+  slideConfig = { "slidesToShow": 4, "slidesToScroll": 1, "autoplay": true, "autoplaySpeed": 4000,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 4,
+        }
       },
-      400: {
-        items: 3
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 3,
+        }
       },
-      740: {
-        items: 4
-      },
-      940: {
-        items: 4
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 2,
+        }
       }
-
-    },
-
-    nav: true
-  }
+    ]
+  };
 
   search: any;
 
 
   searchedProducts: any = []
   variationData: any = [];
-  stroreid:any;
-  params:any;
-  usermobile:any='XXXXXXXXXX'
-  whatsappchat:any;
-  callnow:any;
+  stroreid: any;
+  params: any;
+  usermobile: any = 'XXXXXXXXXX'
+  whatsappchat: any;
+  callnow: any;
   variation_ids: any;
   variationKeys: any = []
   product_id: any;
-  cartData:any=[]
-  storeLocation:any;
-  constructor(private router: Router, private modalService: NgbModal, config: NgbModalConfig, private comp: AppComponent, private categoryservice: CategoryService, private toastr: ToastrService, private spinner: NgxSpinnerService,private route:ActivatedRoute,private auth: AuthService) {
+  cartData: any = []
+  storeLocation: any;
+  constructor(private router: Router, private modalService: NgbModal, config: NgbModalConfig, private comp: AppComponent, private categoryservice: CategoryService, private toastr: ToastrService, private spinner: NgxSpinnerService, private route: ActivatedRoute, private auth: AuthService) {
     config.backdrop = true;
     config.keyboard = false;
 
 
   }
   ngOnInit() {
-    
+
     this.params = this.route.snapshot.paramMap.get('username');
-    if(this.params==undefined || this.params==null){
-      this.params=localStorage.getItem('username')
+    if (this.params == undefined || this.params == null) {
+      this.params = localStorage.getItem('username')
     }
-   // console.log(username)
-    localStorage.setItem('username',this.params)
-    this.store_name =  this.params
+    // console.log(username)
+    localStorage.setItem('username', this.params)
+    this.store_name = this.params
     this.mobile_number = localStorage.getItem('contact-no')
-    
-  if(this.auth.getIsLoggedIn()){
-    this.laodRecentProducts()
-  }
-   
+
+    if (this.auth.getIsLoggedIn()) {
+      this.laodRecentProducts()
+    }
+
     this.loadStoreId()
   }
   open() {
@@ -216,7 +220,7 @@ export class HomeComponent implements OnInit {
         // this.shippingAmount=resp['data']['shipping_amount']
         this.store_name = resp['data']['store_name']
         this.store_logo = resp['data']['logo_img']
-        this.storeLocation=`https://maps.google.com/?q=${resp['data']['latitude']},${resp['data']['longitude']}`
+        this.storeLocation = `https://maps.google.com/?q=${resp['data']['latitude']},${resp['data']['longitude']}`
         this.spinner.hide()
         // this.loadCartDetails()
       } else {
@@ -238,7 +242,7 @@ export class HomeComponent implements OnInit {
 
   searhcProductbySearch() {
     this.spinner.show()
-    this.categoryservice.searchProduct(this.search,localStorage.getItem('storeId')).then(resp => {
+    this.categoryservice.searchProduct(this.search, localStorage.getItem('storeId')).then(resp => {
       console.log(resp)
       if (resp['message'] == 'Product info!') {
         this.searchedProducts = resp['data']
@@ -263,50 +267,50 @@ export class HomeComponent implements OnInit {
   }
 
   private laodRecentProducts() {
-   
+
     this.categoryservice.recentProducts().then(resp => {
       console.log(resp)
       if (resp['message'] == 'Recent product list!') {
-        var recdata= resp['data']
-        for(var data of recdata){
-          var obj={
-            category_id:data['category_id'],
-        category_name:data['category_name'],
-        created_at:data['created_at'],
-        discount:data['discount'],
-        id:data['id'],
-        mrp:data['mrp'],
-        pieces:data['pieces'],
-        product_description:data['product_description'],
-        product_img_url:data['product_img_url'],
-        product_img_url_2:data['product_img_url_2'],
-        product_img_url_3:data['product_img_url_3'],
-        product_img_url_4:data['product_img_url_4'],
-        product_img_url_5:data['product_img_url_5'],
-        product_name:data['product_name'],
-        product_type_id:data['product_type_id'],
-        product_type_name:data['product_type_name'],
-        selling_price:data['selling_price'],
-        status:data['status'],
-        sub_category_id:data['sub_category_id'],
-        subcategory_name:data['subcategory_name'],
-        user_id:data['user_id'],
-        user_name:data['user_name'],
-        variations:data['variations'],
-        cart_added:false,
-        product_count:0
+        var recdata = resp['data']
+        for (var data of recdata) {
+          var obj = {
+            category_id: data['category_id'],
+            category_name: data['category_name'],
+            created_at: data['created_at'],
+            discount: data['discount'],
+            id: data['id'],
+            mrp: data['mrp'],
+            pieces: data['pieces'],
+            product_description: data['product_description'],
+            product_img_url: data['product_img_url'],
+            product_img_url_2: data['product_img_url_2'],
+            product_img_url_3: data['product_img_url_3'],
+            product_img_url_4: data['product_img_url_4'],
+            product_img_url_5: data['product_img_url_5'],
+            product_name: data['product_name'],
+            product_type_id: data['product_type_id'],
+            product_type_name: data['product_type_name'],
+            selling_price: data['selling_price'],
+            status: data['status'],
+            sub_category_id: data['sub_category_id'],
+            subcategory_name: data['subcategory_name'],
+            user_id: data['user_id'],
+            user_name: data['user_name'],
+            variations: data['variations'],
+            cart_added: false,
+            product_count: 0
           }
           this.recproductData.push(obj)
         }
 
       } else {
-       console.log('Something went wrong in recent products')
-       
+        console.log('Something went wrong in recent products')
+
       }
     }, error => {
       console.log('Failed to load Recent products')
       console.log(error)
-    
+
     })
   }
   gotoProductDetails(p_id: any) {
@@ -327,27 +331,27 @@ export class HomeComponent implements OnInit {
           return rv;
         }, []);
       };
-      
+
       this.isModalShow = true;
       console.log(this.isModalShow)
       this.variationData = groupBy(variations, 'variation_name')
       console.log(this.variationData);
       console.log(Object.keys(this.variationData))
       this.variationKeys = Object.keys(this.variationData)
-      
+
     } else {
       this.variationData = {}
       this.variationKeys = []
       this.isModalShow = true;
     }
-   
+
   }
 
-  private loadStoreId(){
+  private loadStoreId() {
     this.spinner.show()
-    this.auth.getStoreId(this.params).then(resp=>{
+    this.auth.getStoreId(this.params).then(resp => {
       console.log(resp)
-      if(resp['message']=='Vendor!'){
+      if (resp['message'] == 'Vendor!') {
         this.spinner.hide()
         this.stroreid=resp['data']['id']
         this.usermobile=resp['data']['contact_no']
@@ -360,38 +364,38 @@ export class HomeComponent implements OnInit {
         this.loadCategories()
         this.loadStoreImpressions()
         console.log(this.stroreid,)
-      }else if(resp['message']=='Vendor not found!'){
+      } else if (resp['message'] == 'Vendor not found!') {
         this.spinner.hide()
-        this.toastr.error('Store not found!','Error',{
-          timeOut:3000,
-          positionClass:'toast-top-center'
-          })
-      }else{
+        this.toastr.error('Store not found!', 'Error', {
+          timeOut: 3000,
+          positionClass: 'toast-top-center'
+        })
+      } else {
         this.spinner.hide()
-        this.toastr.error('Something Went Wrong!','Error',{
-          timeOut:3000,
-          positionClass:'toast-top-center'
-          })
+        this.toastr.error('Something Went Wrong!', 'Error', {
+          timeOut: 3000,
+          positionClass: 'toast-top-center'
+        })
       }
-     
-      
-    },error=>{
+
+
+    }, error => {
       this.spinner.hide()
       console.log(error)
-      this.toastr.error('Failed to load store details!','Error',{
-        timeOut:3000,
-        positionClass:'toast-top-center'
-        })
+      this.toastr.error('Failed to load store details!', 'Error', {
+        timeOut: 3000,
+        positionClass: 'toast-top-center'
+      })
     })
   }
 
-  private loadStoreImpressions(){
-      this.categoryservice.getstoreimpressions(this.stroreid).then(resp=>{
-        console.log(resp)
-      },error=>{
-        console.log(error)
-      })
+  private loadStoreImpressions() {
+    this.categoryservice.getstoreimpressions(this.stroreid).then(resp => {
+      console.log(resp)
+    }, error => {
+      console.log(error)
+    })
   }
 
- 
+
 }
