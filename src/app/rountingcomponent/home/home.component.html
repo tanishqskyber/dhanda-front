@@ -159,19 +159,19 @@
 									</button>
 								</div>
 							  </div> -->
-
-				<!-- <owl-carousel-o [options]="customOptions">
-					<ng-container *ngFor="let cat of categorydata;let i=index;">
+<!-- 
+				<owl-carousel-o [options]="customOptions">
+					<ng-container *ngFor="">
 						<ng-template carouselSlide>
 							<div class="slide">
 								<img (click)="gotoSubcategory(cat.id)" [src]="cat.category_img_url">
 								<h4 (click)="gotoSubcategory(cat.id)" class="text-center">{{cat.category_name}}</h4>
 							</div>
 						</ng-template>
-					</ng-container>
+					</ng-container>let cat of categorydata;let i=index;
 				</owl-carousel-o> -->
 
-				<owl-carousel-o [options]="customOptions">
+				<!-- <owl-carousel-o [options]="customOptions">
 					<ng-template carouselSlide *ngFor="let cat of categorydata;let i=index;">
 						<img *ngIf="cat.category_img_url!=null" (click)="gotoSubcategory(cat.id)"
 							[src]="cat.category_img_url" class="mb-2">
@@ -179,11 +179,12 @@
 							src="../../../assets/img/no_image.png" class="mb-2">
 						<h6 (click)="gotoSubcategory(cat.id)" class="text-center">{{cat.category_name}}</h6>
 					</ng-template>
-				</owl-carousel-o>
+				</owl-carousel-o> -->
 
 				<ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig">
-					<div ngxSlickItem *ngFor="let slide of slides" class="slide">
-						<img src="{{ slide.img }}" alt="" width="100%">
+					<div ngxSlickItem *ngFor="let cat of categorydata;let i=index;" class="slide">
+						<img [src]="cat.category_img_url" alt="" width="100%">
+						<h6 (click)="gotoSubcategory(cat.id)" class="text-center">{{cat.category_name}}</h6>
 					</div>
 				</ngx-slick-carousel>
 
