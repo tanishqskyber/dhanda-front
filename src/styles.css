@@ -106,6 +106,7 @@ p {
   white-space: nowrap;
   color: #000000;
   font-family: "Apercu", sans-serif;
+  
 }
 
 /*---------header----------*/
@@ -651,6 +652,11 @@ li.home-footer5 a.active-link img {
   margin: 0;
 }
 
+.resend{
+  position: relative;
+  top: 30px;
+  left: 37%;
+}
 /*animated line-end*/
 
 /*----------------categories----------------*/
@@ -1085,10 +1091,44 @@ div#slider-home {
 }
 
 .modal {
-  top: auto !important;
+  top: auto ;
   background: #ffffff;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
+}
+
+.sub-categories-modal{
+  top: 290px;
+}
+
+@media(max-width:1024px){
+  .sub-categories-modal{
+    top: 75%;
+  } 
+}
+
+@media(max-width:768px){
+  .sub-categories-modal{
+    top: 67% !important;
+  } 
+}
+
+@media(max-width:414px){
+  .sub-categories-modal{
+    top: 57% !important;
+  } 
+}
+
+@media(max-width: 375px){
+  .sub-categories-modal{
+    top: 53% !important;
+  } 
+}
+
+@media(max-width: 320px){
+  .sub-categories-modal{
+    top: 43% !important;
+  } 
 }
 
 .minus-btn,
@@ -3054,11 +3094,17 @@ td.amout-color {
   }
   #wrapper #dialog span {
     font-size: 15px;
-    margin-top: 4px;
   }
   .edit-no p a {
     padding-left: 5px;
   }
+  .resend{
+    
+    position: relative;
+    left: 22px;
+    top: 5px;
+
+}
 
   .price-prod small {
     padding-left: 10px;
@@ -3236,6 +3282,7 @@ td.amout-color {
   font-size: 14px;
   font-weight: 500;
   margin: 0;
+  
 }
 
 a.cart-btn {

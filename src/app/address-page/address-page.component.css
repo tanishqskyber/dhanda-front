@@ -54,8 +54,9 @@ label {
     font-family:'apercu',sans-serif;
   }
 .add{
-    padding-left:25px;
-    font-family:'apercu',sans-serif;
+  font-family: 'apercu',sans-serif;
+  padding-top: 10px;
+  line-height: 8px;
 }
 .test:after {
     content: '\2807';

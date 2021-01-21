@@ -30,16 +30,16 @@ export class HomeComponent implements OnInit {
   recproductData: any = []
 
 
-  slides = [
-    { img: "http://placehold.it/350x150/000000" },
-    { img: "http://placehold.it/350x150/111111" },
-    { img: "http://placehold.it/350x150/333333" },
-    { img: "http://placehold.it/350x150/666666" },
-    { img: "http://placehold.it/350x150/000000" },
-    { img: "http://placehold.it/350x150/111111" },
-    { img: "http://placehold.it/350x150/333333" },
-    { img: "http://placehold.it/350x150/666666" }
-  ];
+  // slides = [
+  //   { img: "http://placehold.it/350x150/000000" },
+  //   { img: "http://placehold.it/350x150/111111" },
+  //   { img: "http://placehold.it/350x150/333333" },
+  //   { img: "http://placehold.it/350x150/666666" },
+  //   { img: "http://placehold.it/350x150/000000" },
+  //   { img: "http://placehold.it/350x150/111111" },
+  //   { img: "http://placehold.it/350x150/333333" },
+  //   { img: "http://placehold.it/350x150/666666" }
+  // ];
   slideConfig = { "slidesToShow": 4, "slidesToScroll": 1, "autoplay": true, "autoplaySpeed": 4000,
     responsive: [
       {
@@ -81,7 +81,6 @@ export class HomeComponent implements OnInit {
   constructor(private router: Router, private modalService: NgbModal, config: NgbModalConfig, private comp: AppComponent, private categoryservice: CategoryService, private toastr: ToastrService, private spinner: NgxSpinnerService, private route: ActivatedRoute, private auth: AuthService) {
     config.backdrop = true;
     config.keyboard = false;
-
 
   }
   ngOnInit() {

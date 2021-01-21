@@ -15,4 +15,17 @@ input[type="text"]:read-only {
 
   .profile-heading-page h2{
     color: #1fb055;
+    position: relative;
+    right: 20px;
+  }
+  .edit{
+    padding: 0px 20px;
+    color: #fff!important;
+    background: #1fb055;
+    border: none;
+    border-radius: 5px;
+    margin: 0px 0px 0px 0px;
+  }
+  .profile-heading-page a{
+    color:#fff;
   }
