@@ -44,8 +44,9 @@ export class SubCategoriesPopupComponent implements OnInit {
   activeElement2 :number;
   variation1:any=[]
   variation2:any=[]
-  variationname1:any;
-  variationname2:any;
+  variationname1:any=null;
+  variationname2:any=null;
+  
   constructor(private modalService: NgbModal, config: NgbModalConfig, private comp: AppComponent, private categoryservice: CategoryService, private toastr: ToastrService, private spinner: NgxSpinnerService, private router: Router, private activatedRoute: ActivatedRoute,private auth:AuthService,private foot:FooterComponent) {
     config.backdrop = true;
     config.keyboard = false;
@@ -392,6 +393,10 @@ export class SubCategoriesPopupComponent implements OnInit {
     this.counter = 0
     this.variation_ids = null;
     this.variationKeys = []
+    this.variation1=[]
+    this.variation2=[]
+    this.variationname1=null
+    this.variationname2=null
     this.categoryservice.getProductDetails(id).then(resp => {
       console.log(resp)
       if (resp['message'] == 'No product found!' && resp['status'] == 404) {

@@ -38,7 +38,7 @@
 								<img *ngIf="product.product_img_url!=null" (click)="gotoProductDetails(product.id)"
 									[src]="product.product_img_url">
 								<img *ngIf="product.product_img_url==null" (click)="gotoProductDetails(product.id)"
-									[src="../../assets/img/no_image.png">
+									src="../../assets/img/no_image.png">
 							</div>
 							<div class="product-title">
 								<h3><a>{{product.product_name}}</a></h3>

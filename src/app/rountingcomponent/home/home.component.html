@@ -6,7 +6,8 @@
 		<div class="col-md-12">
 			<div class="view-google-detalis">
 				<div class="clint-img">
-					<img [src]="store_logo">
+					<img *ngIf="store_logo!='null'" [src]="store_logo">
+					<img *ngIf="store_logo=='null'" src="../../../assets/img/no_image.png">
 				</div>
 
 				<div class="clint-info">

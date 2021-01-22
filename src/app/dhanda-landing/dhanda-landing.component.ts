@@ -17,12 +17,30 @@ export class DhandaLandingComponent implements OnInit {
   constructor(private support: SupportService,private spinner:NgxSpinnerService,private toastr: ToastrService) { }
 
   slides = [
-    { img: "assets/img/client/1.jpg" },
-    { img: "assets/img/client/2.jpg" },
-    { img: "assets/img/client/3.jpg" },
-    { img: "assets/img/client/4.jpg" },
-    { img: "assets/img/client/5.jpg" },
-    { img: "assets/img/client/6.jpg" },
+    { img: "assets/img/client/1.jpg",
+      name:"Ajay" ,
+      designation:"Dealer",
+      message :"Dhanda App has helped me restart my business"   },
+    { img: "assets/img/client/2.jpg",
+    name:"Vijay" ,
+    designation:"Dealer",
+    message :"Dhanda App has helped me restart my business"   },
+    { img: "assets/img/client/3.jpg",
+    name:"Sanjay" ,
+    designation:"Dealer",
+    message :"Dhanda App has helped me restart my business"   },
+    { img: "assets/img/client/4.jpg",
+    name:"Rajesh" ,
+    designation:"Dealer",
+    message :"Dhanda App has helped me restart my business"   },
+    { img: "assets/img/client/5.jpg",
+    name:"Dhananjay" ,
+    designation:"Dealer",
+    message :"Dhanda App has helped me restart my business"   },
+    { img: "assets/img/client/6.jpg",
+    name:"Sheetal" ,
+    designation:"Dealer",
+    message :"Dhanda App has helped me restart my business"   },
   ];
   
   slideConfig = { "slidesToShow": 1, "slidesToScroll": 1, "autoplay":true, "autoplaySpeed":4000};

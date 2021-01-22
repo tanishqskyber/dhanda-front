@@ -33,8 +33,8 @@ export class SearchedProductComponent implements OnInit {
   cartData:any=[]
   variation1:any=[]
   variation2:any=[]
-  variationname1:any;
-  variationname2:any;
+  variationname1:any=null;
+  variationname2:any=null;
   activeElement1 :number;
   activeElement2 :number;
   constructor(private modalService: NgbModal, config: NgbModalConfig,private comp: AppComponent,private categoryservice:CategoryService,private toastr: ToastrService,private spinner: NgxSpinnerService,private router: Router,private activatedRoute: ActivatedRoute) { 
@@ -154,7 +154,10 @@ export class SearchedProductComponent implements OnInit {
 
 
   loadProductInfo(id,variations,product){
-    
+    this.variation1=[]
+    this.variation2=[]
+    this.variationname1=null
+    this.variationname2=null
     this.product_id=id
     this.productInfo=product
     console.log(variations)

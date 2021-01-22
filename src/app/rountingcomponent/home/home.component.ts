@@ -80,8 +80,8 @@ export class HomeComponent implements OnInit {
   storeLocation: any;
   variation1:any=[]
   variation2:any=[]
-  variationname1:any;
-  variationname2:any;
+  variationname1:any=null;
+  variationname2:any=null;
   activeElement1 :number;
   activeElement2 :number;
   variation_ids_arr:any=[]
@@ -304,7 +304,12 @@ export class HomeComponent implements OnInit {
         // this.shippingAmount=resp['data']['shipping_amount']
         this.store_name = resp['data']['store_name']
         this.store_logo = resp['data']['logo_img']
-        this.storeLocation = `https://maps.google.com/?q=${resp['data']['latitude']},${resp['data']['longitude']}`
+        if(resp['data']['latitude']!=null || resp['data']['longitude']!=null){
+          this.storeLocation = `https://maps.google.com/?q=${resp['data']['latitude']},${resp['data']['longitude']}`
+        }else{
+          this.storeLocation = `javascript:void(0)`
+        }
+       
         this.spinner.hide()
         // this.loadCartDetails()
       } else {
@@ -402,7 +407,10 @@ export class HomeComponent implements OnInit {
   }
 
   loadProductInfo(id,variations,product){
-    
+    this.variation1=[]
+    this.variation2=[]
+    this.variationname1=null
+    this.variationname2=null
     this.product_id=id
     this.productInfo=product
     console.log(variations)

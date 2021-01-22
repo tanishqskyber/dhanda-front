@@ -40,7 +40,10 @@ type="ball-scale-multiple"
 				<div class="recent-product-list">
 					<button type="button" class="btn btn-info btn-lg">
 						<div class="off-overlay"><small>{{product.discount}}%</small>
-							<img (click)="gotoProductDetails(product.id)"  [src]="product.product_img_url">
+							<img *ngIf="product.product_img_url!=null" (click)="gotoProductDetails(product.id)"
+									[src]="product.product_img_url">
+								<img *ngIf="product.product_img_url==null" (click)="gotoProductDetails(product.id)"
+									src="../../assets/img/no_image.png">
 						</div>
 						<div class="product-title">
 							<h3><a>{{product.product_name}}</a></h3>
