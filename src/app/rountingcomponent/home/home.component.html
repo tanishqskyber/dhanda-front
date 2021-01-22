@@ -250,6 +250,9 @@
 					<div class="modal modalcatadd" *ngIf="isModalShow">
 						<div class="modal-dialog">
 							<div class="modal-content">
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								  </button>
 								<div class="modal-body">
 									<ng-container *ngFor="let varia of variationKeys">
 										<div class="size-select">
@@ -272,7 +275,7 @@
 									</ng-container>
 
 									<div class="row add-remove-div mb-3">
-										<div class="col-4">
+										<div class="col-md-4">
 											<div style="width: 100px;">
 												<h2 style="font-size: 19px;">Qty.</h2>
 												<div class="input-group add-cart-input">
@@ -293,7 +296,7 @@
 												</div>
 											</div>
 										</div>
-										<div class="col-8">
+										<div class="col-md-8">
 											<div class="bag-button">
 												<button class="add_product-modal-btn" (click)="incrementOne()"
 													*ngIf="isBtn">ADD TO BAG</button>

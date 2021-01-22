@@ -106,7 +106,6 @@ p {
   white-space: nowrap;
   color: #000000;
   font-family: "Apercu", sans-serif;
-  
 }
 
 /*---------header----------*/
@@ -422,6 +421,7 @@ li.home-footer5 a.active-link img {
 
 .recent-products {
   padding-top: 40px;
+  padding-bottom: 40px;
 }
 
 .price-prod-home ins {
@@ -652,7 +652,7 @@ li.home-footer5 a.active-link img {
   margin: 0;
 }
 
-.resend{
+.resend {
   position: relative;
   top: 30px;
   left: 37%;
@@ -1090,14 +1090,36 @@ div#slider-home {
   border: none !important;
 }
 
-.modal {
+.modalcatadd {
+  display: block;
+}
+
+.modal-dialog {
+  position: fixed;
+  top: auto;
+  right: auto;
+  left: auto;
+  bottom: 0;
+  width: 100%;
+  max-width: 100% !important;
+  margin: 0;
+}
+
+.modal-content {
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+
+/* .modal {
   top: auto ;
   background: #ffffff;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
-}
+} */
 
-.sub-categories-modal{
+/* .sub-categories-modal{
   top: 290px;
 }
 
@@ -1129,7 +1151,7 @@ div#slider-home {
   .sub-categories-modal{
     top: 43% !important;
   } 
-}
+} */
 
 .minus-btn,
 .plus-btn {
@@ -1167,11 +1189,11 @@ div#add-remove-div input#input_item {
   height: 32px;
 }
 
-.modal-content {
+/* .modal-content {
   -webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
   box-shadow: unset;
   border: unset;
-}
+} */
 
 .modal-header {
   padding: 0;
@@ -1179,24 +1201,29 @@ div#add-remove-div input#input_item {
 }
 
 button.close {
-  background: #1fb055;
+  /* background: #1fb055;
   opacity: 1;
   color: #ffffff;
   height: 30px;
   width: 30px;
   border-radius: 100px;
-  padding-bottom: 3px;
+  padding-bottom: 3px; */
+
+  margin-left: auto;
+  position: relative;
+  right: 15px;
+  top: 10px;
 }
 
 .size-select {
   padding: 10px 0 30px;
 }
 
-.modal-dialog {
+/* .modal-dialog {
   max-width: unset;
   margin: 0px auto;
   padding: 0 15px;
-}
+} */
 
 button.add_product-modal {
   float: right;
@@ -3098,13 +3125,11 @@ td.amout-color {
   .edit-no p a {
     padding-left: 5px;
   }
-  .resend{
-    
+  .resend {
     position: relative;
     left: 22px;
     top: 5px;
-
-}
+  }
 
   .price-prod small {
     padding-left: 10px;
@@ -3282,7 +3307,6 @@ td.amout-color {
   font-size: 14px;
   font-weight: 500;
   margin: 0;
-  
 }
 
 a.cart-btn {
