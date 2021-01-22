@@ -126,10 +126,31 @@ showresendbutton:boolean=false
   }
 
   resendOtp(){
-    this.toastr.success('Otp has been re-send!','Msg',{
-      timeOut:3000,
-      positionClass:'toast-top-center'
-      })
+    this.spinner.show()
+    this.auth.resenduserOtp(this.mobilenumber).then(resp=>{
+    
+      if(resp['message']=='OTP send successfully!'){
+        this.spinner.hide()
+        this.toastr.success('Otp has been re-send!','Msg',{
+          timeOut:3000,
+          positionClass:'toast-top-center'
+          })
+      }else{
+        this.toastr.error('Unable to send otp again!','Msg',{
+          timeOut:3000,
+          positionClass:'toast-top-center'
+          })
+      }
+     
+    },error=>{
+      this.spinner.hide()
+      console.log(error)
+      this.toastr.error('Failed to send OTP!','Msg',{
+        timeOut:3000,
+        positionClass:'toast-top-center'
+        })
+    })
+   
      
   }
 

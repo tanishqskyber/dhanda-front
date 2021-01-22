@@ -355,7 +355,7 @@ export class HomeComponent implements OnInit {
         this.stroreid=resp['data']['id']
         this.usermobile=resp['data']['contact_no']
         this.whatsappchat=`//api.whatsapp.com/send?phone=91${this.usermobile}&text=Hi, I found your online store on mydhanda.com and wanted to know more about your products and offerings.`
-        this.callnow=`tel:0${this.usermobile}`
+        this.callnow=`tel:${this.usermobile}`
         // <a href="tel:0120-4888488"><img src="/static/images/common/phone_icon.svg" alt="">0120 - 4888488</a>
        
         localStorage.setItem('storeId',this.stroreid)

@@ -19,7 +19,7 @@ type="ball-scale-multiple"
 <div class="row"> 
   <ng-container *ngFor="let address of addressData ;let i=index;">
 <div class="col-md-12 card">
-<div class="card-body">
+<div class="card-body"  *ngIf="showgetAddressOption" (click)="getAddress(address.id)" style="cursor: pointer;">
     <label for="d3_graph_chart0017day">
         <p class="add">{{address.flat_no}}, {{address.apartment_name}}, {{address.road_name}}</p>
         <p class="add">{{address.city}}, {{address.state}}-{{address.pincode}}</p>
@@ -30,9 +30,24 @@ type="ball-scale-multiple"
         <div class="dropdown">
           <a (click)="gotoEditAddress(address.id)"><div><span><i class="fa fa-edit"></i>Edit</span></div></a>
           <a (click)="addressdelete(address.id)"><div><span><i class="fa fa-trash"></i>Delete</span></div></a>
-          <a  *ngIf="showgetAddressOption" (click)="getAddress(address.id)"><div><span><i class="fa fa-trash"></i>getAddress</span></div></a>
+        
         </div>
       </div>
+</div>
+<div class="card-body"  *ngIf="!showgetAddressOption">
+  <label for="d3_graph_chart0017day">
+      <p class="add">{{address.flat_no}}, {{address.apartment_name}}, {{address.road_name}}</p>
+      <p class="add">{{address.city}}, {{address.state}}-{{address.pincode}}</p>
+      <p class="add">+91-{{address.contact_no}}</p>
+    </label>
+    <div class="dropdown-container" tabindex="-1">
+      <div class="test"></div>
+      <div class="dropdown">
+        <a (click)="gotoEditAddress(address.id)"><div><span><i class="fa fa-edit"></i>Edit</span></div></a>
+        <a (click)="addressdelete(address.id)"><div><span><i class="fa fa-trash"></i>Delete</span></div></a>
+       
+      </div>
+    </div>
 </div>
 </div>
 </ng-container>
