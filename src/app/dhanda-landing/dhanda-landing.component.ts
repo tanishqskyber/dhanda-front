@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgxSpinnerService } from "ngx-spinner";
 import {SupportService} from './../_api/support.service'
 import { ToastrService } from 'ngx-toastr'
+declare const $: any;
 @Component({
   selector: 'app-dhanda-landing',
   templateUrl: './dhanda-landing.component.html',
@@ -28,6 +29,19 @@ export class DhandaLandingComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadDhandaSummary()
+
+    $(function () {
+      $('.accordion').find('.accordion-title').on('click', function () {
+          // Adds Active Class
+          $(this).toggleClass('active');
+          // Expand or Collapse This Panel
+          $(this).next().slideToggle('fast');
+          // Hide The Other Panels
+          $('.accordion-content').not($(this).next()).slideUp('fast');
+          // Removes Active Class From Other Titles
+          $('.accordion-title').not($(this)).removeClass('active');
+      });
+  });
   }
 
   private loadDhandaSummary(){
@@ -83,6 +97,7 @@ export class DhandaLandingComponent implements OnInit {
     var k = value.keyCode;
           return ((k >= 48 && k <= 57) || k == 8);
   }
+  
 
 
 }

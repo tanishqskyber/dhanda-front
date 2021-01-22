@@ -2329,6 +2329,9 @@ td.amout-color {
   .size-select a {
     margin-right: 3px;
   }
+  .slick-prev:before, .slick-next:before {
+    display: none;
+  }
 
   /* .add_cart_product button {
     margin-right: 5px;
@@ -3127,7 +3130,7 @@ td.amout-color {
   }
   .resend {
     position: relative;
-    left: 22px;
+    left: 5px;
     top: 5px;
   }
 
