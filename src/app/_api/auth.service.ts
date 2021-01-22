@@ -97,6 +97,30 @@ getStoreId(username:any): Promise<any> {
     return promise;
   }
 
+
+
+  resenduserOtp(contact:any): Promise<any> {
+    var params={
+        "contact_no": contact,
+       
+    }
+    let promise = new Promise((resolve, reject) => {
+        this.http.post(`${path}user/resend_otp`,params)
+            .subscribe(
+                res => {
+                    
+                    resolve(res);
+                },
+                err => {
+                    console.log("Error occured : " + err);
+                    reject(err);
+                }
+            );
+    });
+    return promise;
+  }
+
+
   saveToken(token){
     //console.log('Set Token')
     localStorage.setItem(this.TOKEN_KEY,token)

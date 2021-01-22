@@ -17,19 +17,20 @@
 						</li>
 						<li>
 							<a [href]=whatsappchat target="_blank"><img class="header-logos"
-									src="../../../assets/img/icon-2.png"></a>
+									src="../../../assets/img/icon-2.png">
 							<span>
 								+91-{{usermobile}}
 							</span>
+						</a>
 						</li>
 						<li><img class="header-logos" src="../../../assets/img/icon-3.png"><span>+91-<a [href]=callnow
 									target="_blank"></a>{{usermobile}}</span></li>
 						<li>
 							<a [href]=storeLocation target="_blank">
 								<img class="header-logos" src="../../../assets/img/icon-4.png">
-							</a>
+							
 							<span>Location</span>
-
+						</a>
 						</li>
 					</ul>
 				</div>
@@ -183,7 +184,8 @@
 
 				<ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig">
 					<div ngxSlickItem *ngFor="let cat of categorydata;let i=index;" class="slide">
-						<img [src]="cat.category_img_url" class="p-2" alt="" width="100%" style="border-radius: 20px;">
+						<img *ngIf="cat.category_img_url!=null" [src]="cat.category_img_url" class="p-2" alt="" width="100%" style="border-radius: 20px;" (click)="gotoSubcategory(cat.id)">
+						<img *ngIf="cat.category_img_url==null" src="../../../assets/img/no_image.png" class="p-2" alt="" width="100%" style="border-radius: 20px;" (click)="gotoSubcategory(cat.id)">
 						<h6 (click)="gotoSubcategory(cat.id)" class="text-center">{{cat.category_name}}</h6>
 					</div>
 				</ngx-slick-carousel>
