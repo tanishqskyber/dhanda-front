@@ -95,9 +95,12 @@
 						</button>
 					</div>
 				</div>
-				<div class="modal modalcatadd sub-categories-modal" *ngIf="isModalShow">
+				<div class="modal modalcatadd" *ngIf="isModalShow">
 					<div class="modal-dialog sub-categories-modal-dialog">
 						<div class="modal-content">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							  </button>
 							<div class="modal-body">
 								<ng-container *ngIf="variationKeys.length==2">
 									<div class="size-select">
@@ -166,7 +169,7 @@
 								</div>
 							</div> -->
 								<div class="row add-remove-div mb-3">
-									<div class="col-6">
+									<div class="col-md-6">
 										<div style="width: 100px;">
 											<h2 style="font-size: 19px;">Qty.</h2>
 											<div class="input-group add-cart-input">
@@ -187,7 +190,7 @@
 											</div>
 										</div>
 									</div>
-									<div class="bag-button col-6 text-right">
+									<div class="bag-button col-md-6 text-right">
 
 										<button class="add_product-modal-btn"
 											(click)="addproducttoCart(product.product_count)" *ngIf="isBtn">ADD TO
