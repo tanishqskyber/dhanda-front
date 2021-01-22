@@ -378,6 +378,7 @@ Default CSS
   .navbar-light .navbar-nav .nav-item {
     position: relative;
     padding: 0;
+    left:55%;
   }
   
   .navbar-light .navbar-nav .nav-item span {
@@ -3858,5 +3859,8 @@ Default CSS
       width: 300px;
       text-align: center;
       font-size:12px;
+    }
+    .navbar-light .navbar-nav .nav-item{
+      left:0%;
     }
   }
