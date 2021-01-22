@@ -16,7 +16,7 @@
 							<span>{{store_name}}</span>
 						</li>
 						<li>
-							<a [href]=whatsappchat target="_blank"><img class="header-logos"
+							<a [href]=whatsappchat target="_blank" style="color:black;"><img class="header-logos"
 									src="../../../assets/img/icon-2.png">
 							<span>
 								+91-{{usermobile}}
@@ -26,7 +26,7 @@
 						<li><img class="header-logos" src="../../../assets/img/icon-3.png"><span>+91-<a [href]=callnow
 									target="_blank"></a>{{usermobile}}</span></li>
 						<li>
-							<a [href]=storeLocation target="_blank">
+							<a [href]=storeLocation target="_blank" style="color:black;">
 								<img class="header-logos" src="../../../assets/img/icon-4.png">
 							
 							<span>Location</span>
@@ -243,7 +243,7 @@
 
 							</div>
 							<div class="text-left">
-								<a class="cart-btn btn" (click)="loadProductInfo(product.id,product.variations)">Add</a>
+								<a class="cart-btn btn" (click)="loadProductInfo(product.id,product.variations,product)">Add</a>
 							</div>
 
 						</button>
@@ -252,82 +252,90 @@
 					<div class="modal modalcatadd" *ngIf="isModalShow">
 						<div class="modal-dialog">
 							<div class="modal-content">
-								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closepop()">
 									<span aria-hidden="true">&times;</span>
 								  </button>
 								<div class="modal-body">
-									<ng-container *ngFor="let varia of variationKeys">
+									<ng-container *ngIf="variationKeys.length==2">
 										<div class="size-select">
-											<h2>{{varia}}</h2>
+											<h2>{{variationname1}}</h2>
 											<div class="exTab1">
 												<ul class="nav nav-pills" style="display:flex; list-style: none;">
-													<ng-container *ngFor="let vd of product.variations">
-														<li *ngIf="vd.variation_name==varia">
-															<a (click)="selectvariation(vd.id,vd.variation_name)"
+													<ng-container *ngFor="let vd of variation1">
+														<li  [ngClass]="vd.id === activeElement1 ? 'active' : 'none'">
+															<a (click)="selectvariation(vd.id,vd.variation_name);setActiveVar1(vd.id)"
 																data-toggle="tab">
 																{{vd.variation_value}}
 															</a>
 														</li>
 													</ng-container>
 													<!-- <li><a data-toggle="tab">small</a></li>
-										<li><a data-toggle="tab">small</a></li> -->
+											<li><a data-toggle="tab">small</a></li> -->
+												</ul>
+											</div>
+										</div>
+										<div class="size-select">
+											<h2>{{variationname2}}</h2>
+											<div class="exTab1">
+												<ul class="nav nav-pills" style="display:flex; list-style: none;">
+													<ng-container *ngFor="let vd of variation2">
+														<li  [ngClass]="vd.id === activeElement2 ? 'active' : 'none'">
+															<a (click)="selectvariation(vd.id,vd.variation_name);setActiveVar2(vd.id)"
+																data-toggle="tab">
+																{{vd.variation_value}}
+															</a>
+														</li>
+													</ng-container>
+													<!-- <li><a data-toggle="tab">small</a></li>
+											<li><a data-toggle="tab">small</a></li> -->
 												</ul>
 											</div>
 										</div>
 									</ng-container>
-
-									<div class="row add-remove-div mb-3">
-										<div class="col-md-4">
-											<div style="width: 100px;">
-												<h2 style="font-size: 19px;">Qty.</h2>
-												<div class="input-group add-cart-input">
-													<div class="input-group-prepend">
-														<button class="btn btn-outline-secondary-green"
-															(click)="decrement(product.product_count,product.id)"
-															type="button"><i class="fas fa-minus"></i></button>
-													</div>
-													<input type="text" readonly="" id="input_item"
-														class="form-control qty-input text-center" placeholder="1"
-														aria-label="1" aria-describedby="basic-addon2"
-														[(ngModel)]="product.product_count">
-													<div class="input-group-append">
-														<button class="btn btn-outline-secondary-green"
-															(click)="increment(product.product_count,product.id)"
-															type="button"><i class="fas fa-plus"></i></button>
-													</div>
-												</div>
+									<ng-container *ngIf="variationKeys.length==1">
+										<div class="size-select">
+											<h2>{{variationname1}}</h2>
+											<div class="exTab1">
+												<ul class="nav nav-pills" style="display:flex; list-style: none;">
+													<ng-container *ngFor="let vd of variation1">
+														<li  [ngClass]="vd.id === activeElement1 ? 'active' : 'none'">
+															<a (click)="selectvariation(vd.id,vd.variation_name);setActiveVar1(vd.id)"
+																data-toggle="tab">
+																{{vd.variation_value}}
+															</a>
+														</li>
+													</ng-container>
+													<!-- <li><a data-toggle="tab">small</a></li>
+											<li><a data-toggle="tab">small</a></li> -->
+												</ul>
 											</div>
 										</div>
-										<div class="col-md-8">
-											<div class="bag-button">
-												<button class="add_product-modal-btn" (click)="incrementOne()"
-													*ngIf="isBtn">ADD TO BAG</button>
-												<button class="add_product-modal-btn" (click)="addToCart()"
-													*ngIf="!isBtn">ADD TO CART</button>
-												<button class="add_product-modal-btn">ADD PRODUCT</button>
-											</div>
-										</div>
-									</div>
-
-
-									<!-- <div id="add-remove-div" class="add-remove-div">
-										<h2>Qty.</h2>
-										<button type="button" class="btn minus-btn"
-											(click)="decrement(product.product_count,product.id)"> <i
-												class="fa fa-minus"></i></button>
-										<input type="text" value="1" id="input_item" readonly="" class="quantity-input"
-											[(ngModel)]="product.product_count">
-										<button type="button" class="btn plus-btn"
-											(click)="increment(product.product_count,product.id)"> <i
-												class="fa fa-plus"></i></button>
-										<div class="bag-button">
-											<button class="add_product-modal-btn" (click)="incrementOne()"
-												*ngIf="isBtn">ADD TO BAG</button>
-											<button class="add_product-modal-btn" (click)="addToCart()"
-												*ngIf="!isBtn">ADD TO CART</button>
-											<button class="add_product-modal-btn">ADD PRODUCT</button>
+										
+									</ng-container>
+									<!-- <div class="size-select">
+										<h2>Small</h2>
+										<div class="exTab2">
+											<ul class="nav nav-pills" style="display:flex; list-style: none;">
+												<li clas="active"><a data-toggle="tab">small</a></li>
+												<li><a data-toggle="tab">small</a></li>
+												<li><a data-toggle="tab">small</a></li>
+											</ul>
 										</div>
 									</div> -->
+									<div id="add-remove-div" class="add-remove-div">
+										<h2>Qty.</h2>
+										<button type="button" class="btn minus-btn" (click)="decrement(product.product_count,product.id)"> <i
+												class="fa fa-minus"></i></button>
+										<input type="text" value="1" id="input_item" readonly="" class="quantity-input"
+										[(ngModel)]="product.product_count">
+										<button type="button" class="btn plus-btn" (click)="increment(product.product_count,product.id)"> <i
+												class="fa fa-plus"></i></button>
+										<div class="bag-button">
+									
+										<button class="add_product-modal-btn" (click)="addproducttoCart(product.product_count)" *ngIf="isBtn">ADD TO CART</button>
+							
+									</div>
+									</div>
 								</div>
 							</div>
 						</div>

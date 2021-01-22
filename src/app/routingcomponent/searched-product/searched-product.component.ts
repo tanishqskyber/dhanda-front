@@ -153,9 +153,10 @@ export class SearchedProductComponent implements OnInit {
   }
 
 
-  loadProductInfo(id,variations){
+  loadProductInfo(id,variations,product){
     
     this.product_id=id
+    this.productInfo=product
     console.log(variations)
       var groupBy = function(xs, key) {
         return xs.reduce(function(rv, x) {
@@ -214,7 +215,7 @@ export class SearchedProductComponent implements OnInit {
 
 
   addproducttoCart(p_count:any){
-    if(this.varia_split_arr.length==2){
+    if(this.varia_split_arr.length >= 2){
     if(p_count>0){
       var obj={
         "product_id":this.product_id,

@@ -48,7 +48,7 @@ type="ball-scale-multiple"
 								<ins>₹{{product.selling_price}}/{{product.product_type_name}}</ins>
 								<del>₹{{product.mrp}}</del>
 								<!-- <a class="cart-btn" (click)="loadProductInfo(product.id,product.variations)"> + Add</a> -->
-								<a class="cart-btn"  *ngIf="product.cart_added==false"  (click)="loadProductInfo(product.id,product.variations)"> + Add</a>
+								<a class="cart-btn"  *ngIf="product.cart_added==false"  (click)="loadProductInfo(product.id,product.variations,product)"> + Add</a>
 								<div *ngIf="product.cart_added==true" id="add-remove-div" class="add-remove-div">
 									<button type="button" class="btn minus-btn"  (click)="decrementproduct(product.product_count,product.id)"><i class="fa fa-minus"></i></button><input type="text"  id="input_item" readonly="" class="quantity-input ng-pristine ng-valid ng-touched" [(ngModel)]="product.product_count"><button type="button" class="btn plus-btn" (click)="incrementproduct(product.product_count,product.id)"><i class="fa fa-plus"></i></button>
 								</div>
