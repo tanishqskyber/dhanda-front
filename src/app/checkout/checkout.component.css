@@ -6,3 +6,7 @@
     line-height:40px;
     color: #000;
 }
+
+.form-group input:focus{
+    box-shadow: none;
+}

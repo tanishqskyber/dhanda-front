@@ -14,14 +14,14 @@
 				<ng-container *ngFor="let cart of cartData;let i=index;">
 					<div class="cart-listing">
 						<div class="row">
-							<div class="col-4 d-flex align-items-center">
+							<div class="col-3 d-flex align-items-center justify-content-center">
 								<div class="cart-img">
 									<img *ngIf="cart.product_img_url!=null" [src]="cart.product_img_url">
 									<img *ngIf="cart.product_img_url==null" src="../../assets/img/no_image.png">
 								</div>
 							</div>
 
-							<div class="col-8 p-0">
+							<div class="col-9">
 								<div class="row cart-img-price">
 									<div class="col-9">
 										<h3 class="text-truncate" style="max-width: 150px;">{{cart.product_name}}</h3>
@@ -59,9 +59,9 @@
 											</div>
 										</div>
 									</div>
-									<div class="col-3 add-cart-delete-btn">
+									<div class="col-3 add-cart-delete-btn d-flex justify-content-end">
 										<a class="" (click)="deleteCartData(cart.id)"><img
-												src="../../assets/img/del-icon.png" width="24px"></a>
+												src="../../assets/img/del-icon.png"></a>
 									</div>
 								</div>
 							</div>

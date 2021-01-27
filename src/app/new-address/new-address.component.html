@@ -38,7 +38,7 @@
                 <input type="text"  name="pincode" id="Pincode" [(ngModel)]="pincode" placeholder="Pincode" class="form-control">
             </div>
         </div>
-        <div class="col-md-12 text-center">
+        <div class="col-md-12 text-center mb-4">
             <button *ngIf="!updateAddress" class="btn btn-proceed" (click)="saveAddress()">Submit</button>
             <button *ngIf="updateAddress" class="btn btn-proceed" (click)="updateAddr()">Submit</button>
         </div>

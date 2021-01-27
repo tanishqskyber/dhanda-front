@@ -36,26 +36,45 @@ type="ball-scale-multiple"
 				</div>
 			</div>
 			<ng-container *ngFor="let product of productData |filter:search;let i=index;">
-			<div class="col-md-3 col-sm-3 col-xs-6">
+			<div class="col-6 col-md-3">
 				<div class="recent-product-list">
-					<button type="button" class="btn btn-info btn-lg">
-						<div class="off-overlay"><small>{{product.discount}}%</small>
+					<button type="button" class="bg-transparent w-100 border-0">
+						<div class="off-overlay">
+							<small>{{product.discount}}%</small>
 							<img *ngIf="product.product_img_url!=null" (click)="gotoProductDetails(product.id)"
-									[src]="product.product_img_url">
+									[src]="product.product_img_url" class="p-2 img-categories">
 								<img *ngIf="product.product_img_url==null" (click)="gotoProductDetails(product.id)"
-									src="../../assets/img/no_image.png">
+									src="../../assets/img/no_image.png" class="p-2 img-categories">
 						</div>
 						<div class="product-title">
-							<h3><a>{{product.product_name}}</a></h3>
-							<div class="price-prod">
+							<div class="text-left mt-3 home-product">
+								<p class="text-truncate" style="max-width: 150px;"><a>{{product.product_name}}</a></p>
+							</div>
+							<!-- <h3><a>{{product.product_name}}</a></h3> -->
+							<div class="d-flex align-items-center justify-content-between price-prod">
+
+								<div>
+									<ins>₹{{product.selling_price}}/{{product.product_type_name}}</ins>
+								</div>
+
+								<div>
+									<del>₹{{product.mrp}}</del>
+								</div>
+
+
+							</div>
+							<div class="text-left">
+								<a class="cart-btn btn" (click)="loadProductInfo(product.id,product.variations,product)">Add</a>
+							</div>
+							<!-- <div class="price-prod">
 								<ins>₹{{product.selling_price}}/{{product.product_type_name}}</ins>
 								<del>₹{{product.mrp}}</del>
-								<!-- <a class="cart-btn" (click)="loadProductInfo(product.id,product.variations)"> + Add</a> -->
+								<a class="cart-btn" (click)="loadProductInfo(product.id,product.variations)"> + Add</a>
 								<a class="cart-btn"  *ngIf="product.cart_added==false"  (click)="loadProductInfo(product.id,product.variations,product)"> + Add</a>
 								<div *ngIf="product.cart_added==true" id="add-remove-div" class="add-remove-div">
 									<button type="button" class="btn minus-btn"  (click)="decrementproduct(product.product_count,product.id)"><i class="fa fa-minus"></i></button><input type="text"  id="input_item" readonly="" class="quantity-input ng-pristine ng-valid ng-touched" [(ngModel)]="product.product_count"><button type="button" class="btn plus-btn" (click)="incrementproduct(product.product_count,product.id)"><i class="fa fa-plus"></i></button>
 								</div>
-							</div>
+							</div> -->
 						</div>
 					</button>
 				</div>
@@ -63,6 +82,9 @@ type="ball-scale-multiple"
 			<div class="modal modalcatadd" *ngIf="isModalShow">
 				<div class="modal-dialog">
 					<div class="modal-content">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closepop()">
+							<span aria-hidden="true">&times;</span>
+						  </button>
 						<div class="modal-body">
 							<ng-container *ngIf="variationKeys.length==2">
 								<div class="size-select">
@@ -130,7 +152,34 @@ type="ball-scale-multiple"
 									</ul>
 								</div>
 							</div> -->
-							<div id="add-remove-div" class="add-remove-div">
+
+							<div class="row add-remove-div mb-3">
+								<div class="col-md-6">
+									<div style="width: 100px;">
+										<h2 style="font-size: 19px;">Qty.</h2>
+										<div class="input-group add-cart-input">
+											<div class="input-group-prepend">
+												<button class="btn btn-outline-secondary-green" (click)="decrement(product.product_count,product.id)" type="button"><i class="fas fa-minus"></i></button>
+											</div>
+											<input type="text" value="1" id="input_item" readonly="" class="form-control qty-input text-center" [(ngModel)]="product.product_count" placeholder="1">
+											<div class="input-group-append">
+												<button class="btn btn-outline-secondary-green"
+													(click)="increment(product.product_count,product.id)"
+													type="button"><i class="fas fa-plus"></i></button>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="bag-button col-md-6 text-right">
+
+									<button class="add_product-modal-btn"
+										(click)="addproducttoCart(product.product_count)" *ngIf="isBtn">ADD TO
+										CART</button>
+
+								</div>
+							</div>
+
+							<!-- <div id="add-remove-div" class="add-remove-div">
 								<h2>Qty.</h2>
 								<button type="button" class="btn minus-btn" (click)="decrement(product.product_count,product.id)"> <i
 										class="fa fa-minus"></i></button>
@@ -143,7 +192,7 @@ type="ball-scale-multiple"
 								<button class="add_product-modal-btn" (click)="addproducttoCart(product.product_count)" *ngIf="isBtn">ADD TO CART</button>
 					
 							</div>
-							</div>
+							</div> -->
 						</div>
 					</div>
 				</div>

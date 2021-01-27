@@ -3285,7 +3285,7 @@ td.amout-color {
 .btn-outline-secondary-coupon {
   background-color: #1fb055;
   color: #ffffff;
-  border: 2px solid #1fb055;
+  border: 1px solid #1fb055;
 }
 
 .btn-outline-secondary-coupon:hover {

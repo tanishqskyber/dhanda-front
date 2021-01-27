@@ -184,9 +184,9 @@
 				</owl-carousel-o> -->
 
 				<ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig">
-					<div ngxSlickItem *ngFor="let cat of categorydata;let i=index;" class="slide">
-						<img *ngIf="cat.category_img_url!=null" [src]="cat.category_img_url" class="p-2" alt="" width="100%" style="border-radius: 20px;" (click)="gotoSubcategory(cat.id)">
-						<img *ngIf="cat.category_img_url==null" src="../../../assets/img/no_image.png" class="p-2" alt="" width="100%" style="border-radius: 20px;" (click)="gotoSubcategory(cat.id)">
+					<div ngxSlickItem *ngFor="let cat of categorydata;let i=index;" class="slide m-2">
+						<img *ngIf="cat.category_img_url!=null" [src]="cat.category_img_url" class="p-2 img-categories" alt=""  (click)="gotoSubcategory(cat.id)">
+						<img *ngIf="cat.category_img_url==null" src="../../../assets/img/no_image.png" class="p-2 img-categories" alt=""  (click)="gotoSubcategory(cat.id)">
 						<h6 (click)="gotoSubcategory(cat.id)" class="text-center">{{cat.category_name}}</h6>
 					</div>
 				</ngx-slick-carousel>
@@ -221,9 +221,9 @@
 
 							<div class="off-overlay"><small>{{product.discount}}%</small>
 								<img *ngIf="product.product_img_url!=null" (click)="gotoProductDetails(product.id)"
-									[src]="product.product_img_url">
+									[src]="product.product_img_url" class="p-2 img-categories">
 								<img *ngIf="product.product_img_url==null" (click)="gotoProductDetails(product.id)"
-									src="../../../assets/img/no_image.png">
+									src="../../../assets/img/no_image.png" class="p-2 img-categories">
 
 							</div>
 
@@ -323,7 +323,36 @@
 											</ul>
 										</div>
 									</div> -->
-									<div id="add-remove-div" class="add-remove-div">
+									<div class="row add-remove-div mb-3">
+										<div class="col-md-6">
+											<div style="width: 100px;">
+												<h2 style="font-size: 19px;">Qty.</h2>
+												<div class="input-group add-cart-input">
+													<div class="input-group-prepend">
+														<button class="btn btn-outline-secondary-green" (click)="decrement(product.product_count,product.id)" type="button"><i class="fas fa-minus"></i></button>
+													</div>
+													<input type="text" value="1" id="input_item" readonly="" class="form-control qty-input text-center" [(ngModel)]="product.product_count" placeholder="1">
+													<!-- <input type="text" readonly="" id="input_item"
+														class="form-control qty-input text-center" placeholder="1"
+														aria-label="1" aria-describedby="basic-addon2"
+														[(ngModel)]="product.product_count"> -->
+													<div class="input-group-append">
+														<button class="btn btn-outline-secondary-green"
+															(click)="increment(product.product_count,product.id)"
+															type="button"><i class="fas fa-plus"></i></button>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="bag-button col-md-6 text-right">
+	
+											<button class="add_product-modal-btn"
+												(click)="addproducttoCart(product.product_count)" *ngIf="isBtn">ADD TO
+												CART</button>
+	
+										</div>
+									</div>
+									<!-- <div id="add-remove-div" class="add-remove-div">
 										<h2>Qty.</h2>
 										<button type="button" class="btn minus-btn" (click)="decrement(product.product_count,product.id)"> <i
 												class="fa fa-minus"></i></button>
@@ -336,7 +365,7 @@
 										<button class="add_product-modal-btn" (click)="addproducttoCart(product.product_count)" *ngIf="isBtn">ADD TO CART</button>
 							
 									</div>
-									</div>
+									</div> -->
 								</div>
 							</div>
 						</div>
