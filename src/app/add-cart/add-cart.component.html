@@ -16,7 +16,8 @@
 						<div class="row">
 							<div class="col-4 d-flex align-items-center">
 								<div class="cart-img">
-									<img [src]="cart.product_img_url">
+									<img *ngIf="cart.product_img_url!=null" [src]="cart.product_img_url">
+									<img *ngIf="cart.product_img_url==null" src="../../assets/img/no_image.png">
 								</div>
 							</div>
 
@@ -178,4 +179,49 @@
 	</div>
 </div>
 
-<app-footer></app-footer>
+<footer>
+    <div class="bootom-menu">	
+      <div class="container">
+          <div class="row">
+              <div class="col-md-12">
+                  <div class="bottom-menu-list" id="bottom-menu">
+                      <ul>
+                        <li class="home-footer">
+                            <a [routerLink]="['/in',username]"   routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}" (click)="getCurrentPath()">
+                                <img id="my-img" src="../../assets/img/home.png"> 
+                                <span>Home</span>
+                            </a>
+                        </li>
+                        <li class="home-footer2">
+                            <a [routerLink]="['/categories']" routerLinkActive="active-link" (click)="getCurrentPath()">
+                                <img id="my-img" src="../../assets/img/home2.png"> 
+                                <span>Category</span>
+                            </a>
+                        </li>
+                        <li class="home-footer5">
+                            <a [routerLink]="['/order']" routerLinkActive="active-link" (click)="getCurrentPath()">
+                                <img id="my-img" src="../../assets/img/home4.png"> 
+                                <span>Orders</span>
+                            </a>
+                        </li>
+                        <li class="home-footer3">
+                            <a [routerLink]="['/add-cart']" routerLinkActive="active-link" (click)="getCurrentPath()">
+                                <img id="my-img" src="../../assets/img/home3.png">
+                                <span class="navbar-btn-badge" *ngIf="cartcounter">{{cartcounter}}</span>
+                                <span> Cart</span>
+                            </a>
+                        </li>
+                        <li class="home-footer4">
+                            <a [routerLink]="['/profile']" routerLinkActive="active-link" (click)="getCurrentPath()">
+                                <img id="my-img" src="../../assets/img/home5.png"> 
+                                <span>Profile</span>
+                            </a>
+                        </li>
+                      </ul>
+                  </div>
+              </div>
+          </div>
+      </div>
+    </div>
+    <div class="margin-top"></div>
+    </footer>

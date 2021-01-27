@@ -17,6 +17,7 @@ export class FooterComponent implements OnInit {
   cartData:any=[]
   username:any;
   curpath:any;
+  cartCount:number=0
   constructor(private catservice:CategoryService,private router: Router) { }
 
   ngOnInit(): void {
@@ -26,6 +27,9 @@ export class FooterComponent implements OnInit {
    });
    this.username=localStorage.getItem('username')
    this.loadCartDetails()
+  
+   //localStorage.setItem('cartCounter', this.cartCount.toString())
+
   }
   // checkCart() {
   //   console.log("count called");

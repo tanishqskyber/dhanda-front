@@ -9,44 +9,44 @@ declare const $: any;
   styleUrls: ['./dhanda-landing.component.css']
 })
 export class DhandaLandingComponent implements OnInit {
-  total_store_created:number=0
-  total_order_processed:number=0
-  total_transaction_credited:number=0
-  total_store_impressions:number=0
+  total_store_created:any="10000+"
+  total_order_processed:any="50000+"
+  total_transaction_credited:any="20+ "
+  total_store_impressions:any="4,00,000"
   enquiryData:any={}
   constructor(private support: SupportService,private spinner:NgxSpinnerService,private toastr: ToastrService) { }
 
   slides = [
     { img: "assets/img/client/1.jpg",
-      name:"Ajay" ,
-      designation:"Dealer",
+      name:"Basraj Mani" ,
+      designation:"Manufacturer",
       message :"Dhanda App has helped me restart my business"   },
     { img: "assets/img/client/2.jpg",
-    name:"Vijay" ,
-    designation:"Dealer",
-    message :"Dhanda App has helped me restart my business"   },
+    name:"Vinod Gupta" ,
+    designation:"Sai Frankie Stall",
+    message :"Ab koi aur app ki zaroorat nahi, mera pura Dhanda yeh app sey hojata hai"   },
     { img: "assets/img/client/3.jpg",
-    name:"Sanjay" ,
-    designation:"Dealer",
-    message :"Dhanda App has helped me restart my business"   },
+    name:"Balram Shinde" ,
+    designation:"Giriraj Tea Stall",
+    message :"This app has been a blessing in disguise."   },
     { img: "assets/img/client/4.jpg",
-    name:"Rajesh" ,
-    designation:"Dealer",
-    message :"Dhanda App has helped me restart my business"   },
+    name:"Adnan Rassiwala" ,
+    designation:"Creative One",
+    message :"I run a small business and I feel getting my own online store was necessary. Thanks to the Dhanda App, now I have my own website and that too for free"   },
     { img: "assets/img/client/5.jpg",
-    name:"Dhananjay" ,
-    designation:"Dealer",
-    message :"Dhanda App has helped me restart my business"   },
+    name:"Reshma Shetty" ,
+    designation:"Sweet Indulgence Bakery",
+    message :"Great interface, love the seamless experience"   },
     { img: "assets/img/client/6.jpg",
-    name:"Sheetal" ,
-    designation:"Dealer",
-    message :"Dhanda App has helped me restart my business"   },
+    name:"Bhavesh Kampani" ,
+    designation:"Rashee Ethnic Wear",
+    message :"I have increased my daily orders by 50% due to the Dhanda App"  },
   ];
   
   slideConfig = { "slidesToShow": 1, "slidesToScroll": 1, "autoplay":true, "autoplaySpeed":4000};
 
   ngOnInit(): void {
-    this.loadDhandaSummary()
+    //this.loadDhandaSummary()
 
     $(function () {
       $('.accordion').find('.accordion-title').on('click', function () {

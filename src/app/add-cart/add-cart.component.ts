@@ -4,6 +4,8 @@ import { ToastrService } from 'ngx-toastr'
 import { NgxSpinnerService } from "ngx-spinner";
 import {Router,ActivatedRoute} from '@angular/router';
 import { error } from 'protractor';
+import * as $ from 'jquery';
+import {FooterComponent} from './../supportingcomponents/footer/footer.component'
 @Component({
   selector: 'app-add-cart',
   templateUrl: './add-cart.component.html',
@@ -28,16 +30,23 @@ minCartAmount:number=0;
 allowStorePickup:boolean=false;
 shippingAmount:number=0;
 cartId:any=[];
+cartcounter:number=0;
+username:any;
 @Input() counter = 1;
 
-  constructor(private catservice:CategoryService,private toastr: ToastrService,private spinner: NgxSpinnerService,private router: Router,private activatedRoute: ActivatedRoute) { }
+  constructor(private catservice:CategoryService,private toastr: ToastrService,private spinner: NgxSpinnerService,private router: Router,private activatedRoute: ActivatedRoute,private foot:FooterComponent) { }
 
   ngOnInit(): void {
-   
+    $("#bottom-menu a").on('click', function () {
+      $("#bottom-menu a").removeClass('active');
+      $(this).addClass('active');
+   });
+   this.username=localStorage.getItem('username')
     this.loadStoreDetails()
   }
 
   private loadCartDetails(){
+    this.cartcounter=0
     this.spinner.show()
     this.totalPrice=0
     this.cartId=[]
@@ -50,8 +59,8 @@ cartId:any=[];
       
         this.cartData=resp['data']
         for(var data of this.cartData){
-         
-            
+
+             this.cartcounter+=data['qty'] 
             this.totalPrice+=data['selling_price']*data['qty']
             if(this.allowFreeShipping==true){
               this.totalPaymentb4Discount=this.totalPrice-this.couponDiscount
@@ -66,6 +75,7 @@ cartId:any=[];
           
           this.cartId.push(parseInt(data['id']))
         }
+      
         this.spinner.hide()
       }else{
         this.spinner.hide()
@@ -93,6 +103,7 @@ cartId:any=[];
          
           if(resp['message']=='Cart updated successfully!' && resp['status']==200){
             this.loadCartDetails()
+         
             
           }else{
             this.spinner.hide()
@@ -125,6 +136,7 @@ cartId:any=[];
             this.catservice.updateCartQuantity(id,data['qty']).then(resp=>{
               if(resp['message']=='Cart updated successfully!' && resp['status']==200){
                 this.loadCartDetails()
+                
               }else{
                 this.spinner.hide()
                 this.toastr.error('Something went wrong!!!','Error',{
@@ -156,6 +168,7 @@ deleteCartData(id:any){
     console.log(resp)
     if(resp['message']=='Item remove from cart successfully!'){
       this.loadCartDetails()
+      this.foot.loadCartDetails()
       this.spinner.hide()
     }else if(resp['message']=='Something went wrong'){
       this.spinner.hide()
@@ -183,7 +196,9 @@ loadCouponDetails(){
     if(resp['message']=='Coupon info!' && resp['status']==200){
      var curr_date=new Date()
      var expiry_date=new Date(resp['data']['expiry_date'])
-   if(expiry_date.getDate()>curr_date.getDate()){
+   
+if(resp['data']['status']=='Active'){
+   if(expiry_date.getDate()>=curr_date.getDate()){
     if(resp['data']['coupon_type']=='amount'){
       if(this.totalPayment>=resp['data']['min_cart_amount']){
         this.couponDiscount=resp['data']['amount']
@@ -197,7 +212,7 @@ loadCouponDetails(){
         this.spinner.hide()
        
         this.couponApplied=false
-        this.toastr.error('1Coupon not applicable!','Error',{
+        this.toastr.error('Coupon not applicable!','Error',{
           timeOut:3000,
           positionClass:'toast-top-center'
           })
@@ -215,7 +230,7 @@ loadCouponDetails(){
         this.spinner.hide()
      
         this.couponApplied=false
-        this.toastr.error('2Coupon not applicable!','Error',{
+        this.toastr.error('Coupon not applicable!','Error',{
           timeOut:3000,
           positionClass:'toast-top-center'
           })
@@ -225,7 +240,7 @@ loadCouponDetails(){
       this.spinner.hide()
      
       this.couponApplied=false
-      this.toastr.error('3Coupon not applicable!','Error',{
+      this.toastr.error('Coupon not applicable!','Error',{
         timeOut:3000,
         positionClass:'toast-top-center'
         })
@@ -238,8 +253,16 @@ loadCouponDetails(){
       positionClass:'toast-top-center'
       })
    }
+  }else{
+    this.spinner.hide()
+    this.couponApplied=false
+    this.toastr.error('This is not a active coupon!','Error',{
+      timeOut:3000,
+      positionClass:'toast-top-center'
+      })
+  }
       
-    }else if(resp['message']=='No coupon found!' && resp['status']==404){
+    }else if(resp['message']=='No coupon found!' && resp['status']==200){
       this.spinner.hide()
       this.couponApplied=false
       this.toastr.error('Coupon not found!','Error',{
@@ -357,5 +380,8 @@ private loadStoreDetails(){
       positionClass:'toast-top-center'
       })
   })
+}
+getCurrentPath(){
+  localStorage.setItem('currentpath',this.router.url)
 }
 }

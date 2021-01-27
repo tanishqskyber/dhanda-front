@@ -4,6 +4,7 @@ import { ToastrService } from 'ngx-toastr'
 import { NgxSpinnerService } from "ngx-spinner";
 import {Router,ActivatedRoute} from '@angular/router';
 import { error } from 'protractor';
+import {SupportService} from './../_api/support.service'
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -14,11 +15,42 @@ export class ProfileComponent implements OnInit {
   stateData:any=[]
   cityData:any=[]
   editTrue:boolean=true;
-  constructor(private catservice:CategoryService,private toastr: ToastrService,private spinner: NgxSpinnerService,private router: Router,private activatedRoute: ActivatedRoute) { }
+  constructor(private catservice:CategoryService,private toastr: ToastrService,private spinner: NgxSpinnerService,private router: Router,private activatedRoute: ActivatedRoute,private support:SupportService) { }
 
   ngOnInit(): void {
-    this.loadCustomerDetails()
+
+    this.loadCustDetailsbyMob()
     this.loadStates()
+  }
+
+  private loadCustDetailsbyMob(){
+    this.spinner.show()
+    this.support.getCustDetailsbyContact(localStorage.getItem('contact-no')).then(resp=>{
+      if(resp['message']=='Customer details!'){
+        var params={
+          customer_name:resp['data']['profile_name'],
+          email:resp['data']['email'],
+          flat_no:resp['data']['flat_no'],
+          apartment_name:resp['data']['apartment_name'],
+          road_name:resp['data']['road_name'],
+          pincode:resp['data']['pincode'],
+          state_id:resp['data']['state_id'],
+          city_id:resp['data']['city_id']
+        }
+          this.catservice.updateCustomerDetails(params).then(res=>{
+            if(res['message']=='User info!'){
+              
+              this.loadCustomerDetails()
+            }else{
+              this.loadCustomerDetails()
+            }
+          },error=>{
+            this.loadCustomerDetails()
+          })
+      }else if(resp['message']=='Customer details not available'){
+        this.loadCustomerDetails()
+      }
+    })
   }
 
   private loadCustomerDetails(){

@@ -3,6 +3,7 @@ import {AuthService} from '../_api/auth.service'
 import { Router,ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr'
 import { NgxSpinnerService } from "ngx-spinner";
+import {CategoryService} from '../_api/category.service'
 @Component({
   selector: 'app-otp',
   templateUrl: './otp.component.html',
@@ -29,7 +30,7 @@ min:number;
 sec:number;
 cd1:any
 showresendbutton:boolean=false
-  constructor(private auth: AuthService,private route: ActivatedRoute, private router: Router,private toastr: ToastrService,private spinner: NgxSpinnerService) { }
+  constructor(private auth: AuthService,private route: ActivatedRoute, private router: Router,private toastr: ToastrService,private spinner: NgxSpinnerService,private categoryservice: CategoryService) { }
 
   
   ngOnInit(): void {
@@ -55,21 +56,103 @@ showresendbutton:boolean=false
             console.log(resp)
             this.auth.saveToken(resp['data'])
             var curpath=localStorage.getItem('currentpath')
-            if(curpath.includes('/in/')){
-              this.router.navigate([ '/in',localStorage.getItem('username')]);
+            //console.log(localStorage.getItem('addCartData'))
+            if(localStorage.getItem('addCartData')!=null){
+              this.categoryservice.addcart(JSON.parse(localStorage.getItem('addCartData'))).then(resp => {
+                console.log(resp)
+                if (resp['message'] == 'Product added to the cart successfully!' && resp['status'] == 200) {
+                    console.log('Product added to Cart after login')
+                    localStorage.removeItem('addCartData')
+                    if(curpath.includes('/in/')){
+                      this.router.navigate([ '/in',localStorage.getItem('username')]);
+                    }else{
+                      if(curpath.includes('?')){
+                        console.log(curpath.split('?')[0])
+                        console.log(curpath.split('?')[1])
+                        console.log(curpath.split('?')[1].split('=')[0])
+                        console.log(curpath.split('?')[1].split('=')[1])
+                        var id=curpath.split('?')[1].split('=')[0]
+                        var value=curpath.split('?')[1].split('=')[1]
+                        this.router.navigate([`${curpath.split('?')[0]}`],{queryParams:{id:value}});
+                      }else{
+                        this.router.navigate([`${localStorage.getItem('currentpath')}`]);
+                      }
+                    }
+                } else if (resp['message'] == 'Product in the cart has been updated!' && resp['status'] == 200) {
+                  console.log('Product updated to Cart after login')
+                  localStorage.removeItem('addCartData')
+                  if(curpath.includes('/in/')){
+                    this.router.navigate([ '/in',localStorage.getItem('username')]);
+                  }else{
+                    if(curpath.includes('?')){
+                      console.log(curpath.split('?')[0])
+                      console.log(curpath.split('?')[1])
+                      console.log(curpath.split('?')[1].split('=')[0])
+                      console.log(curpath.split('?')[1].split('=')[1])
+                      var id=curpath.split('?')[1].split('=')[0]
+                      var value=curpath.split('?')[1].split('=')[1]
+                      this.router.navigate([`${curpath.split('?')[0]}`],{queryParams:{id:value}});
+                    }else{
+                      this.router.navigate([`${localStorage.getItem('currentpath')}`]);
+                    }
+                  }
+                } else {
+                  console.log('Something went wrong')
+                  if(curpath.includes('/in/')){
+                    this.router.navigate([ '/in',localStorage.getItem('username')]);
+                  }else{
+                    if(curpath.includes('?')){
+                      console.log(curpath.split('?')[0])
+                      console.log(curpath.split('?')[1])
+                      console.log(curpath.split('?')[1].split('=')[0])
+                      console.log(curpath.split('?')[1].split('=')[1])
+                      var id=curpath.split('?')[1].split('=')[0]
+                      var value=curpath.split('?')[1].split('=')[1]
+                      this.router.navigate([`${curpath.split('?')[0]}`],{queryParams:{id:value}});
+                    }else{
+                      this.router.navigate([`${localStorage.getItem('currentpath')}`]);
+                    }
+                  }
+                  console.log('Something Went Wrong!')
+                }
+              }, error => {
+                if(curpath.includes('/in/')){
+                  this.router.navigate([ '/in',localStorage.getItem('username')]);
+                }else{
+                  if(curpath.includes('?')){
+                    console.log(curpath.split('?')[0])
+                    console.log(curpath.split('?')[1])
+                    console.log(curpath.split('?')[1].split('=')[0])
+                    console.log(curpath.split('?')[1].split('=')[1])
+                    var id=curpath.split('?')[1].split('=')[0]
+                    var value=curpath.split('?')[1].split('=')[1]
+                    this.router.navigate([`${curpath.split('?')[0]}`],{queryParams:{id:value}});
+                  }else{
+                    this.router.navigate([`${localStorage.getItem('currentpath')}`]);
+                  }
+                }
+                console.log('Error in adding product to cart')
+              
+              })
+              
             }else{
-              if(curpath.includes('?')){
-                console.log(curpath.split('?')[0])
-                console.log(curpath.split('?')[1])
-                console.log(curpath.split('?')[1].split('=')[0])
-                console.log(curpath.split('?')[1].split('=')[1])
-                var id=curpath.split('?')[1].split('=')[0]
-                var value=curpath.split('?')[1].split('=')[1]
-                this.router.navigate([`${curpath.split('?')[0]}`],{queryParams:{id:value}});
+              if(curpath.includes('/in/')){
+                this.router.navigate([ '/in',localStorage.getItem('username')]);
               }else{
-                this.router.navigate([`${localStorage.getItem('currentpath')}`]);
+                if(curpath.includes('?')){
+                  console.log(curpath.split('?')[0])
+                  console.log(curpath.split('?')[1])
+                  console.log(curpath.split('?')[1].split('=')[0])
+                  console.log(curpath.split('?')[1].split('=')[1])
+                  var id=curpath.split('?')[1].split('=')[0]
+                  var value=curpath.split('?')[1].split('=')[1]
+                  this.router.navigate([`${curpath.split('?')[0]}`],{queryParams:{id:value}});
+                }else{
+                  this.router.navigate([`${localStorage.getItem('currentpath')}`]);
+                }
               }
             }
+          
             
             
           }else if(resp['status']==400 && resp['message']=='Invalid Otp!'){

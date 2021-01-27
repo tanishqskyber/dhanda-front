@@ -367,7 +367,8 @@
 						<tbody *ngFor="let order of orderItems;let i=index;">
 							<tr>
 								<td class="img-middle">
-									<img [src]="order.product_img_url">
+									<img *ngIf="order.product_img_url!=null" [src]="order.product_img_url">
+									<img *ngIf="order.product_img_url==null"  src="../../assets/img/no_image.png">
 								</td>
 								<td>
 									<h5 class="mb-0">{{order.product_name}}</h5>

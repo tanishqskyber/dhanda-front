@@ -53,4 +53,26 @@ export class SupportService {
     return promise;
   }
 
+  getCustDetailsbyContact(mobile:any): Promise<any> {  
+    var params={
+        mobile_number:mobile
+    }
+    let promise = new Promise((resolve, reject) => {
+        this.http.post(`${path}user/customer_details_by_contactno`,params)
+            .subscribe(
+                res => {
+                    
+                    resolve(res);
+                },
+                err => {
+                    console.log("Error occured : " + err);
+                    reject(err);
+                }
+            );
+  
+    });
+  
+    return promise;
+  }
+
 }

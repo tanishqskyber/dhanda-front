@@ -6,7 +6,9 @@ import {CategoryService} from '../../_api/category.service'
 import { ToastrService } from 'ngx-toastr'
 import { NgxSpinnerService } from "ngx-spinner";
 import {Router,ActivatedRoute} from '@angular/router';
-
+import {AuthService} from '../../_api/auth.service'
+import * as $ from 'jquery';
+import {Location} from '@angular/common';
 @Component({
   selector: 'app-searched-product',
   templateUrl: './searched-product.component.html',
@@ -37,7 +39,9 @@ export class SearchedProductComponent implements OnInit {
   variationname2:any=null;
   activeElement1 :number;
   activeElement2 :number;
-  constructor(private modalService: NgbModal, config: NgbModalConfig,private comp: AppComponent,private categoryservice:CategoryService,private toastr: ToastrService,private spinner: NgxSpinnerService,private router: Router,private activatedRoute: ActivatedRoute) { 
+  username:any;
+  cartcounter : any = 0;
+  constructor(private modalService: NgbModal, config: NgbModalConfig,private comp: AppComponent,private categoryservice:CategoryService,private toastr: ToastrService,private spinner: NgxSpinnerService,private router: Router,private activatedRoute: ActivatedRoute,private auth:AuthService,private _location: Location) { 
     config.backdrop = true;
     config.keyboard = false;
   }
@@ -45,6 +49,11 @@ export class SearchedProductComponent implements OnInit {
   ngOnInit(): void {
   
     this.loadCartData()
+    $("#bottom-menu a").on('click', function () {
+      $("#bottom-menu a").removeClass('active');
+      $(this).addClass('active');
+   });
+   this.username=localStorage.getItem('username')
   }
 
 
@@ -158,6 +167,8 @@ export class SearchedProductComponent implements OnInit {
     this.variation2=[]
     this.variationname1=null
     this.variationname2=null
+    this.varia_split_arr=[]
+    this.variation_ids_arr=[]
     this.product_id=id
     this.productInfo=product
     console.log(variations)
@@ -218,7 +229,9 @@ export class SearchedProductComponent implements OnInit {
 
 
   addproducttoCart(p_count:any){
-    if(this.varia_split_arr.length >= 2){
+    this.spinner.show()
+    if(this.auth.getIsLoggedIn()){
+    if(this.varia_split_arr.length >0){
     if(p_count>0){
       var obj={
         "product_id":this.product_id,
@@ -230,14 +243,14 @@ export class SearchedProductComponent implements OnInit {
         console.log(resp)
         if(resp['message']=='Product added to the cart successfully!' && resp['status']==200){
           this.isModalShow = false;
-
+          this.loadCartData()
           this.toastr.success('Product has been added to the cart!','Success',{
             timeOut:3000,
             positionClass:'toast-top-center'
             })
         }else if(resp['message']=='Product in the cart has been updated!' && resp['status']==200){
           this.isModalShow = false;
-
+          this.loadCartData()
           this.toastr.success('Product in the cart has been updated!','Error',{
             timeOut:3000,
             positionClass:'toast-top-center'
@@ -312,6 +325,49 @@ export class SearchedProductComponent implements OnInit {
         })
     }
   }
+}else{
+  this.spinner.hide()
+  if (this.varia_split_arr.length > 0){
+    if (p_count > 0){
+      var cobj = {
+        "product_id": this.product_id,
+        "price": this.productInfo['selling_price'],
+        "qty": p_count,
+        "variation_id": this.variation_ids
+      }
+    
+      localStorage.setItem('addCartData',JSON.stringify(cobj))
+    }else {
+      this.spinner.hide()
+      this.toastr.error('Please Select the Quantity!', 'Error', {
+        timeOut: 3000,
+        positionClass: 'toast-top-center'
+      })
+    }
+  }else {
+    if (p_count > 0){
+      var cobje = {
+        "product_id": this.product_id,
+        "price": this.productInfo['selling_price'],
+        "qty": p_count,
+        "variation_id": ""
+      }
+      localStorage.setItem('addCartData',JSON.stringify(cobje))
+    }else {
+      this.spinner.hide()
+      this.toastr.error('Please Select the Quantity!', 'Error', {
+        timeOut: 3000,
+        positionClass: 'toast-top-center'
+      })
+    }
+  }
+  this.toastr.warning('Please Login to Continue!', 'Alert', {
+    timeOut: 3000,
+    positionClass: 'toast-top-center'
+  })
+  localStorage.setItem('currentpath',this.router.url)
+  this.router.navigate(['/signin-signup'])
+}
     
 
   }
@@ -497,6 +553,7 @@ export class SearchedProductComponent implements OnInit {
   }
 
   private loadCartData(){
+    this.cartcounter=0
     this.spinner.show()
     this.categoryservice.getCartList().then(resp=>{
       if(resp['message']=='Record not found!' && resp['status']==404){
@@ -505,25 +562,21 @@ export class SearchedProductComponent implements OnInit {
       }else if(resp['message']=='Cart info!' && resp['status']==200){
       
         this.cartData=resp['data']
-     
+        for(var data of this.cartData){
+          this.cartcounter+=data['qty']
+        }
         this.loadProductdata()
         this.spinner.hide()
       }else{
         this.spinner.hide()
         this.loadProductdata()
-        this.toastr.error('Something Went Wrong!','Error',{
-          timeOut:3000,
-          positionClass:'toast-top-center'
-          })
+        console.log('Something Went Wrong!')
       }
     },error=>{
       this.spinner.hide()
       this.loadProductdata()
       console.log(error)
-      this.toastr.error('Failed to get Cart Details!','Error',{
-        timeOut:3000,
-        positionClass:'toast-top-center'
-        })
+      console.log('Failed to load!')
     })
   }
 
@@ -538,5 +591,20 @@ export class SearchedProductComponent implements OnInit {
     this.activeElement2 = id;
 
   }
+
+  getCurrentPath(){
+    localStorage.setItem('currentpath',this.router.url)
+  }
+
+  closepop(){
+    this.isModalShow=false;
+  }
+
+  backClicked() {
+    localStorage.removeItem('searchedProduct')
+    this._location.back();
+    
+  }
+
 
 }

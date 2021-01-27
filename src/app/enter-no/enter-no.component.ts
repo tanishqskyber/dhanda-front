@@ -66,7 +66,7 @@ export class EnterNoComponent implements OnInit {
           console.log
           this.auth.saveToken(resp['data']['secure_set'])
           localStorage.setItem('contact-no',this.contact_no)
-          this.toastr.success('Sign-in successfully & OTP sent!','Error',{
+          this.toastr.success('Sign-in successfully & OTP sent!','Success',{
             timeOut:3000,
             positionClass:'toast-top-center'
             })

@@ -77,6 +77,7 @@ export class HomeComponent implements OnInit {
   variationKeys: any = []
   product_id: any;
   cartData: any = []
+  cartData1:any = []
   storeLocation: any;
   variation1:any=[]
   variation2:any=[]
@@ -87,27 +88,43 @@ export class HomeComponent implements OnInit {
   variation_ids_arr:any=[]
   varia_split_arr:any=[]
   productInfo:any={}
+  cartcounter : any = 0;
+  username:any;
   constructor(private router: Router, private modalService: NgbModal, config: NgbModalConfig, private comp: AppComponent, private categoryservice: CategoryService, private toastr: ToastrService, private spinner: NgxSpinnerService, private route: ActivatedRoute, private auth: AuthService) {
     config.backdrop = true;
     config.keyboard = false;
 
   }
   ngOnInit() {
-
-    this.params = this.route.snapshot.paramMap.get('username');
-    if (this.params == undefined || this.params == null) {
-      this.params = localStorage.getItem('username')
+  
+     this.params = this.route.snapshot.paramMap.get('username');
+     if(localStorage.getItem('username')!=null){
+        if(localStorage.getItem('username')!=this.params){
+          localStorage.removeItem('token')
+          localStorage.removeItem('contact-no')
+          localStorage.removeItem('subCategory')
+          localStorage.removeItem('storeId')
+          localStorage.setItem('username', this.params)
+          this.loadStoreId()
+        }else if(localStorage.getItem('username')==this.params){
+          localStorage.setItem('username', this.params)
+          this.loadStoreId()  
+        }
+    }else{
+      localStorage.setItem('username', this.params)
+      this.loadStoreId()
+  
     }
-    // console.log(username)
-    localStorage.setItem('username', this.params)
-    this.store_name = this.params
-    this.mobile_number = localStorage.getItem('contact-no')
+    $("#bottom-menu a").on('click', function () {
+      $("#bottom-menu a").removeClass('active');
+      $(this).addClass('active');
+   });
+   this.username=localStorage.getItem('username')
+  
 
-    if (this.auth.getIsLoggedIn()) {
-      this.laodRecentProducts()
-    }
+    
 
-    this.loadStoreId()
+   
   }
   open() {
     //this.modalService.open(CustomModalComponent);
@@ -268,9 +285,6 @@ export class HomeComponent implements OnInit {
       if (resp['status'] == 200 && resp['message'] == 'Category list!') {
         this.spinner.hide()
         this.categorydata = resp['data']
-        console.log(this.categorydata)
-        console.log(this.categorydata[0]['category_img_url'])
-        console.log(this.categorydata[1]['category_img_url'])
       } else {
         this.spinner.hide()
         this.toastr.error('Something went wrong!', 'Error', {
@@ -356,8 +370,8 @@ export class HomeComponent implements OnInit {
   }
 
   private laodRecentProducts() {
-
-    this.categoryservice.recentProducts().then(resp => {
+    this.recproductData=[]
+    this.categoryservice.recentProducts(this.stroreid).then(resp => {
       console.log(resp)
       if (resp['message'] == 'Recent product list!') {
         var recdata = resp['data']
@@ -413,6 +427,8 @@ export class HomeComponent implements OnInit {
     this.variationname2=null
     this.product_id=id
     this.productInfo=product
+    this.varia_split_arr=[]
+    this.variation_ids_arr=[]
     console.log(variations)
       var groupBy = function(xs, key) {
         return xs.reduce(function(rv, x) {
@@ -485,6 +501,8 @@ export class HomeComponent implements OnInit {
         this.loadStoreDetails()
         this.loadCategories()
         this.loadStoreImpressions()
+        this.laodRecentProducts()
+        this.loadCartDetails()
         console.log(this.stroreid,)
       } else if (resp['message'] == 'Vendor not found!') {
         this.spinner.hide()
@@ -571,7 +589,8 @@ export class HomeComponent implements OnInit {
 
 addproducttoCart(p_count:any){
   this.spinner.show()
-  if(this.varia_split_arr.length >= 2){
+  if(this.auth.getIsLoggedIn()){
+  if(this.varia_split_arr.length > 0){
   if(p_count>0){
     var obj={
       "product_id":this.product_id,
@@ -584,6 +603,7 @@ addproducttoCart(p_count:any){
       if(resp['message']=='Product added to the cart successfully!' && resp['status']==200){
         this.isModalShow = false;
         this.laodRecentProducts()
+        this.loadCartDetails()
         this.spinner.hide()
         this.toastr.success('Product has been added to the cart!','Success',{
           timeOut:3000,
@@ -593,6 +613,7 @@ addproducttoCart(p_count:any){
         this.isModalShow = false;
         this.spinner.hide()
         this.laodRecentProducts()
+        this.loadCartDetails()
         this.toastr.success('Product in the cart has been updated!','Error',{
           timeOut:3000,
           positionClass:'toast-top-center'
@@ -630,6 +651,7 @@ addproducttoCart(p_count:any){
         this.isModalShow = false;
         this.spinner.hide()
         this.laodRecentProducts()
+        this.loadCartDetails()
         //this.foot.loadCartDetails()
         this.toastr.success('Product has been added to the cart!','Success',{
           timeOut:3000,
@@ -639,6 +661,7 @@ addproducttoCart(p_count:any){
         this.isModalShow = false;
         this.spinner.hide()
         this.laodRecentProducts()
+        this.loadCartDetails()
         //this.foot.loadCartDetails()
         this.toastr.success('Product in the cart has been updated!','Error',{
           timeOut:3000,
@@ -667,8 +690,85 @@ addproducttoCart(p_count:any){
       })
   }
 }
+}else{
+  this.spinner.hide()
+  if (this.varia_split_arr.length > 0){
+    if (p_count > 0){
+      var cobj = {
+        "product_id": this.product_id,
+        "price": this.productInfo['selling_price'],
+        "qty": p_count,
+        "variation_id": this.variation_ids
+      }
+    
+      localStorage.setItem('addCartData',JSON.stringify(cobj))
+    }else {
+      this.spinner.hide()
+      this.toastr.error('Please Select the Quantity!', 'Error', {
+        timeOut: 3000,
+        positionClass: 'toast-top-center'
+      })
+    }
+  }else {
+    if (p_count > 0){
+      var cobje = {
+        "product_id": this.product_id,
+        "price": this.productInfo['selling_price'],
+        "qty": p_count,
+        "variation_id": ""
+      }
+      localStorage.setItem('addCartData',JSON.stringify(cobje))
+    }else {
+      this.spinner.hide()
+      this.toastr.error('Please Select the Quantity!', 'Error', {
+        timeOut: 3000,
+        positionClass: 'toast-top-center'
+      })
+    }
+  }
+  this.toastr.warning('Please Login to Continue!', 'Alert', {
+    timeOut: 3000,
+    positionClass: 'toast-top-center'
+  })
+  localStorage.setItem('currentpath',this.router.url)
+  this.router.navigate(['/signin-signup'])
+}
+
   
 
+}
+
+private loadCartDetails(){
+  this.cartcounter=0
+  this.cartData1=[]
+  this.categoryservice.getCartList().then(resp=>{
+
+    if(resp['message']=='Record not found!' && resp['status']==404){
+          console.log('Not Record in Cart')
+          this.cartcounter=0;
+        
+    }else if(resp['message']=='Cart info!' && resp['status']==200){
+  
+      this.cartData1=resp['data']
+     
+      for(var data of this.cartData1){
+        this.cartcounter+=data['qty']
+      }
+    
+
+    }else{
+    console.log("Something Went Wrong")
+    this.cartcounter=0;
+    }
+  },error=>{
+    this.cartcounter=0;
+    console.log(error)
+   
+  })
+}
+
+getCurrentPath(){
+  localStorage.setItem('currentpath',this.router.url)
 }
 
 

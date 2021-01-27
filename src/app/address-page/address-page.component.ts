@@ -28,7 +28,8 @@ export class AddressPageComponent implements OnInit {
 
   private loadAddressData(){
     this.spinner.show()
-    this.catservice.getAddress().then(resp=>{
+
+    this.catservice.getAddress(localStorage.getItem('contact-no')).then(resp=>{
       console.log(resp)
       if(resp['message']=='Customer address list!'){
         this.spinner.hide()

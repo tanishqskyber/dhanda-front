@@ -10,6 +10,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ThrowStmt } from '@angular/compiler';
 import {AuthService} from '../_api/auth.service'
 import {FooterComponent} from '.././supportingcomponents/footer/footer.component'
+import * as $ from 'jquery';
 @Component({
   selector: 'app-sub-categories-popup',
   templateUrl: './sub-categories-popup.component.html',
@@ -46,7 +47,9 @@ export class SubCategoriesPopupComponent implements OnInit {
   variation2:any=[]
   variationname1:any=null;
   variationname2:any=null;
-  
+  cartCount:number=0
+  username:any;
+  cartcounter : any = 0;
   constructor(private modalService: NgbModal, config: NgbModalConfig, private comp: AppComponent, private categoryservice: CategoryService, private toastr: ToastrService, private spinner: NgxSpinnerService, private router: Router, private activatedRoute: ActivatedRoute,private auth:AuthService,private foot:FooterComponent) {
     config.backdrop = true;
     config.keyboard = false;
@@ -56,7 +59,11 @@ export class SubCategoriesPopupComponent implements OnInit {
     this.params = this.activatedRoute.snapshot.queryParams["id"];
     this.subcategory_name = localStorage.getItem('sub_cat_name')
     this.category_id = localStorage.getItem('subCategory')
-
+    $("#bottom-menu a").on('click', function () {
+      $("#bottom-menu a").removeClass('active');
+      $(this).addClass('active');
+   });
+   this.username=localStorage.getItem('username')
     this.loadCartData()
 
   }
@@ -109,6 +116,7 @@ export class SubCategoriesPopupComponent implements OnInit {
   }
 
   selectvariation(id, var_name) {
+    this.variation_ids=null
     var obj = {}
     obj["id"] = id
     obj['var_name'] = var_name
@@ -268,9 +276,12 @@ export class SubCategoriesPopupComponent implements OnInit {
         var pdata = resp['data']
         var obje = {}
         for (var data of pdata) {
+
           let obj = this.cartData.find(o => o.product_id === data['id']);
+          console.log(obj)
           if (obj != undefined) {
             if (Object.keys(obj).length != 0) {
+              console.log('Count Set')
               obje = {
                 category_id: data['category_id'],
                 category_name: data['category_name'],
@@ -298,6 +309,7 @@ export class SubCategoriesPopupComponent implements OnInit {
                 product_count: obj['qty']
               }
             } else {
+              console.log('Count Set 0-1')
               obje = {
                 category_id: data['category_id'],
                 category_name: data['category_name'],
@@ -326,6 +338,7 @@ export class SubCategoriesPopupComponent implements OnInit {
               }
             }
           } else {
+            console.log('Count Set 0-2')
             obje = {
               category_id: data['category_id'],
               category_name: data['category_name'],
@@ -392,6 +405,8 @@ export class SubCategoriesPopupComponent implements OnInit {
     this.product_id = id
     this.counter = 0
     this.variation_ids = null;
+    this.variation_ids_arr=[]
+    this.varia_split_arr=[]
     this.variationKeys = []
     this.variation1=[]
     this.variation2=[]
@@ -490,7 +505,9 @@ export class SubCategoriesPopupComponent implements OnInit {
 
     this.spinner.show()
     if(this.auth.getIsLoggedIn()){
-      if (this.varia_split_arr.length >= 1) {
+     
+      if (this.varia_split_arr.length > 0) {
+     
         if (p_count > 0) {
           var obj = {
             "product_id": this.product_id,
@@ -505,7 +522,7 @@ export class SubCategoriesPopupComponent implements OnInit {
               this.isModalShow = false;
               this.spinner.hide()
               this.loadCartData()
-              this.foot.loadCartDetails()
+              
               this.toastr.success('Product has been added to the cart!', 'Success', {
                 timeOut: 3000,
                 positionClass: 'toast-top-center'
@@ -549,6 +566,7 @@ export class SubCategoriesPopupComponent implements OnInit {
             "qty": p_count,
             "variation_id": ""
           }
+          console.log(obje)
           console.log("No Variation Product")
           this.categoryservice.addcart(obje).then(resp => {
             console.log(resp)
@@ -597,6 +615,40 @@ export class SubCategoriesPopupComponent implements OnInit {
       }
     }else{
       this.spinner.hide()
+      if (this.varia_split_arr.length > 0){
+        if (p_count > 0){
+          var cobj = {
+            "product_id": this.product_id,
+            "price": this.productInfo['selling_price'],
+            "qty": p_count,
+            "variation_id": this.variation_ids
+          }
+        
+          localStorage.setItem('addCartData',JSON.stringify(cobj))
+        }else {
+          this.spinner.hide()
+          this.toastr.error('Please Select the Quantity!', 'Error', {
+            timeOut: 3000,
+            positionClass: 'toast-top-center'
+          })
+        }
+      }else {
+        if (p_count > 0){
+          var cobje = {
+            "product_id": this.product_id,
+            "price": this.productInfo['selling_price'],
+            "qty": p_count,
+            "variation_id": ""
+          }
+          localStorage.setItem('addCartData',JSON.stringify(cobje))
+        }else {
+          this.spinner.hide()
+          this.toastr.error('Please Select the Quantity!', 'Error', {
+            timeOut: 3000,
+            positionClass: 'toast-top-center'
+          })
+        }
+      }
       this.toastr.warning('Please Login to Continue!', 'Alert', {
         timeOut: 3000,
         positionClass: 'toast-top-center'
@@ -610,7 +662,9 @@ export class SubCategoriesPopupComponent implements OnInit {
   }
 
   private loadCartData() {
+    this.cartcounter=0
     this.spinner.show()
+    this.cartData=[]
     this.categoryservice.getCartList().then(resp => {
       console.log(resp)
       if (resp['message'] == 'Record not found!' && resp['status'] == 404) {
@@ -618,6 +672,9 @@ export class SubCategoriesPopupComponent implements OnInit {
         this.loadProductdata()
       } else if (resp['message'] == 'Cart info!' && resp['status'] == 200) {
         this.cartData = resp['data']
+        for(var data of this.cartData){
+          this.cartcounter+=data['qty']
+        }
         this.loadProductdata()
         this.spinner.hide()
       } else {
@@ -669,6 +726,15 @@ export class SubCategoriesPopupComponent implements OnInit {
   
     this.activeElement2 = id;
 
+  }
+
+
+  getCurrentPath(){
+    localStorage.setItem('currentpath',this.router.url)
+  }
+
+  closepop(){
+    this.isModalShow=false;
   }
 
 

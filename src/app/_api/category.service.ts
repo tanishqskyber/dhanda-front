@@ -307,9 +307,9 @@ const path = new Config().getBaseURL();
         return promise;
       }
 
-      getAddress(): Promise<any> {  
+      getAddress(contact): Promise<any> {  
         let promise = new Promise((resolve, reject) => {
-            this.http.get(`${path}user/get_address`)
+            this.http.get(`${path}user/get_address?contact_no=${contact}`)
                 .subscribe(
                     res => {
                         
@@ -468,9 +468,9 @@ const path = new Config().getBaseURL();
       return promise;
     }
 
-    recentProducts(): Promise<any> { 
+    recentProducts(id:any): Promise<any> { 
         var params={
-           
+           "vendor_id":id
         }
       let promise = new Promise((resolve, reject) => {
           this.http.post(`${path}product/recent_products`,params)

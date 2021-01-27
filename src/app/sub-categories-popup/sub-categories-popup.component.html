@@ -98,7 +98,7 @@
 				<div class="modal modalcatadd" *ngIf="isModalShow">
 					<div class="modal-dialog sub-categories-modal-dialog">
 						<div class="modal-content">
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closepop()">
 								<span aria-hidden="true">&times;</span>
 							  </button>
 							<div class="modal-body">
@@ -221,7 +221,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="backdrop" *ngIf="isModalShow" (click)="backDrop()"></div>
+				<div class="backdrop" *ngIf="isModalShow" (click)="closepop()"></div>
 			</ng-container>
 			<!-- <div class="col-md-3 col-sm-3 col-xs-6">
 				<div class="recent-product-list">
@@ -292,4 +292,49 @@
 <!-- Custom -->
 
 
-<app-footer></app-footer>
+<footer>
+    <div class="bootom-menu">	
+      <div class="container">
+          <div class="row">
+              <div class="col-md-12">
+                  <div class="bottom-menu-list" id="bottom-menu">
+                      <ul>
+                        <li class="home-footer">
+                            <a [routerLink]="['/in',username]"   routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}" (click)="getCurrentPath()">
+                                <img id="my-img" src="../../assets/img/home.png"> 
+                                <span>Home</span>
+                            </a>
+                        </li>
+                        <li class="home-footer2">
+                            <a [routerLink]="['/categories']" routerLinkActive="active-link" (click)="getCurrentPath()">
+                                <img id="my-img" src="../../assets/img/home2.png"> 
+                                <span>Category</span>
+                            </a>
+                        </li>
+                        <li class="home-footer5">
+                            <a [routerLink]="['/order']" routerLinkActive="active-link" (click)="getCurrentPath()">
+                                <img id="my-img" src="../../assets/img/home4.png"> 
+                                <span>Orders</span>
+                            </a>
+                        </li>
+                        <li class="home-footer3">
+                            <a [routerLink]="['/add-cart']" routerLinkActive="active-link" (click)="getCurrentPath()">
+                                <img id="my-img" src="../../assets/img/home3.png">
+                                <span class="navbar-btn-badge" *ngIf="cartcounter">{{cartcounter}}</span>
+                                <span> Cart</span>
+                            </a>
+                        </li>
+                        <li class="home-footer4">
+                            <a [routerLink]="['/profile']" routerLinkActive="active-link" (click)="getCurrentPath()">
+                                <img id="my-img" src="../../assets/img/home5.png"> 
+                                <span>Profile</span>
+                            </a>
+                        </li>
+                      </ul>
+                  </div>
+              </div>
+          </div>
+      </div>
+    </div>
+    <div class="margin-top"></div>
+    </footer>

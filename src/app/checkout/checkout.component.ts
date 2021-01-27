@@ -45,7 +45,7 @@ export class CheckoutComponent implements OnInit {
     this.paramsid=this.activatedRoute.snapshot.queryParams["id"];
     if(this.paramsid!=undefined){
       this.spinner.show();
-     
+      this.loadDeliverytab()
       this.catservice.getAddressbyId(this.paramsid).then(resp=>{
         console.log(resp)
         this.flat_no=resp['data']['flat_no']
@@ -63,7 +63,7 @@ export class CheckoutComponent implements OnInit {
         }
         this.saveAddressOption=false;
 
-
+       
         
         this.spinner.hide();
       },error=>{

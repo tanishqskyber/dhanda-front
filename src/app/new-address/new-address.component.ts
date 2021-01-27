@@ -21,6 +21,7 @@ export class NewAddressComponent implements OnInit {
   road_no:any=null;
   pincode:any=null;
   delivery_contact_no:any=null
+  full_name:any=null;
   params:string;
   updateAddress:boolean=false;
   getCityName:any;
@@ -49,6 +50,7 @@ export class NewAddressComponent implements OnInit {
      }
      if(this.flat_no!=null && this.building_no!=null && this.state_name!=null && this.city_name!=null && this.pincode!=null && this.delivery_contact_no!=null){
        var params={
+         "full_name":this.full_name,
          "flat_no":this.flat_no,
          "apartment_name":this.building_no,
          "road_name":this.road_no,
@@ -101,6 +103,7 @@ export class NewAddressComponent implements OnInit {
             this.updateAddress=true
             this.catservice.getAddressbyId(this.params).then(resp=>{
               console.log(resp)
+              this.full_name=resp['data']['full_name']
               this.flat_no=resp['data']['flat_no']
               this.building_no=resp['data']['apartment_name']
               this.road_no=resp['data']['road_name']
@@ -189,6 +192,7 @@ export class NewAddressComponent implements OnInit {
 
     if(this.flat_no!=null && this.building_no!=null && this.state_name!=null && this.city_name!=null && this.pincode!=null && this.delivery_contact_no!=null){
       var par={
+        "full_name":this.full_name,
         "flat_no":this.flat_no,
         "apartment_name":this.building_no,
         "road_name":this.road_no,

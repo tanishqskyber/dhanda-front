@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {CategoryService} from './../_api/category.service'
 import { ToastrService } from 'ngx-toastr'
+import * as $ from 'jquery';
 import { NgxSpinnerService } from "ngx-spinner";
 import {Router,ActivatedRoute} from '@angular/router';
 import {AuthService} from '../_api/auth.service'
@@ -52,9 +53,18 @@ export class ProductDetailsComponent implements OnInit {
   variation2:any=[]
   variationname1:any;
   variationname2:any;
+  cartcounter : any = 0;
+  username:any;
+  cartData:any=[]
   ngOnInit(): void {
     this.params = this.activatedRoute.snapshot.queryParams["id"];
     this.loadProductDetails();
+    this.loadCartDetails()
+    $("#bottom-menu a").on('click', function () {
+      $("#bottom-menu a").removeClass('active');
+      $(this).addClass('active');
+   });
+   this.username=localStorage.getItem('username')
   }
 
   private loadProductDetails(){
@@ -287,6 +297,40 @@ export class ProductDetailsComponent implements OnInit {
 }
 }else{
   this.spinner.hide()
+  if (this.varia_split_arr.length > 0){
+    if (this.counter > 0){
+      var cobj = {
+        "product_id": this.params,
+        "price": this.productData['selling_price'],
+        "qty": this.counter,
+        "variation_id": this.variation_ids
+      }
+    
+      localStorage.setItem('addCartData',JSON.stringify(cobj))
+    }else {
+      this.spinner.hide()
+      this.toastr.error('Please Select the Quantity!', 'Error', {
+        timeOut: 3000,
+        positionClass: 'toast-top-center'
+      })
+    }
+  }else {
+    if (this.counter > 0){
+      var cobje = {
+        "product_id": this.params,
+        "price": this.productData['selling_price'],
+        "qty": this.counter,
+        "variation_id": ""
+      }
+      localStorage.setItem('addCartData',JSON.stringify(cobje))
+    }else {
+      this.spinner.hide()
+      this.toastr.error('Please Select the Quantity!', 'Error', {
+        timeOut: 3000,
+        positionClass: 'toast-top-center'
+      })
+    }
+  }
   this.toastr.warning('Please Login to Continue!', 'Alert', {
     timeOut: 3000,
     positionClass: 'toast-top-center'
@@ -308,6 +352,38 @@ export class ProductDetailsComponent implements OnInit {
   
     this.activeElement2 = id;
 
+  }
+
+  private loadCartDetails(){
+    this.cartcounter=0
+    this.categoryservice.getCartList().then(resp=>{
+  
+      if(resp['message']=='Record not found!' && resp['status']==404){
+            console.log('Not Record in Cart')
+            this.cartcounter=0;
+          
+      }else if(resp['message']=='Cart info!' && resp['status']==200){
+    
+        this.cartData=resp['data']
+       
+        for(var data of this.cartData){
+          this.cartcounter+=data['qty']
+        }
+      
+  
+      }else{
+      console.log("Something Went Wrong")
+      this.cartcounter=0;
+      }
+    },error=>{
+      this.cartcounter=0;
+      console.log(error)
+     
+    })
+  }
+  
+  getCurrentPath(){
+    localStorage.setItem('currentpath',this.router.url)
   }
 
   // setActive(varia,vid){

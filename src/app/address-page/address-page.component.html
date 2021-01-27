@@ -21,6 +21,7 @@ type="ball-scale-multiple"
 <div class="col-md-12 card">
 <div class="card-body"  *ngIf="showgetAddressOption" (click)="getAddress(address.id)" style="cursor: pointer;">
     <label for="d3_graph_chart0017day">
+        <p class="add">{{address.full_name}}</p>
         <p class="add">{{address.flat_no}}, {{address.apartment_name}}, {{address.road_name}}</p>
         <p class="add">{{address.city}}, {{address.state}}-{{address.pincode}}</p>
         <p class="add">+91-{{address.contact_no}}</p>
@@ -36,6 +37,7 @@ type="ball-scale-multiple"
 </div>
 <div class="card-body"  *ngIf="!showgetAddressOption">
   <label for="d3_graph_chart0017day">
+    <p class="add">{{address.full_name}}</p>
       <p class="add">{{address.flat_no}}, {{address.apartment_name}}, {{address.road_name}}</p>
       <p class="add">{{address.city}}, {{address.state}}-{{address.pincode}}</p>
       <p class="add">+91-{{address.contact_no}}</p>

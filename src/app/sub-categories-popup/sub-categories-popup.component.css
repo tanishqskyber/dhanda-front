@@ -16,3 +16,27 @@
 /* .sub-categories-modal-dialog{
     padding-top: 15px;
 } */
+
+.navbar-btn-badge
+{
+position: absolute;
+width: 20px !important;
+height: 20px;
+background-color: #e50b20;
+border-radius: 10px;
+color: #fff;
+text-align: center;
+font-size: 13px;
+line-height: 16px;
+padding: 2px 0;
+top: 0px;
+left: 69%;
+}
+@media screen and (max-width:500px){
+.navbar-btn-badge{
+width: 15px !important;
+height: 15px;
+font-size: 12px;
+padding: 0px 0px;
+}
+}
