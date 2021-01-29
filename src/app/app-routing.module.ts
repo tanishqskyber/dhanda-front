@@ -51,7 +51,7 @@ const routes: Routes = [{ path:'signin-signup',component:EnterNoComponent},
 {path:'empty-category',component:EmptyCategoryComponent,canActivate: [AuthGuard]},
 {path:'empty-subcategory',component:EmptySubCategoryComponent,canActivate: [AuthGuard]},
 {path:'empty-orders',component:EmptyOrdersComponent,canActivate: [AuthGuard]},
-{path:'profile-address',component:ProfileAddressComponent,canActivate: [AuthGuard]},
+{path:'profile-address',component:ProfileAddressComponent},
 { path:'**',redirectTo:'',pathMatch: 'full'}
 ]
 
