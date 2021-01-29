@@ -45,6 +45,7 @@ import { EmptySubCategoryComponent } from './supportingcomponents/empty-sub-cate
 import { EmptyOrdersComponent } from './supportingcomponents/empty-orders/empty-orders.component';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { CountdownModule } from 'ngx-countdown';
+import { ProfileAddressComponent } from './profile-address/profile-address.component';
 declare const $: any;
 @NgModule({
   declarations: [
@@ -76,6 +77,7 @@ declare const $: any;
     EmptyProductsComponent,
     EmptySubCategoryComponent,
     EmptyOrdersComponent,
+    ProfileAddressComponent,
 
 
   ],

@@ -1,0 +1,46 @@
+<ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#fff" type="ball-scale-multiple">
+    <p style="font-size: 20px; color: white">Loading...</p>
+  </ngx-spinner>
+  <div class="my-cart-product">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 text-left">
+          <h4 class="my-add">Create your Profile</h4>
+        </div>
+        <form class="w-100">
+          <div class="col-md-12">
+            <div class="form-group">
+              <input name="full_name" id="flate-1" [(ngModel)]="full_name" type="tel" placeholder="Name" class="form-control" >
+              <input name="delivery_contact_no" id="flate-1" [(ngModel)]="delivery_contact_no" type="tel" placeholder="Contact No." class="form-control" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" maxlength="10">
+              <input name="flat_no" id="flate-1" [(ngModel)]="flat_no" type="text" placeholder="Flat No. / Room No." class="form-control">
+              <input type="text" name="building_no" [(ngModel)]="building_no" id="bulding1" placeholder="Building / Apartment / Society / Colony Name" class="form-control">
+              <input name="road_no" id="road-name" [(ngModel)]="road_no" type="text" placeholder="Road Name" class="form-control">
+            </div>
+            <div>
+              <div class="form-group">
+                <select  name="state_id" [(ngModel)]="state_id" id="state" class="form-control" (change)="loadCities(state_id)">
+                  <option value="" selected>Select State</option>
+                  <option *ngFor="let state of stateData" value="{{state.id}}">
+                    {{state.name}}</option>
+                </select>
+            </div>
+            <div class="form-group">
+              <select  name="city_id" [(ngModel)]="city_id" class="form-control">
+                <option *ngFor="let city of cityData" value="{{city.id}}">{{city.name}}
+                </option>
+                </select> 
+          </div>					
+              <div class="form-group">
+                  <input type="text"  name="pincode" id="Pincode" [(ngModel)]="pincode" placeholder="Pincode" class="form-control">
+              </div>
+          </div>
+          <div class="col-md-12 text-center mb-4">
+              <button *ngIf="!updateAddress" class="btn btn-proceed" (click)="saveAddress()">Submit</button>
+              <button *ngIf="updateAddress" class="btn btn-proceed" (click)="updateAddr()">Submit</button>
+          </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  

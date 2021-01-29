@@ -662,9 +662,7 @@ li.home-footer5 a.active-link img {
 /*----------------categories----------------*/
 
 .back-page {
-  padding: 16px 0 0 0;
-  position: relative;
-  right: 25px;
+  padding: 16px 0 0 5px;
 }
 
 .product-slider .carousel-indicators {

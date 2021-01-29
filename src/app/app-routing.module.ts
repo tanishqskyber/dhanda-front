@@ -25,6 +25,7 @@ import { EmptyCategoryComponent } from './supportingcomponents/empty-category/em
 import { EmptyProductsComponent } from './supportingcomponents/empty-products/empty-products.component';
 import { EmptySubCategoryComponent } from './supportingcomponents/empty-sub-category/empty-sub-category.component';
 import { EmptyOrdersComponent } from './supportingcomponents/empty-orders/empty-orders.component';
+import { ProfileAddressComponent } from './profile-address/profile-address.component';
 
 const routes: Routes = [{ path:'signin-signup',component:EnterNoComponent},
 {path:'add-cart',component:AddCartComponent,canActivate: [AuthGuard]},
@@ -50,6 +51,7 @@ const routes: Routes = [{ path:'signin-signup',component:EnterNoComponent},
 {path:'empty-category',component:EmptyCategoryComponent,canActivate: [AuthGuard]},
 {path:'empty-subcategory',component:EmptySubCategoryComponent,canActivate: [AuthGuard]},
 {path:'empty-orders',component:EmptyOrdersComponent,canActivate: [AuthGuard]},
+{path:'profile-address',component:ProfileAddressComponent,canActivate: [AuthGuard]},
 { path:'**',redirectTo:'',pathMatch: 'full'}
 ]
 

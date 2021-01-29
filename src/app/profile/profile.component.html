@@ -9,7 +9,7 @@
 					<h2>Profile</h2>
 					<p>
 					<button class="edit"><a *ngIf="editTrue" (click)="editProfile()">Edit</a></button>
-				
+					<button id="send-msg" class="edit ml-2" (click)="gotoAddress()">Manage Address</button>
 					</p>
 				
 				</div>
@@ -42,7 +42,7 @@
 
 							<div class="col-md-12">
 								<div class="form-group">
-									<label class="saved-add">Saved Address</label>
+									<label class="saved-add">Default Address</label>
 									<input type="text" name="flat_no" [(ngModel)]="customerData.flat_no" id="add"
 										placeholder="Flat No. / Room No." class="form-control" [readonly]=editTrue>
 								</div>
@@ -96,7 +96,7 @@
 							</div>
 							<div class="col-md-12">
 								<div class="text-center">
-									<button id="send-msg" class="btn default-submit mb-2" (click)="gotoAddress()">Manage Address</button>
+									
 								</div>
 							</div>
 							<div class="col-md-12">
