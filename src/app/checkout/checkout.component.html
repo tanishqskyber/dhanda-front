@@ -34,15 +34,7 @@
 					<div class="tab-content clearfix">
 						<div class="tab-pane" [ngClass]="storeActive ? 'active' : ''" *ngIf="storeShow && storeTabShow">
 							<form class="date-time-form">
-								<div class="form-group">
-									<input type="text" class="form-control" style="border-radius: 0px;" id="textinput1"
-										placeholder="Enter Name">
-								</div>
-								<div class="form-group">
-									<input type="number" pattern="/^-?\d+\.?\d*$/"
-										onKeyPress="if(this.value.length==10) return false;" class="form-control"
-										style="border-radius: 0px;" id="textinput1" placeholder="Enter Mobile Number">
-								</div>
+							
 								<div class="form-group">
 									<input type="date" data-date="" name="delivery_date" [(ngModel)]="delivery_date"
 										data-date-format="DD MMMM YYYY">

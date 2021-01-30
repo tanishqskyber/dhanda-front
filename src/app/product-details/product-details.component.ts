@@ -58,6 +58,7 @@ export class ProductDetailsComponent implements OnInit {
   cartData:any=[]
   ngOnInit(): void {
     this.params = this.activatedRoute.snapshot.queryParams["id"];
+    localStorage.setItem('currentpath',this.router.url)
     this.loadProductDetails();
     this.loadCartDetails()
     $("#bottom-menu a").on('click', function () {

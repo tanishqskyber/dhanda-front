@@ -15,7 +15,7 @@ export class CategoriesComponent implements OnInit {
   constructor(private categoryservice:CategoryService,private toastr: ToastrService,private spinner: NgxSpinnerService,private router: Router) { }
 
   ngOnInit(): void {
-
+    localStorage.setItem('currentpath',this.router.url)
     this.loadCategories()
   }
   private loadCategories(){

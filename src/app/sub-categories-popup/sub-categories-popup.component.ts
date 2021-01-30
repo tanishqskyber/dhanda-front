@@ -59,6 +59,7 @@ export class SubCategoriesPopupComponent implements OnInit {
     this.params = this.activatedRoute.snapshot.queryParams["id"];
     this.subcategory_name = localStorage.getItem('sub_cat_name')
     this.category_id = localStorage.getItem('subCategory')
+    localStorage.setItem('currentpath',this.router.url)
     $("#bottom-menu a").on('click', function () {
       $("#bottom-menu a").removeClass('active');
       $(this).addClass('active');

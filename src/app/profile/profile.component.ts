@@ -26,9 +26,10 @@ export class ProfileComponent implements OnInit {
   private loadCustDetailsbyMob(){
     this.spinner.show()
     this.support.getCustDetailsbyContact(localStorage.getItem('contact-no')).then(resp=>{
+      console.log(resp)
       if(resp['message']=='Customer details!'){
         var params={
-          customer_name:resp['data']['profile_name'],
+          profile_name:resp['data']['profile_name'],
           email:resp['data']['email'],
           flat_no:resp['data']['flat_no'],
           apartment_name:resp['data']['apartment_name'],
@@ -37,6 +38,7 @@ export class ProfileComponent implements OnInit {
           state_id:resp['data']['state_id'],
           city_id:resp['data']['city_id']
         }
+       
           this.catservice.updateCustomerDetails(params).then(res=>{
             if(res['message']=='User info!'){
               
@@ -59,6 +61,7 @@ export class ProfileComponent implements OnInit {
       if(resp['message']=='User info!'){
         this.spinner.hide()
         this.customerData=resp['data']
+        
         if(this.customerData['state_id']!=null){
           this.loadCities(this.customerData['state_id'])
         }
