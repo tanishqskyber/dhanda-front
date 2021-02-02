@@ -112,11 +112,5 @@
    transform-origin: top center;
 }
 
-.img-middle{
-   vertical-align: middle;
-}
 
-.img-middle img{
-   border-radius: 5px;
-   width:130px;
-}
+
