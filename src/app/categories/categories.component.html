@@ -17,12 +17,12 @@ type="ball-scale-multiple"
 				
 					<div class="product-list-form">
 						<form>
-							<input type="text" name="search" placeholder="Search" [(ngModel)]="search"  (change)="searhcProductbySearch()">
+							<input type="text" name="search" placeholder="Search" [(ngModel)]="search">
 						</form>				
 					</div>
 				
 			</div>
-			<ng-container *ngFor="let cat of categorydata;let i=index;">
+			<ng-container *ngFor="let cat of categorydata|filter:search;let i=index;">
 			<div class="col-6 col-md-3">
 				<div class="cloth-categories">
 					<a>
