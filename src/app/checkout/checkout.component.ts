@@ -26,7 +26,7 @@ export class CheckoutComponent implements OnInit {
   state_name:any=null;
   city_name:any=null;
   pincode:any=null;
-  cash_upi_on_del:boolean=false
+  cash_upi_on_del:boolean=true
   delivery_date:any=null;
   converted_del_time:any=null;
   delievery_time:any=null;
