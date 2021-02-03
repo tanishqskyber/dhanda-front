@@ -144,7 +144,12 @@ a {
   .add{
     font-family: 'apercu',sans-serif;
     padding-top: 3px;
+<<<<<<< HEAD
     line-height: 5px;
     font-size: 13px;
+=======
+    line-height: 8px;
+    font-size: 14px;
+>>>>>>> a396e952e13464ff63bd7ed10ce47d84bf3dc10c
   } 
 }

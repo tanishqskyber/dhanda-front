@@ -26,67 +26,43 @@ export class CheckoutComponent implements OnInit {
   state_name:any=null;
   city_name:any=null;
   pincode:any=null;
-  cash_upi_on_del:boolean=false
+  cash_upi_on_del:boolean=true
   delivery_date:any=null;
   converted_del_time:any=null;
   delievery_time:any=null;
   addressSave:boolean=false;
-  delievery_mode:any=null;
+  delievery_mode:any='Pickup';
   is_address_save:boolean=false;
   delivery_contact_no:any=null
   savedAddres:any={}
   paramsid:any;
   savecityname:any;
   saveAddressOption:boolean=true;
+  selectedAddress:any={}
   constructor(private catservice:CategoryService,private toastr: ToastrService,private spinner: NgxSpinnerService,private router: Router,private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.loadStates()
     this.orderData=JSON.parse(localStorage.getItem('orderDetails'))
-    this.paramsid=this.activatedRoute.snapshot.queryParams["id"];
-    if(this.paramsid!=undefined){
-      this.spinner.show();
-      this.loadDeliverytab()
-      this.catservice.getAddressbyId(this.paramsid).then(resp=>{
-        console.log(resp)
-        this.flat_no=resp['data']['flat_no']
-        this.building_no=resp['data']['apartment_name']
-        this.road_no=resp['data']['road_name']
-        this.pincode=resp['data']['pincode']
-        this.delivery_contact_no=resp['data']['contact_no']
-        this.flat_no=resp['data']['flat_no']
-        this.savecityname=resp['data']['city']
-        for(var data of this.stateData){
-          if(data['name']==resp['data']['state']){
-            this.state_id=data['id']
-            this.loadCities(this.state_id)
-          }
-        }
-        this.saveAddressOption=false;
-
-       
-        
-        this.spinner.hide();
-      },error=>{
-        this.saveAddressOption=true;
-        console.log(error)
-        this.spinner.hide();
-      })
+    this.allowStorePickup=localStorage.getItem('allowStorePickup')
+    console.log(this.selectedAddress)
+    this.selectedAddress=JSON.parse(localStorage.getItem('selectedAddress'))
+    console.log(this.selectedAddress)
+    if( this.allowStorePickup=='true'){
+      this.storeShow=true
     }else{
-      this.saveAddressOption=true;
+      this.storeShow=false
+      this.storeActive=false;
+      this.storeTabShow=false;
+      this.deliveryActive=true;
+      this.deliveryTabShow=true
     }
+   
+    
   
   console.log(this.orderData)
-    this.allowStorePickup=localStorage.getItem('allowStorePickup')
-    if(this.allowStorePickup=='true'){
-      this.storeShow=true;
-      this.delievery_mode='Pickup'
-    }else{
-      this.storeShow=false;
-      this.deliveryActive=true;
-      this.deliveryTabShow=true;
-      this.delievery_mode='Delivery'
-    }
-    this.loadStates()
+  
+  
   }
 
 
@@ -96,6 +72,7 @@ export class CheckoutComponent implements OnInit {
     this.deliveryActive=false;
     this.deliveryTabShow=false
     this.delievery_mode='Pickup'
+    console.log(this.delievery_mode)
   }
 
   loadDeliverytab(){
@@ -105,11 +82,15 @@ export class CheckoutComponent implements OnInit {
     this.deliveryActive=true;
     this.deliveryTabShow=true
     this.delievery_mode='Delivery'
-  
+    if(this.allowStorePickup=='true'){
+      this.storeShow=true
+    }else{
+      this.storeShow=false;
+    }
   }
 
   placeOrder(){
-   
+   console.log(this.delievery_mode)
     this.spinner.show()
     if(this.delievery_mode=='Pickup'){
       console.log(this.delivery_date)
@@ -138,6 +119,7 @@ export class CheckoutComponent implements OnInit {
             this.spinner.hide()
             localStorage.removeItem('orderDetails')
             localStorage.removeItem('allowStorePickup')
+            localStorage.removeItem('selectedAddress')
              this.router.navigate(['/order-placed']);
           }else{
             this.spinner.hide()
@@ -197,6 +179,7 @@ export class CheckoutComponent implements OnInit {
             this.spinner.hide()
             localStorage.removeItem('orderDetails')
             localStorage.removeItem('allowStorePickup')
+            localStorage.removeItem('selectedAddress')
              this.router.navigate(['/order-placed']);
           }else{
             this.spinner.hide()
@@ -237,21 +220,28 @@ export class CheckoutComponent implements OnInit {
       if(resp['message']=='States list!'){
         this.spinner.hide()
         this.stateData=resp['data']
-        if(this.paramsid!=undefined){
-          this.flat_no=this.savedAddres['flat_no']
-          this.building_no=this.savedAddres['apartment_name']
-          this.road_no=this.savedAddres['road_name']
-          this.pincode=this.savedAddres['pincode']
-          this.savecityname=this.savedAddres['city']
-          for(var data of this.stateData){
-            if(data['name']==this.savedAddres['state']){
-              this.state_id=data['id']
-              this.state_name=this.savedAddres['state']
-              this.loadCities(this.state_id)
-             
-            }
-          }
-          
+        if(this.selectedAddress!=null){
+          this.spinner.show();
+          this.loadDeliverytab()
+              console.log('Address Found')
+              this.flat_no=this.selectedAddress['flat_no']
+              this.building_no=this.selectedAddress['apartment_name']
+              this.road_no=this.selectedAddress['road_name']
+              this.pincode=this.selectedAddress['pincode']
+              this.delivery_contact_no=this.selectedAddress['contact_no']
+              this.flat_no=this.selectedAddress['flat_no']
+              this.savecityname=this.selectedAddress['city']
+              for(var data of this.stateData){
+                if(data['name']==this.selectedAddress['state']){
+                  this.state_id=data['id']
+                  this.loadCities(this.state_id)
+                }
+              }
+              this.saveAddressOption=false;
+            this.spinner.hide();
+        }else{
+          this.saveAddressOption=true;
+     
         }
       }else{
         this.spinner.hide()
@@ -277,7 +267,7 @@ export class CheckoutComponent implements OnInit {
        
        this.spinner.hide()
        this.cityData=resp['data']
-       if(this.paramsid!=undefined){
+       if(this.selectedAddress!=null){
          for(var data of this.cityData){
            if(data['name']==this.savecityname){
              this.city_id=data['id']

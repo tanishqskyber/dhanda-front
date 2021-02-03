@@ -116,6 +116,7 @@ export class ProductDetailsComponent implements OnInit {
            
           }
         }else if(this.variationKeys.length==1){
+          this.variationname1=this.variationKeys[0]
           for(var data of this.productData['variations']){
             if(data['variation_name']==this.variationKeys[0]){
               var obj={

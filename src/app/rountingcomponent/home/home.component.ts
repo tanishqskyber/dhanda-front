@@ -104,6 +104,10 @@ export class HomeComponent implements OnInit {
           localStorage.removeItem('contact-no')
           localStorage.removeItem('subCategory')
           localStorage.removeItem('storeId')
+          localStorage.removeItem('orderDetails')
+          localStorage.removeItem('sub_cat_name')
+          localStorage.removeItem('selectedAddress')
+          localStorage.removeItem('allowStorePickup')
           localStorage.setItem('username', this.params)
           this.loadStoreId()
         }else if(localStorage.getItem('username')==this.params){
@@ -440,6 +444,8 @@ export class HomeComponent implements OnInit {
       this.variationData=groupBy(variations, 'variation_name')
       this.variationKeys=Object.keys(this.variationData)
       if(this.variationKeys.length==2){
+        console.log("Load Product")
+        console.log(this.variationKeys)
         this.variationname1=this.variationKeys[0]
         this.variationname2=this.variationKeys[1]
         for(var data of variations){
@@ -463,6 +469,9 @@ export class HomeComponent implements OnInit {
          
         }
       }else if(this.variationKeys.length==1){
+        console.log("Load Product")
+        console.log(this.variationKeys)
+        this.variationname1=this.variationKeys[0]
         for(var data of variations){
           if(data['variation_name']==this.variationKeys[0]){
             var obj={
@@ -476,6 +485,8 @@ export class HomeComponent implements OnInit {
          
         }
       }else{
+        console.log("Load Product")
+        console.log(this.variationKeys)
         this.variation1=[]
         this.variation2=[]
       }
