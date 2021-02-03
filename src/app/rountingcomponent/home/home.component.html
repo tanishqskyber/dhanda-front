@@ -185,7 +185,7 @@
 
 				<ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig">
 					<div ngxSlickItem *ngFor="let cat of categorydata;let i=index;" class="slide m-2">
-						<img *ngIf="cat.category_img_url!=null" [src]="cat.category_img_url" class="p-2 img-categories" alt=""  (click)="gotoSubcategory(cat.id)">
+						<img *ngIf="cat.category_img_url!=null" [src]="cat.category_img_url" class="img-categories" alt=""  (click)="gotoSubcategory(cat.id)">
 						<img *ngIf="cat.category_img_url==null" src="../../../assets/img/no_image.png" class="p-2 img-categories" alt=""  (click)="gotoSubcategory(cat.id)">
 						<h6 (click)="gotoSubcategory(cat.id)" class="text-center">{{cat.category_name}}</h6>
 					</div>
@@ -221,9 +221,9 @@
 
 							<div class="off-overlay"><small>{{product.discount}}%</small>
 								<img *ngIf="product.product_img_url!=null" (click)="gotoProductDetails(product.id)"
-									[src]="product.product_img_url" class="p-2 img-categories">
+									[src]="product.product_img_url" class="img-categories">
 								<img *ngIf="product.product_img_url==null" (click)="gotoProductDetails(product.id)"
-									src="../../../assets/img/no_image.png" class="p-2 img-categories">
+									src="../../../assets/img/no_image.png" class="img-categories">
 
 							</div>
 

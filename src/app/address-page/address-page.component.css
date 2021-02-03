@@ -55,8 +55,9 @@ label {
   }
 .add{
   font-family: 'apercu',sans-serif;
-  padding-top: 10px;
-  line-height: 8px;
+  padding-top: 3px;
+  line-height:14px;
+  font-size: 16px;
 }
 .test:after {
     content: '\2807';
@@ -138,4 +139,12 @@ a {
     top: 22px;
     right: 10px;
   }
+}
+@media  screen and (max-width:500px){
+  .add{
+    font-family: 'apercu',sans-serif;
+    padding-top: 3px;
+    line-height: 8px;
+    font-size: 14px;
+  } 
 }

@@ -75,16 +75,13 @@ a {
   font-family: "Apercu", sans-serif;
   font-weight: 300;
 }
-
-.h1,
-.h2,
-.h3,
+  
 h1,
 h2,
 h3 {
   margin-top: 0px;
   font-family: "Apercu", sans-serif;
-  font-size: 32px;
+  font-size: 24px;
   font-weight: bold;
   color: #000;
 }
@@ -95,6 +92,7 @@ footer {
   float: left;
   position: relative;
 }
+
 
 ul {
   padding: 0px;
@@ -312,8 +310,11 @@ div#demo1 {
 
 .recent-product-list img {
   width: 260px;
+  border: 1px solid #ddd;
 }
-
+.back-page span{
+margin-left:10px;
+}
 .cat-heading {
   padding-bottom: 20px;
 }
@@ -442,7 +443,6 @@ li.home-footer5 a.active-link img {
 .clint-img img {
   border-radius: 100px;
   border: solid 3px #1fb055;
-  padding: 10px;
   height: 110px;
   width: 110px;
   display: inline;
@@ -662,8 +662,17 @@ li.home-footer5 a.active-link img {
 /*----------------categories----------------*/
 
 .back-page {
-  padding: 16px 0 0 5px;
+  padding: 16px 0 0 0px;
 }
+.img-middle img{
+   border-radius: 5px;
+   width:130px;
+}
+.img-middle{
+  vertical-align: middle;
+  width:160px;
+}
+
 
 .product-slider .carousel-indicators {
   bottom: -34px;
@@ -790,9 +799,16 @@ select#city {
 .customer_profile {
   padding: 40px 0;
 }
+.profile-head{
+  text-align: right;
+  padding:0px;
+}
 
 .profile-heading {
   padding: 0 15px;
+}
+.profile-heading-page h2{
+  font-size:20px!important;
 }
 
 .profile-heading {
@@ -2667,17 +2683,23 @@ td.amout-color {
     padding: 30px;
     margin-top: 0px;
   }
+  .img-middle{
+    width:80px;
+  }
+  .table td{
+    padding:8px 0px 8px 0px!important;
+  }
+  .img-middle img{
+    width:60px;
+    border:1px solid #ccc;
+  }
   .quantity {
     font-size: 14px;
+    display: block;
   }
   .ng-star-inserted h5 {
     font-size: 15px;
     padding-top: 8px;
-  }
-
-  .img-middle {
-    padding: 0.2rem !important;
-    width: 175px;
   }
 
   .size-select a {
