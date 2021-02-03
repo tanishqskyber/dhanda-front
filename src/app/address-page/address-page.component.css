@@ -10,16 +10,16 @@
     margin-top:10px;
 }
 label {
-    font-weight: normal;
-    font-size: 14px;
-    Font-Family: Metric-Regular;
-    Color: #666666;
-    display: block;
-    cursor: pointer;
-    position: absolute;
-    top: 10%;
-    font-family:'apercu', sans-serif;
-
+  font-weight: normal;
+  font-size: 14px;
+  Font-Family: Metric-Regular;
+  Color: #666666;
+  display: block;
+  cursor: pointer;
+  position: absolute;
+  top: 15%;
+  font-family: 'apercu', sans-serif;
+  left: 20px;
   }
   [type="radio"] {
     border: 0;
@@ -55,8 +55,9 @@ label {
   }
 .add{
   font-family: 'apercu',sans-serif;
-  padding-top: 10px;
-  line-height: 8px;
+  padding-top: 3px;
+  line-height:14px;
+  font-size: 16px;
 }
 .test:after {
     content: '\2807';
@@ -131,11 +132,19 @@ a {
   .btn-proceed{
     margin-top: 0px;
     position: relative;
-    bottom: 25px;
+    bottom: 30px;
   }
   [type="radio"] + span:before{
     position: relative;
     top: 22px;
     right: 10px;
   }
+}
+@media  screen and (max-width:500px){
+  .add{
+    font-family: 'apercu',sans-serif;
+    padding-top: 3px;
+    line-height: 5px;
+    font-size: 13px;
+  } 
 }

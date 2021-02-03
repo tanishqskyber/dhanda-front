@@ -12,10 +12,6 @@ input[type="text"]:read-only {
   select:disabled{
     background: transparent;
   }
-
-  .profile-heading-page h2{
-    color: #1fb055;
-  }
   
   .edit{
     padding: 0px 20px;
@@ -28,3 +24,4 @@ input[type="text"]:read-only {
   .profile-heading-page a{
     color:#fff;
   }
+  

@@ -4,15 +4,17 @@
 <div class="customer_profile">
 	<div class="container">
 		<div class="row">
-			<div class="col-md-12 mb-4">
-				<div class="profile-heading-page d-flex align-items-center justify-content-between">
-					<h2>Profile</h2>
+			<div class="col-md-12 profile-head">
+				<div class="profile-heading-page">
 					<p>
 					<button class="edit"><a *ngIf="editTrue" (click)="editProfile()">Edit</a></button>
 					<button id="send-msg" class="edit ml-2" (click)="gotoAddress()">Manage Address</button>
 					</p>
 				
 				</div>
+			</div>
+			<div class="profile heading-page">
+				<h2 class="profile-main">Profile</h2>
 			</div>
 			<div class="col-md-12">
 				<div class="profile-form">
