@@ -13,6 +13,8 @@ import { error } from 'protractor';
 export class AddressPageComponent implements OnInit {
   addressData:any=[]
   params:any;
+  stateData:any=[]
+  cityData:any=[]
   showgetAddressOption:boolean=false;
   constructor(private catservice:CategoryService,private toastr: ToastrService,private spinner: NgxSpinnerService,private router: Router,private activatedRoute: ActivatedRoute) { }
 
@@ -92,8 +94,10 @@ export class AddressPageComponent implements OnInit {
     this.router.navigate(['/new-address'],{queryParams:{id:id}})
   }
 
-  getAddress(addrid){
-    this.router.navigate(['/checkout'],{queryParams:{id:addrid}});
+  getAddress(address){
+    localStorage.setItem('selectedAddress',JSON.stringify(address))
+    this.router.navigate(['/checkout']);
   }
+
 
 }

@@ -104,6 +104,10 @@ export class HomeComponent implements OnInit {
           localStorage.removeItem('contact-no')
           localStorage.removeItem('subCategory')
           localStorage.removeItem('storeId')
+          localStorage.removeItem('orderDetails')
+          localStorage.removeItem('sub_cat_name')
+          localStorage.removeItem('selectedAddress')
+          localStorage.removeItem('allowStorePickup')
           localStorage.setItem('username', this.params)
           this.loadStoreId()
         }else if(localStorage.getItem('username')==this.params){

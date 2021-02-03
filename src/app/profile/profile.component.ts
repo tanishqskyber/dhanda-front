@@ -94,6 +94,10 @@ export class ProfileComponent implements OnInit {
       localStorage.removeItem('contact-no')
       localStorage.removeItem('subCategory')
       localStorage.removeItem('storeId')
+      localStorage.removeItem('orderDetails')
+      localStorage.removeItem('sub_cat_name')
+      localStorage.removeItem('selectedAddress')
+      localStorage.removeItem('allowStorePickup')
       this.router.navigate([ '/in',localStorage.getItem('username')]);
       }else{
         this.spinner.hide()
@@ -101,6 +105,10 @@ export class ProfileComponent implements OnInit {
         localStorage.removeItem('contact-no')
         localStorage.removeItem('subCategory')
         localStorage.removeItem('storeId')
+        localStorage.removeItem('orderDetails')
+        localStorage.removeItem('sub_cat_name')
+        localStorage.removeItem('selectedAddress')
+        localStorage.removeItem('allowStorePickup')
       this.router.navigate([ '/in',localStorage.getItem('username')]);
       }
    
@@ -110,6 +118,10 @@ export class ProfileComponent implements OnInit {
       localStorage.removeItem('contact-no')
       localStorage.removeItem('subCategory')
       localStorage.removeItem('storeId')
+      localStorage.removeItem('orderDetails')
+      localStorage.removeItem('sub_cat_name')
+      localStorage.removeItem('selectedAddress')
+      localStorage.removeItem('allowStorePickup')
       this.router.navigate([ '/in',localStorage.getItem('username')]);
       console.log(error)
     })

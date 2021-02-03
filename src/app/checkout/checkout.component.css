@@ -15,6 +15,3 @@
     
 } */
 
-.checkcontainer input:checked ~ .radiobtn {
-    background-color: #1fb055 !important;
-}
