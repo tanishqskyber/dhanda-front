@@ -10,16 +10,16 @@
     margin-top:10px;
 }
 label {
-    font-weight: normal;
-    font-size: 14px;
-    Font-Family: Metric-Regular;
-    Color: #666666;
-    display: block;
-    cursor: pointer;
-    position: absolute;
-    top: 10%;
-    font-family:'apercu', sans-serif;
-
+  font-weight: normal;
+  font-size: 14px;
+  Font-Family: Metric-Regular;
+  Color: #666666;
+  display: block;
+  cursor: pointer;
+  position: absolute;
+  top: 15%;
+  font-family: 'apercu', sans-serif;
+  left: 20px;
   }
   [type="radio"] {
     border: 0;
@@ -132,7 +132,7 @@ a {
   .btn-proceed{
     margin-top: 0px;
     position: relative;
-    bottom: 25px;
+    bottom: 30px;
   }
   [type="radio"] + span:before{
     position: relative;
@@ -144,7 +144,7 @@ a {
   .add{
     font-family: 'apercu',sans-serif;
     padding-top: 3px;
-    line-height: 8px;
-    font-size: 14px;
+    line-height: 5px;
+    font-size: 13px;
   } 
 }

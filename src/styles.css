@@ -667,11 +667,19 @@ li.home-footer5 a.active-link img {
 .img-middle img{
    border-radius: 5px;
    width:130px;
+<<<<<<< HEAD
+=======
+}
+.img-middle{
+  vertical-align: middle;
+  width:160px;
+>>>>>>> a396e952e13464ff63bd7ed10ce47d84bf3dc10c
 }
 .img-middle{
   vertical-align: middle;
   width:160px;
 }
+
 
 
 .product-slider .carousel-indicators {
@@ -821,6 +829,10 @@ select#city {
   display: inline-block;
   font-size: 20px;
   color: #1fb055;
+}
+.profile-main{
+  color:#1fb055;
+  margin:20px 15px;
 }
 
 .profile-heading a {
@@ -2723,6 +2735,9 @@ td.amout-color {
     color: #000000;
     font-size: 12px;
     font-weight: bold;
+  }
+  .profile-main{
+    margin:20px 0px;
   }
 
   .order-new-1 .col-md-2.col-sm-2.col-xs-2 {
