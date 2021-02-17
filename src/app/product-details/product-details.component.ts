@@ -14,6 +14,7 @@ export class ProductDetailsComponent implements OnInit {
 
   constructor(private categoryservice:CategoryService,private toastr: ToastrService,private spinner: NgxSpinnerService,private router: Router,private activatedRoute: ActivatedRoute,private auth:AuthService) { }
   counter : any = 1;
+  stroreid: any;
   isBtn = true;
   customOptions: any = {
     loop: true,
@@ -55,9 +56,15 @@ export class ProductDetailsComponent implements OnInit {
   variationname2:any;
   cartcounter : any = 0;
   username:any;
-  cartData:any=[]
+  cartData:any=[];
+  in:any;
   ngOnInit(): void {
     this.params = this.activatedRoute.snapshot.queryParams["id"];
+    this.in=this.activatedRoute.snapshot.queryParams["in"];
+    if(this.in!=null || this.in!=undefined){
+      localStorage.setItem('username', this.in)
+      this.loadStoreId()  
+    }
     localStorage.setItem('currentpath',this.router.url)
     this.loadProductDetails();
     this.loadCartDetails()
@@ -150,6 +157,32 @@ export class ProductDetailsComponent implements OnInit {
         timeOut:3000,
         positionClass:'toast-top-center'
         })
+    })
+  }
+
+  private loadStoreId() {
+    this.spinner.show()
+    this.auth.getStoreId(this.in).then(resp => {
+      console.log(resp)
+      if (resp['message'] == 'Vendor!') {
+        this.spinner.hide()
+        this.stroreid=resp['data']['id']
+        localStorage.setItem('storeId',this.stroreid)
+      
+        console.log(this.stroreid,)
+      } else if (resp['message'] == 'Vendor not found!') {
+        this.spinner.hide()
+          console.log('Store not found')
+      } else {
+        this.spinner.hide()
+        console.log('Somethinf went wrong')
+      }
+
+
+    }, error => {
+      this.spinner.hide()
+      console.log(error)
+      console.log('failed to load')
     })
   }
 
