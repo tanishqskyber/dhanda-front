@@ -43,7 +43,7 @@ type="ball-scale-multiple"
 							<small>{{product.discount}}%</small>
 							<img *ngIf="product.product_img_url!=null" (click)="gotoProductDetails(product.id)"
 									[src]="product.product_img_url" class="p-2 img-categories">
-								<img *ngIf="product.product_img_url==null" (click)="gotoProductDetails(product.id)"
+								<img *ngIf="product.product_img_url== '' || product.product_img_url==null" (click)="gotoProductDetails(product.id)"
 									src="../../assets/img/no_image.png" class="p-2 img-categories">
 						</div>
 						<div class="product-title">

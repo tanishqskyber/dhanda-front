@@ -37,7 +37,7 @@
 							<div class="off-overlay"><small>{{product.discount}}%</small>
 								<img *ngIf="product.product_img_url!=null" (click)="gotoProductDetails(product.id)"
 									[src]="product.product_img_url">
-								<img *ngIf="product.product_img_url==null" (click)="gotoProductDetails(product.id)"
+								<img *ngIf="product.product_img_url== '' || product.product_img_url==null" (click)="gotoProductDetails(product.id)"
 									src="../../assets/img/no_image.png">
 							</div>
 							<div class="product-title">
