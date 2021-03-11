@@ -7,7 +7,7 @@
 			<div class="view-google-detalis">
 				<div class="clint-img">
 					<!-- <img *ngIf="store_logo!='null'" [src]="store_logo"> -->
-					<img  [src]=" store_logo !=null ? store_logo : '../../../assets/img/no_image.png' ">
+					<img [src]=" store_logo !=null ? store_logo : '../../../assets/img/no_image.png' ">
 				</div>
 
 				<div class="clint-info">
@@ -19,19 +19,19 @@
 						<li>
 							<a [href]=whatsappchat target="_blank" style="color:black;"><img class="header-logos"
 									src="../../../assets/img/icon-2.png">
-							<span>
-								+91-{{usermobile}}
-							</span>
-						</a>
+								<span>
+									+91-{{usermobile}}
+								</span>
+							</a>
 						</li>
-						<li><a  [href]="'tel:' + usermobile"
-						 style="color:black;"><img class="header-logos" src="../../../assets/img/icon-3.png"><span>+91-{{usermobile}}</span></a></li>
+						<li><a [href]="'tel:' + usermobile" style="color:black;"><img class="header-logos"
+									src="../../../assets/img/icon-3.png"><span>+91-{{usermobile}}</span></a></li>
 						<li>
 							<a [href]=storeLocation target="_blank" style="color:black;">
 								<img class="header-logos" src="../../../assets/img/icon-4.png">
-							
-							<span>Location</span>
-						</a>
+
+								<span>Location</span>
+							</a>
 						</li>
 					</ul>
 				</div>
@@ -161,7 +161,7 @@
 									</button>
 								</div>
 							  </div> -->
-<!-- 
+				<!-- 
 				<owl-carousel-o [options]="customOptions">
 					<ng-container *ngFor="">
 						<ng-template carouselSlide>
@@ -185,8 +185,11 @@
 
 				<ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig">
 					<div ngxSlickItem *ngFor="let cat of categorydata;let i=index;" class="slide m-2">
-						<img *ngIf="cat.category_img_url!=null" [src]="cat.category_img_url" class="img-categories" alt=""  (click)="gotoSubcategory(cat.id)">
-						<img *ngIf="cat.category_img_url== '' || cat.category_img_url==null" src="../../../assets/img/no_image.png" class="p-2 img-categories" alt=""  (click)="gotoSubcategory(cat.id)">
+						<img *ngIf="cat.category_img_url!=null" [src]="cat.category_img_url" class="img-categories"
+							alt="" (click)="gotoSubcategory(cat.id)">
+						<img *ngIf="cat.category_img_url== '' || cat.category_img_url==null"
+							src="../../../assets/img/no_image.png" class="p-2 img-categories" alt=""
+							(click)="gotoSubcategory(cat.id)">
 						<h6 (click)="gotoSubcategory(cat.id)" class="text-center">{{cat.category_name}}</h6>
 					</div>
 				</ngx-slick-carousel>
@@ -222,8 +225,9 @@
 							<div class="off-overlay"><small>{{product.discount}}%</small>
 								<img *ngIf="product.product_img_url!=null" (click)="gotoProductDetails(product.id)"
 									[src]="product.product_img_url" class="img-categories">
-								<img *ngIf="product.product_img_url== '' || product.product_img_url==null" (click)="gotoProductDetails(product.id)"
-									src="../../../assets/img/no_image.png" class="img-categories">
+								<img *ngIf="product.product_img_url == '' || product.product_img_url == null"
+									(click)="gotoProductDetails(product.id)" src="../../../assets/img/no_image.png"
+									class="img-categories">
 
 							</div>
 
@@ -244,7 +248,8 @@
 
 							</div>
 							<div class="text-left">
-								<a class="cart-btn btn" (click)="loadProductInfo(product.id,product.variations,product)">Add</a>
+								<a class="cart-btn btn"
+									(click)="loadProductInfo(product.id,product.variations,product)">Add</a>
 							</div>
 
 						</button>
@@ -253,9 +258,10 @@
 					<div class="modal modalcatadd" *ngIf="isModalShow">
 						<div class="modal-dialog">
 							<div class="modal-content">
-								<button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closepop()">
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close"
+									(click)="closepop()">
 									<span aria-hidden="true">&times;</span>
-								  </button>
+								</button>
 								<div class="modal-body">
 									<ng-container *ngIf="variationKeys.length==2">
 										<div class="size-select">
@@ -263,7 +269,7 @@
 											<div class="exTab1">
 												<ul class="nav nav-pills" style="display:flex; list-style: none;">
 													<ng-container *ngFor="let vd of variation1">
-														<li  [ngClass]="vd.id === activeElement1 ? 'active' : 'none'">
+														<li [ngClass]="vd.id === activeElement1 ? 'active' : 'none'">
 															<a (click)="selectvariation(vd.id,vd.variation_name);setActiveVar1(vd.id)"
 																data-toggle="tab">
 																{{vd.variation_value}}
@@ -280,7 +286,7 @@
 											<div class="exTab1">
 												<ul class="nav nav-pills" style="display:flex; list-style: none;">
 													<ng-container *ngFor="let vd of variation2">
-														<li  [ngClass]="vd.id === activeElement2 ? 'active' : 'none'">
+														<li [ngClass]="vd.id === activeElement2 ? 'active' : 'none'">
 															<a (click)="selectvariation(vd.id,vd.variation_name);setActiveVar2(vd.id)"
 																data-toggle="tab">
 																{{vd.variation_value}}
@@ -299,7 +305,7 @@
 											<div class="exTab1">
 												<ul class="nav nav-pills" style="display:flex; list-style: none;">
 													<ng-container *ngFor="let vd of variation1">
-														<li  [ngClass]="vd.id === activeElement1 ? 'active' : 'none'">
+														<li [ngClass]="vd.id === activeElement1 ? 'active' : 'none'">
 															<a (click)="selectvariation(vd.id,vd.variation_name);setActiveVar1(vd.id)"
 																data-toggle="tab">
 																{{vd.variation_value}}
@@ -311,7 +317,7 @@
 												</ul>
 											</div>
 										</div>
-										
+
 									</ng-container>
 									<!-- <div class="size-select">
 										<h2>Small</h2>
@@ -329,9 +335,13 @@
 												<h2 style="font-size: 19px;">Qty.</h2>
 												<div class="input-group add-cart-input">
 													<div class="input-group-prepend">
-														<button class="btn btn-outline-secondary-green" (click)="decrement(product.product_count,product.id)" type="button"><i class="fas fa-minus"></i></button>
+														<button class="btn btn-outline-secondary-green"
+															(click)="decrement(product.product_count,product.id)"
+															type="button"><i class="fas fa-minus"></i></button>
 													</div>
-													<input type="text" value="1" id="input_item" readonly="" class="form-control qty-input text-center" [(ngModel)]="product.product_count" placeholder="1">
+													<input type="text" value="1" id="input_item" readonly=""
+														class="form-control qty-input text-center"
+														[(ngModel)]="product.product_count" placeholder="1">
 													<!-- <input type="text" readonly="" id="input_item"
 														class="form-control qty-input text-center" placeholder="1"
 														aria-label="1" aria-describedby="basic-addon2"
@@ -345,11 +355,11 @@
 											</div>
 										</div>
 										<div class="bag-button col-md-6 text-right">
-	
+
 											<button class="add_product-modal-btn"
 												(click)="addproducttoCart(product.product_count)" *ngIf="isBtn">ADD TO
 												CART</button>
-	
+
 										</div>
 									</div>
 									<!-- <div id="add-remove-div" class="add-remove-div">
@@ -424,51 +434,55 @@
 <!-- Custom -->
 
 <footer>
-    <div class="bootom-menu">	
-      <div class="container">
-          <div class="row">
-              <div class="col-md-12">
-                  <div class="bottom-menu-list" id="bottom-menu">
-                      <ul>
-                        <li class="home-footer">
-                            <a [routerLink]="['/in',username]" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}" (click)="getCurrentPath()">
-                                <img id="my-img" src="../../assets/img/home.png"> 
-                                <span>Home</span>
-                            </a>
+	<div class="bootom-menu">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="bottom-menu-list" id="bottom-menu">
+						<ul>
+							<li class="home-footer">
+								<a [routerLink]="['/in',username]" routerLinkActive="active-link"
+									[routerLinkActiveOptions]="{exact: true}" (click)="getCurrentPath()">
+									<img id="my-img" src="../../assets/img/home.png">
+									<span>Home</span>
+								</a>
 
-							
-							
-                        </li>
-                        <li class="home-footer2">
-                            <a [routerLink]="['/categories']" routerLinkActive="active-link" (click)="getCurrentPath()">
-                                <img id="my-img" src="../../assets/img/home2.png"> 
-                                <span>Category</span>
-                            </a>
-                        </li>
-                        <li class="home-footer5">
-                            <a [routerLink]="['/order']" routerLinkActive="active-link" (click)="getCurrentPath()">
-                                <img id="my-img" src="../../assets/img/home4.png"> 
-                                <span>Orders</span>
-                            </a>
-                        </li>
-                        <li class="home-footer3">
-                            <a [routerLink]="['/add-cart']" routerLinkActive="active-link" (click)="getCurrentPath()">
-                                <img id="my-img" src="../../assets/img/home3.png">
-                                <span class="navbar-btn-badge" *ngIf="cartcounter">{{cartcounter}}</span>
-                                <span> Cart</span>
-                            </a>
-                        </li>
-                        <li class="home-footer4">
-                            <a [routerLink]="['/profile']" routerLinkActive="active-link" (click)="getCurrentPath()">
-                                <img id="my-img" src="../../assets/img/home5.png"> 
-                                <span>Profile</span>
-                            </a>
-                        </li>
-                      </ul>
-                  </div>
-              </div>
-          </div>
-      </div>
-    </div>
-    <div class="margin-top"></div>
-    </footer>
+
+
+							</li>
+							<li class="home-footer2">
+								<a [routerLink]="['/categories']" routerLinkActive="active-link"
+									(click)="getCurrentPath()">
+									<img id="my-img" src="../../assets/img/home2.png">
+									<span>Category</span>
+								</a>
+							</li>
+							<li class="home-footer5">
+								<a [routerLink]="['/order']" routerLinkActive="active-link" (click)="getCurrentPath()">
+									<img id="my-img" src="../../assets/img/home4.png">
+									<span>Orders</span>
+								</a>
+							</li>
+							<li class="home-footer3">
+								<a [routerLink]="['/add-cart']" routerLinkActive="active-link"
+									(click)="getCurrentPath()">
+									<img id="my-img" src="../../assets/img/home3.png">
+									<span class="navbar-btn-badge" *ngIf="cartcounter">{{cartcounter}}</span>
+									<span> Cart</span>
+								</a>
+							</li>
+							<li class="home-footer4">
+								<a [routerLink]="['/profile']" routerLinkActive="active-link"
+									(click)="getCurrentPath()">
+									<img id="my-img" src="../../assets/img/home5.png">
+									<span>Profile</span>
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="margin-top"></div>
+</footer>
