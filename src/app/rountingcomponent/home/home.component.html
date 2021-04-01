@@ -7,7 +7,8 @@
 			<div class="view-google-detalis">
 				<div class="clint-img">
 					<!-- <img *ngIf="store_logo!='null'" [src]="store_logo"> -->
-					<img [src]=" store_logo !=null ? store_logo : '../../../assets/img/no_image.png' ">
+					<!-- <img [src]=" store_logo !=null ? store_logo : '../../../assets/img/no_image.png' "> -->
+					<img [src]=" store_logo == null || store_logo == ''  ? '../../../assets/img/no_image.png' : store_logo ">
 				</div>
 
 				<div class="clint-info">
